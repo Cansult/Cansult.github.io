@@ -246,21 +246,15 @@
       
         <p>啦啦啦啦啦啦啦啦啦啦</p>
 <a id="more"></a>
-<h3 id="懵逼的-题目">懵逼的 题目</h3>
-<p><a target="_blank" rel="noopener" href="https://lydsy.com/JudgeOnline/problem.php?id=4294">BZOJ</a></p>
-<h3 id="扯淡的-题解">扯淡的 题解</h3>
-<p>首先我们要知道一个结论 叫斐波那契数模<span class="math inline">\(10^n\)</span>的循环周期是<span class="math inline">\(6 \times 10^n\)</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p>然后呢 我们就可以从低到高的搜索<span class="math inline">\(s\)</span> 因为有循环 所以我们只需要检验上一个<span class="math inline">\(k\)</span>加上任意个<span class="math inline">\(6 \times 10^{dq}\)</span>所在的斐波那契树的<span class="math inline">\(dq\)</span>位是否是我们搜的这一位就行了</p>
-<h3 id="沙茶的-代码">沙茶的 代码</h3>
-<p>抄抄抄</p>
+<h3 id="懵逼的-题目"><a href="#懵逼的-题目" class="headerlink" title="懵逼的 题目"></a>懵逼的 题目</h3><p><a target="_blank" rel="noopener" href="https://lydsy.com/JudgeOnline/problem.php?id=4294">BZOJ</a></p>
+<h3 id="扯淡的-题解"><a href="#扯淡的-题解" class="headerlink" title="扯淡的 题解"></a>扯淡的 题解</h3><p>首先我们要知道一个结论 叫斐波那契数模$10^n$的循环周期是$6 \times 10^n$<sup><a href="#fn_1" id="reffn_1">1</a></sup></p>
+<p>然后呢 我们就可以从低到高的搜索$s$ 因为有循环 所以我们只需要检验上一个$k$加上任意个$6 \times 10^{dq}$所在的斐波那契树的$dq$位是否是我们搜的这一位就行了</p>
+<h3 id="沙茶的-代码"><a href="#沙茶的-代码" class="headerlink" title="沙茶的 代码"></a>沙茶的 代码</h3><p>抄抄抄</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 20</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ull;</span><br><span class="line"><span class="keyword">int</span> n,i,flag;<span class="keyword">char</span> a[N];ll mo[N],b[N];ull ans;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ull <span class="title">mul</span><span class="params">(ull a,ull b,ull P)</span></span>&#123;ull t=<span class="number">0</span>;<span class="keyword">for</span>(;b;b&gt;&gt;=<span class="number">1</span>,a=(a+a)%P)<span class="keyword">if</span>(b&amp;<span class="number">1</span>)t=(t+a)%P;<span class="keyword">return</span> t;&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cal</span><span class="params">(ll n,ll&amp;x,ll&amp;y,ll P)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(!n)&#123;x=<span class="number">0</span>,y=<span class="number">1</span>;<span class="keyword">return</span>;&#125;</span><br><span class="line">  <span class="keyword">if</span>(n==<span class="number">1</span>)&#123;x=y=<span class="number">1</span>;<span class="keyword">return</span>;&#125;</span><br><span class="line">  <span class="keyword">if</span>(n&amp;<span class="number">1</span>)&#123;</span><br><span class="line">    cal(n<span class="number">-1</span>,y,x,P);</span><br><span class="line">    y=(<span class="number">1U</span>LL*y+x)%P;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  ll a,b;</span><br><span class="line">  cal(n&gt;&gt;<span class="number">1</span>,a,b,P);</span><br><span class="line">  x=(mul(a,b,P)+mul(a,b&lt;a?b-a+P:b-a,P))%P;</span><br><span class="line">  y=(mul(a,a,P)+mul(b,b,P))%P;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">fib</span><span class="params">(ll n,ll P)</span></span>&#123;ll x,y;cal(n,x,y,P);<span class="keyword">return</span> x;&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> n,ll t,ll T)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(flag)<span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">if</span>(fib(t,mo[n])!=b[n])<span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">if</span>(n==<span class="number">1</span>)&#123;flag=<span class="number">1</span>,ans=<span class="number">6000000000000000000U</span>LL+t;<span class="keyword">return</span>;&#125;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)dfs(n<span class="number">-1</span>,(<span class="number">1U</span>LL*t+T*i)%(T*<span class="number">10</span>),T*<span class="number">10</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,a+<span class="number">1</span>),n=<span class="built_in">strlen</span>(a+<span class="number">1</span>);</span><br><span class="line">  <span class="keyword">for</span>(mo[i=n]=<span class="number">1</span>;i;i--,mo[i]=mo[i+<span class="number">1</span>]*<span class="number">10</span>)b[i]=mo[i]*(a[i]-<span class="string">&#x27;0&#x27;</span>)+b[i+<span class="number">1</span>];</span><br><span class="line">  <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)mo[i]*=<span class="number">10</span>;</span><br><span class="line">  <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">60</span>;i++)dfs(n,i,<span class="number">60</span>);</span><br><span class="line">  <span class="keyword">if</span>(flag)<span class="built_in">printf</span>(<span class="string">&quot;%llu&quot;</span>,ans);<span class="keyword">else</span> <span class="built_in">puts</span>(<span class="string">&quot;NIE&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>By 准备退役旅游的 Cansult</p>
-<section class="footnotes" role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1" role="doc-endnote"><p>其实更普遍的情况是模<span class="math inline">\(A^x\)</span>的循环节<span class="math inline">\(L(A^x)\)</span>是<span class="math inline">\(A^{x - 1} \cdot L(A)\)</span><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
+<blockquote id="fn_1">
+<sup>1</sup>. 其实更普遍的情况是模$A^x$的循环节$L(A^x)$是$A^{x - 1} \cdot L(A)$<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
 
     </div>
 
@@ -363,7 +357,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-count">75</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -512,7 +506,7 @@
     };
     (function () {
       var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
       script.defer = true;
       document.head.appendChild(script);
     })();

@@ -251,22 +251,19 @@
       
         <p>菜的真实</p>
 <a id="more"></a>
-<h3 id="c---k-dmc"><a target="_blank" rel="noopener" href="https://dwacon5th-prelims.contest.atcoder.jp/tasks/dwacon5th_prelims_c">C - k-DMC</a></h3>
-<p>给<span class="math inline">\(Q\)</span>个<span class="math inline">\(k\)</span>, 对于每个<span class="math inline">\(k_i\)</span>, 回答在程序初始给定的长度为<span class="math inline">\(N\)</span>的字符串<span class="math inline">\(S\)</span>中: 有多少个三元组<span class="math inline">\((a, b, c)\)</span> 满足<span class="math inline">\(S[a] = D, S[b] = M, S[c] = C\)</span>并且<span class="math inline">\(c - a &lt; k_i\)</span>; <span class="math inline">\(N \le 10^6, Q \le 75\)</span>, 要求<span class="math inline">\(NQ\)</span>做法</p>
+<h3 id="C-k-DMC"><a href="#C-k-DMC" class="headerlink" title="C - k-DMC"></a><a target="_blank" rel="noopener" href="https://dwacon5th-prelims.contest.atcoder.jp/tasks/dwacon5th_prelims_c">C - k-DMC</a></h3><p>给$Q$个$k$, 对于每个$k_i$, 回答在程序初始给定的长度为$N$的字符串$S$中: 有多少个三元组$(a, b, c)$ 满足$S[a] = D, S[b] = M, S[c] = C$并且$c - a &lt; k_i$; $N \le 10^6, Q \le 75$, 要求$NQ$做法</p>
 <blockquote>
-<p>我(不确定这题<span class="math inline">\(NQ\)</span>能不能过): Asia啊 这题复杂度多少啊 Asia: 这题(单次询问)复杂度线性的(注意句式为省略句) 我: ???? Asia: 这是基础操作啊 我: ?????????(吓傻跪烂.jpg)</p>
+<p>我(不确定这题$NQ$能不能过): Asia啊 这题复杂度多少啊<br> Asia: 这题(单次询问)复杂度线性的(注意句式为省略句)<br>我: ????<br>Asia: 这是基础操作啊<br>我: ?????????(吓傻跪烂.jpg)</p>
 </blockquote>
-<p><del>迫真线性</del></p>
+<p><del>迫真线性</del> </p>
 <p>过于真实</p>
-<p>对于每一个询问<span class="math inline">\(k_i\)</span>, 遍历<span class="math inline">\(S\)</span>, 遇到一个<span class="math inline">\(M\)</span>就入队加入贡献, 遇到<span class="math inline">\(C\)</span>就把不合法的<span class="math inline">\(M\)</span>出队, 去掉不合法贡献, 计算当前队列的合法贡献</p>
-<p>贡献: 先做一个前缀和数组<code>fr[i]</code>代表前<code>i</code>个字符中<span class="math inline">\(D\)</span>的个数, 当前队列能对<span class="math inline">\(M\)</span>产生的贡献为[队列中所有<span class="math inline">\(M\)</span>位置的<code>fr</code> - <span class="math inline">\(C\)</span>的下标减去<span class="math inline">\(k_i\)</span>所在的位置的<code>fr</code> <span class="math inline">\(\times\)</span> 队列元素个数], 所以入队的时候加上当前位置的<code>fr</code>即可</p>
+<p>对于每一个询问$k_i$, 遍历$S$, 遇到一个$M$就入队加入贡献, 遇到$C$就把不合法的$M$出队, 去掉不合法贡献, 计算当前队列的合法贡献</p>
+<p>贡献: 先做一个前缀和数组<code>fr[i]</code>代表前<code>i</code>个字符中$D$的个数, 当前队列能对$M$产生的贡献为[队列中所有$M$位置的<code>fr</code> - $C$的下标减去$k_i$所在的位置的<code>fr</code> $\times$ 队列元素个数], 所以入队的时候加上当前位置的<code>fr</code>即可</p>
 <p>注意不要在减<code>k</code>的时候下标越界</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN (1000000 + 5)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line">LL fr[MAXN];</span><br><span class="line"><span class="keyword">char</span> s[MAXN];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">	LL dqd = <span class="number">0</span>, ans = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (s[i] == <span class="string">&#x27;M&#x27;</span>)	q.push(i), dqd += fr[i];</span><br><span class="line">		<span class="keyword">if</span> (s[i] == <span class="string">&#x27;C&#x27;</span>) &#123;</span><br><span class="line">			<span class="keyword">while</span> (!q.empty() &amp;&amp; i - q.front() &gt;= k)</span><br><span class="line">				dqd -= fr[q.front()], q.pop();</span><br><span class="line">			ans += dqd - fr[max(<span class="number">0</span>, i - k)] * q.size(); <span class="comment">// 这个地方要小心越界</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, s + <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		fr[i] = fr[i - <span class="number">1</span>] + (s[i] == <span class="string">&#x27;D&#x27;</span>);</span><br><span class="line">	<span class="keyword">int</span> q;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;q);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>, srq; i &lt;= q; i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;srq), solve(srq);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="d---square-rotation"><a target="_blank" rel="noopener" href="https://dwacon5th-prelims.contest.atcoder.jp/tasks/dwacon5th_prelims_d">D - Square Rotation</a></h3>
-<p>我怎么...只会搜索啊...</p>
+<h3 id="D-Square-Rotation"><a href="#D-Square-Rotation" class="headerlink" title="D - Square Rotation"></a><a target="_blank" rel="noopener" href="https://dwacon5th-prelims.contest.atcoder.jp/tasks/dwacon5th_prelims_d">D - Square Rotation</a></h3><p>我怎么…只会搜索啊…</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="e---cyclic-gcds"><a target="_blank" rel="noopener" href="https://dwacon5th-prelims.contest.atcoder.jp/tasks/dwacon5th_prelims_e">E - Cyclic GCDs</a></h3>
-<p>我怎么...读不懂题啊...</p>
+<h3 id="E-Cyclic-GCDs"><a href="#E-Cyclic-GCDs" class="headerlink" title="E - Cyclic GCDs"></a><a target="_blank" rel="noopener" href="https://dwacon5th-prelims.contest.atcoder.jp/tasks/dwacon5th_prelims_e">E - Cyclic GCDs</a></h3><p>我怎么…读不懂题啊…</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
 <p>By 准备退役旅游的Cansult</p>
 
@@ -354,7 +351,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#c---k-dmc"><span class="nav-number">1.</span> <span class="nav-text">C - k-DMC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d---square-rotation"><span class="nav-number">2.</span> <span class="nav-text">D - Square Rotation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#e---cyclic-gcds"><span class="nav-number">3.</span> <span class="nav-text">E - Cyclic GCDs</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#C-k-DMC"><span class="nav-number">1.</span> <span class="nav-text">C - k-DMC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-Square-Rotation"><span class="nav-number">2.</span> <span class="nav-text">D - Square Rotation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E-Cyclic-GCDs"><span class="nav-number">3.</span> <span class="nav-text">E - Cyclic GCDs</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -370,7 +367,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-count">75</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -519,7 +516,7 @@
     };
     (function () {
       var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
       script.defer = true;
       document.head.appendChild(script);
     })();

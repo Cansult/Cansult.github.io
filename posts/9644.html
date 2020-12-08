@@ -250,107 +250,70 @@
       
         <p>据说这节肥肠难</p>
 <a id="more"></a>
-<h2 id="单调有界收敛定理及其应用">单调有界收敛定理及其应用</h2>
-<h3 id="weierstrass魏尔斯特拉斯定理">weierstrass(魏尔斯特拉斯)定理</h3>
-<p>定理 2.4.1:</p>
+<h2 id="单调有界收敛定理及其应用"><a href="#单调有界收敛定理及其应用" class="headerlink" title="单调有界收敛定理及其应用"></a>单调有界收敛定理及其应用</h2><h3 id="weierstrass-魏尔斯特拉斯-定理"><a href="#weierstrass-魏尔斯特拉斯-定理" class="headerlink" title="weierstrass(魏尔斯特拉斯)定理"></a>weierstrass(魏尔斯特拉斯)定理</h3><p>定理 2.4.1: </p>
 <blockquote>
-<p>单调增的数列<span class="math inline">\(\{u_n\}\)</span>有极限<span class="math inline">\(\iff\)</span><span class="math inline">\(\{u_n\}\)</span>有上界<br />
-单调减的数列<span class="math inline">\(\{u_n\}\)</span>有极限<span class="math inline">\(\iff\)</span><span class="math inline">\(\{u_n\}\)</span>有下界</p>
+<p>单调增的数列$\{u_n\}$有极限$\iff<script type="math/tex">\{u_n\}$有上界  
+单调减的数列$\{u_n\}$有极限$\iff</script>\{u_n\}$有下界</p>
 </blockquote>
-<p>证明:<br />
-"<span class="math inline">\(\Rightarrow\)</span>": 显然</p>
-<p>"<span class="math inline">\(\Leftarrow\)</span>": 只证<span class="math inline">\(\{u_n\}\)</span>单增有上界时 <span class="math inline">\(\lim\limits_{k\to \infty}{u_n}\)</span>存在:<br />
-由确界原理知, <span class="math inline">\(\{u_n\}\)</span>有上确界<span class="math inline">\(\beta\)</span>, 下证<span class="math inline">\(\lim\limits_{n\to\infty}u_n = \beta\)</span> <span class="math display">\[
-\beta = \sup\{u_n\} \Rightarrow \forall n \in \mathbb{N^+}, u_n \le \beta \tag{1}
-\]</span> <span class="math display">\[
-\forall \varepsilon &gt; 0, \exists N \in \mathbb{N^+}, s.t. u_N &gt; \beta - \varepsilon \tag{2}
-\]</span> <span class="math display">\[
-\{u_n\}单增 \Rightarrow n &gt; N时, u_n \ge u_N \tag{3}
-\]</span> 由<span class="math inline">\((1)(2)(3)\)</span>可知 <span class="math display">\[
-\forall \varepsilon &gt; 0, \exists N\in \mathbb{N^+}, 当n &gt; N时,
-\beta - \varepsilon &lt; u_n \le u_n \le \beta &lt; \beta + \varepsilon
-\]</span> <span class="math display">\[
-即\lim\limits_{n\to\infty} u_n = \beta = \sup\{u_n\}
-\]</span></p>
-<hr />
-<p>EX. 2.4.1: 若<span class="math inline">\(x_1 = 1, x_{n + 1} = \frac{1}{2}(x_n + \frac{2}{x_n}), n\in\mathbb{N^+}\)</span>, 证明<span class="math inline">\(\{x_n\}\)</span>收敛, 并求出<span class="math inline">\(\lim\limits_{n \to \infty}x_n\)</span></p>
-<p>证明:<br />
-step. 1: 证<span class="math inline">\(\{x_n\}\)</span>有下界(归纳法)<br />
-用归纳法证明<span class="math inline">\(x_n &gt; \sqrt 2, \forall n &gt; 1, n \in \mathbb{N^+}\)</span>:<br />
-<span class="math inline">\(n = 2\)</span>时<span class="math inline">\(x_2 = \frac{3}{2} &gt; 2\)</span>成立<br />
-假设<span class="math inline">\(n = k\)</span>时成立, 下证<span class="math inline">\(n = k + 1\)</span>时成立<br />
-<span class="math display">\[
-x_{k + 1} = \frac{1}{2}(x_{k} + \frac{2}{k_k})\ge\frac{1}{2} \cdot 2 \cdot \sqrt{x_k \cdot \frac{2}{x_k}} = \sqrt{2}
-\]</span> <span class="math display">\[
-``=&quot;成立\iff x_k = \frac{2}{x_k} 即 x_k = \sqrt{2}
-\]</span> <span class="math display">\[
-\therefore \forall n &gt; 2, n\in\mathbb{N^+}, x_n &gt; \sqrt{2}
-\]</span></p>
-<p>step. 2: 证<span class="math inline">\(\{x_n\}\)</span>单减</p>
-<p><span class="math display">\[
-x^2 &gt; 2(x_n &gt; 0) \Rightarrow \frac{2}{x_n} &lt; x_n \Rightarrow x_{n + 1} = \frac{1}{2}(x_n + \frac{2}{x_n}) &lt; x_n
-\]</span> <span class="math display">\[
-\therefore \{x_n\}单减
-\]</span></p>
-<p>由定理2.4.1可知, <span class="math inline">\(\lim\limits_{n \to \infty}{x_n}\)</span>存在, 记为<span class="math inline">\(a\)</span>, 在<span class="math inline">\(x_{n + 1} = \frac{1}{2}(x_n + \frac{2}{x_n})\)</span>两边令<span class="math inline">\(n\to \infty\)</span> <span class="math display">\[
-a = \frac{1}{2}(a + \frac{2}{a})
-\]</span> <span class="math display">\[
-a = \sqrt{2}
-\]</span></p>
-<hr />
-<p>注: 在证明<span class="math inline">\(\{x_n\}\)</span>单调时, 一般采用下列方法:<br />
-1. 讨论<span class="math inline">\(x_n - x_{n + 1}\)</span><br />
-如在EX. 2.4.1中, <span class="math inline">\(x_{n + 1} = \frac{1}{2}(x_n + \frac{2}{x_n})\)</span>, <span class="math inline">\(x_n = \frac{1}{2}(x_{n - 1} + \frac{2}{x_{n - 1}})\)</span><br />
-<span class="math display">\[
-   \begin{aligned}
-      x_{n + 1} - x_{n} &amp;= \frac{1}{2}(x_n - x_{n - 1}) + (\frac{1}{x_n} - \frac{1}{x_{n - 1}})\\
-   &amp;=(x_n - x_{n + 1})(\frac{1}{2} - \frac{1}{x_n\cdot x_{n - 1}})
-   \end{aligned}\]</span> <span class="math display">\[
-   {x_n}单调\iff x_n + 1 - x_n 与 x_n - x_{n + 1}同号
-   \]</span> 2. 讨论<span class="math inline">\(\frac{x_n}{x_{n + 1}}\)</span></p>
-<hr />
-<p>EX. 2.4.2: <span class="math inline">\(x_1 &gt; 0, x_{n + 1} = 1 + \frac{x_n}{1 + x_n}, \forall n\in\mathbb{N^+}\)</span>, 证明<span class="math inline">\(\lim\limits_{n\to\infty}x_n\)</span>存在并求出<br />
-证明:<br />
-step. 1: 证明 <span class="math inline">\(1 &lt; x_n &lt; 2, \forall n \ge 2, n\in\mathbb{N^+}\)</span></p>
+<p>证明:<br>“$\Rightarrow$”: 显然  </p>
+<p>“$\Leftarrow$”: 只证$\{u_n\}$单增有上界时 $\lim\limits_{k\to \infty}{u_n}$存在:<br>由确界原理知, $\{u_n\}$有上确界$\beta$, 下证$\lim\limits_{n\to\infty}u_n = \beta$</p>
+<script type="math/tex; mode=display">
+\beta = \sup\{u_n\} \Rightarrow \forall n \in \mathbb{N^+}, u_n \le \beta \tag{1}</script><script type="math/tex; mode=display">
+\forall \varepsilon > 0, \exists N \in \mathbb{N^+}, s.t. u_N > \beta - \varepsilon \tag{2}</script><script type="math/tex; mode=display">
+\{u_n\}单增 \Rightarrow n > N时, u_n \ge u_N \tag{3}</script><p>由$(1)(2)(3)$可知</p>
+<script type="math/tex; mode=display">
+\forall \varepsilon > 0, \exists N\in \mathbb{N^+}, 当n > N时,
+\beta - \varepsilon < u_n \le u_n \le \beta < \beta + \varepsilon</script><script type="math/tex; mode=display">
+即\lim\limits_{n\to\infty} u_n = \beta = \sup\{u_n\}</script><hr>
+<p>EX. 2.4.1: 若$x_1 = 1, x_{n + 1} = \frac{1}{2}(x_n + \frac{2}{x_n}), n\in\mathbb{N^+}$, 证明$\{x_n\}$收敛, 并求出$\lim\limits_{n \to \infty}x_n$</p>
+<p>证明:<br>step. 1: 证$\{x_n\}$有下界(归纳法)<br>用归纳法证明$x_n &gt; \sqrt 2, \forall n &gt; 1, n \in \mathbb{N^+}$:<br>$n = 2$时$x_2 = \frac{3}{2} &gt; 2$成立<br>假设$n = k$时成立, 下证$n = k + 1$时成立  </p>
+<script type="math/tex; mode=display">
+x_{k + 1} = \frac{1}{2}(x_{k} + \frac{2}{k_k})\ge\frac{1}{2} \cdot 2 \cdot \sqrt{x_k \cdot \frac{2}{x_k}} = \sqrt{2}</script><script type="math/tex; mode=display">
+``="成立\iff x_k = \frac{2}{x_k} 即 x_k = \sqrt{2}</script><script type="math/tex; mode=display">
+\therefore \forall n > 2, n\in\mathbb{N^+}, x_n > \sqrt{2}</script><p>step. 2: 证$\{x_n\}$单减  </p>
+<script type="math/tex; mode=display">
+x^2 > 2(x_n > 0) \Rightarrow \frac{2}{x_n} < x_n \Rightarrow x_{n + 1} = \frac{1}{2}(x_n + \frac{2}{x_n}) < x_n</script><script type="math/tex; mode=display">
+\therefore \{x_n\}单减</script><p>由定理2.4.1可知, $\lim\limits_{n \to \infty}{x_n}$存在, 记为$a$, 在$x_{n + 1} = \frac{1}{2}(x_n + \frac{2}{x_n})$两边令$n\to \infty$</p>
+<script type="math/tex; mode=display">
+a = \frac{1}{2}(a + \frac{2}{a})</script><script type="math/tex; mode=display">
+a = \sqrt{2}</script><hr>
+<p>注: 在证明$\{x_n\}$单调时, 一般采用下列方法:  </p>
+<ol>
+<li>讨论$x_n - x_{n + 1}$<br> 如在EX. 2.4.1中, $x_{n + 1} = \frac{1}{2}(x_n + \frac{2}{x_n})$, $x_n = \frac{1}{2}(x_{n - 1} + \frac{2}{x_{n - 1}})$  <script type="math/tex; mode=display">
+\begin{aligned}
+   x_{n + 1} - x_{n} &= \frac{1}{2}(x_n - x_{n - 1}) + (\frac{1}{x_n} - \frac{1}{x_{n - 1}})\\
+&=(x_n - x_{n + 1})(\frac{1}{2} - \frac{1}{x_n\cdot x_{n - 1}})
+\end{aligned}</script><script type="math/tex; mode=display">
+{x_n}单调\iff x_n + 1 - x_n 与 x_n - x_{n + 1}同号</script></li>
+<li>讨论$\frac{x_n}{x_{n + 1}}$</li>
+</ol>
+<hr>
+<p>EX. 2.4.2: $x_1 &gt; 0, x_{n + 1} = 1 + \frac{x_n}{1 + x_n}, \forall n\in\mathbb{N^+}$, 证明$\lim\limits_{n\to\infty}x_n$存在并求出<br>证明:<br>step. 1: 证明 $1 &lt; x_n &lt; 2, \forall n \ge 2, n\in\mathbb{N^+}$  </p>
 <blockquote>
-<p>这里的 <span class="math inline">\(x_n &lt; 2\)</span> 是用 <span class="math inline">\(a = 1 + \frac{a}{1 + a}\)</span> 猜出来的</p>
+<p>这里的 $x_n &lt; 2$ 是用 $a = 1 + \frac{a}{1 + a}$ 猜出来的  </p>
 </blockquote>
-<p>运用归纳法: <span class="math inline">\(n = 2\)</span> 时, <span class="math inline">\(x_2 = 1 + \frac{x_1}{1 + x_1} \in (1, 2)\)</span><br />
-假设当 <span class="math inline">\(n = k\)</span> 时, <span class="math inline">\(x_n \in (1, 2)\)</span> , 所以<span class="math inline">\(x_{k + 1} = 1 + \frac{x_k}{1 + x_k} \in (1, 2)\)</span></p>
-<p>step. 2: 证明<span class="math inline">\(\{x_n\}\)</span>单调 <span class="math display">\[
-x_{n + 1} - x_n = \frac{x_n - x_{n - 1}}{(1 + x_n)(1 + x_{n - 1})}
-\]</span> <span class="math display">\[
-(1 + x_n)(1 + x_{n - 1}) &gt; 0 \Rightarrow x_{n + 1} - {x_n}与x_n - x_{n - 1}同号
-\]</span> <span class="math display">\[
-\Rightarrow \{x_n\}单调 \Rightarrow \lim\limits_{n\to\infty}x_n 存在, 记为a
-\]</span></p>
-<p>step. 3: 求<span class="math inline">\(a\)</span><br />
-在 <span class="math inline">\(x_{n + 1} = 1 + \frac{x_n}{1 + x_n}\)</span> 两边令 <span class="math inline">\(n\to\infty\)</span></p>
-<p><span class="math display">\[
-a = 1 + \frac{a}{1 + a} (a \in [1, 2])
-\]</span> <span class="math display">\[
-\Rightarrow a = \frac{1 + \sqrt{5}}{2}
-\]</span></p>
-<p>EX. 2.4.3: 证明 <span class="math inline">\(\lim\limits_{n\to\infty}\frac{a^n}{n!} = 0\,\, (a &gt; 1)\)</span></p>
-<p>证明: 令 <span class="math inline">\(u_n = \frac{a^n}{n!} &gt; 0\)</span>, 则 <span class="math inline">\(\frac{u_{n + 1}}{u_n} = \frac{a}{n + 1} \to 0 &lt; 1\)</span></p>
-<p><span class="math display">\[
-\therefore\exists N\in\mathbb{N^+}, n &gt; N 时, \frac{u_{n + 1}}{u_n} &lt; 1, 即 u_{n + 1} &lt; u_n
-\]</span> <span class="math inline">\(u_n &gt; 0\)</span>, 根据单调有界原理, <span class="math inline">\(\lim\limits_{n\to\infty}u_n\)</span>存在, 记为<span class="math inline">\(A \ge 0\)</span><br />
-由 <span class="math inline">\(x_n + 1 = \frac{a ^ {n + 1}}{(n + 1)!} = x_n \cdot \frac{a}{n + 1}\)</span>, 令两边<span class="math inline">\(n\to\infty\)</span>, 则 <span class="math display">\[
+<p>运用归纳法: $n = 2$ 时, $x_2 = 1 + \frac{x_1}{1 + x_1} \in (1, 2)$<br>假设当 $n = k$ 时, $x_n \in (1, 2)$ , 所以$x_{k + 1} = 1 + \frac{x_k}{1 + x_k} \in (1, 2)$  </p>
+<p>step. 2: 证明$\{x_n\}$单调</p>
+<script type="math/tex; mode=display">
+x_{n + 1} - x_n = \frac{x_n - x_{n - 1}}{(1 + x_n)(1 + x_{n - 1})}</script><script type="math/tex; mode=display">
+(1 + x_n)(1 + x_{n - 1}) > 0 \Rightarrow x_{n + 1} - {x_n}与x_n - x_{n - 1}同号</script><script type="math/tex; mode=display">
+\Rightarrow \{x_n\}单调 \Rightarrow \lim\limits_{n\to\infty}x_n 存在, 记为a</script><p>step. 3: 求$a$<br>在 $x_{n + 1} = 1 + \frac{x_n}{1 + x_n}$ 两边令 $n\to\infty$ </p>
+<script type="math/tex; mode=display">
+a = 1 + \frac{a}{1 + a} (a \in [1, 2])</script><script type="math/tex; mode=display">
+\Rightarrow a = \frac{1 + \sqrt{5}}{2}</script><p>EX. 2.4.3: 证明 $\lim\limits_{n\to\infty}\frac{a^n}{n!} = 0\,\, (a &gt; 1)$  </p>
+<p>证明: 令 $u_n = \frac{a^n}{n!} &gt; 0$, 则 $\frac{u_{n + 1}}{u_n} = \frac{a}{n + 1} \to 0 &lt; 1$  </p>
+<script type="math/tex; mode=display">
+\therefore\exists N\in\mathbb{N^+}, n > N 时, \frac{u_{n + 1}}{u_n} < 1, 即 u_{n + 1} < u_n</script><p>$u_n &gt; 0$, 根据单调有界原理, $\lim\limits_{n\to\infty}u_n$存在, 记为$A \ge 0$<br>由 $x_n + 1 = \frac{a ^ {n + 1}}{(n + 1)!} = x_n \cdot \frac{a}{n + 1}$, 令两边$n\to\infty$, 则</p>
+<script type="math/tex; mode=display">
 \begin{aligned}
-  A &amp;= 0 \cdot A\\
-  A &amp;= 0
-\end{aligned}
-\]</span></p>
-<h3 id="单调有界原理的应用-pi-和-e">单调有界原理的应用: <span class="math inline">\(\pi\)</span> 和 <span class="math inline">\(e\)</span></h3>
-<h3 id="pi-割圆术"><span class="math inline">\(\pi\)</span> : 割圆术</h3>
-<p>单位圆内有一内接正<span class="math inline">\(n\)</span>边形, 边长为<span class="math inline">\(a\)</span>, 则 <span class="math display">\[
+  A &= 0 \cdot A\\
+  A &= 0
+\end{aligned}</script><h3 id="单调有界原理的应用-pi-和-e"><a href="#单调有界原理的应用-pi-和-e" class="headerlink" title="单调有界原理的应用: $\pi$ 和 $e$"></a>单调有界原理的应用: $\pi$ 和 $e$</h3><h3 id="pi-割圆术"><a href="#pi-割圆术" class="headerlink" title="$\pi$ : 割圆术"></a>$\pi$ : 割圆术</h3><p>单位圆内有一内接正$n$边形, 边长为$a$, 则</p>
+<script type="math/tex; mode=display">
 \begin{aligned}
-a^2 &amp;= 4\sin^2\frac{180^\circ}{n}\\
-a &amp;= 2\sin\frac{180^\circ}{n}
-\end{aligned}
-\]</span> 所以正<span class="math inline">\(n\)</span>边形的半周长 <span class="math inline">\(L_n = \frac{n}{2}\cdot a = n \cdot \sin\frac{180^\circ}{n}\)</span><br />
-下证</p>
+a^2 &= 4\sin^2\frac{180^\circ}{n}\\
+a &= 2\sin\frac{180^\circ}{n}
+\end{aligned}</script><p>所以正$n$边形的半周长 $L_n = \frac{n}{2}\cdot a = n \cdot  \sin\frac{180^\circ}{n}$<br>下证</p>
 
     </div>
 
@@ -435,7 +398,7 @@ a &amp;= 2\sin\frac{180^\circ}{n}
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E8%B0%83%E6%9C%89%E7%95%8C%E6%94%B6%E6%95%9B%E5%AE%9A%E7%90%86%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">单调有界收敛定理及其应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#weierstrass%E9%AD%8F%E5%B0%94%E6%96%AF%E7%89%B9%E6%8B%89%E6%96%AF%E5%AE%9A%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">weierstrass(魏尔斯特拉斯)定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E8%B0%83%E6%9C%89%E7%95%8C%E5%8E%9F%E7%90%86%E7%9A%84%E5%BA%94%E7%94%A8-pi-%E5%92%8C-e"><span class="nav-number">1.2.</span> <span class="nav-text">单调有界原理的应用: \(\pi\) 和 \(e\)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pi-%E5%89%B2%E5%9C%86%E6%9C%AF"><span class="nav-number">1.3.</span> <span class="nav-text">\(\pi\) : 割圆术</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E8%B0%83%E6%9C%89%E7%95%8C%E6%94%B6%E6%95%9B%E5%AE%9A%E7%90%86%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">单调有界收敛定理及其应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#weierstrass-%E9%AD%8F%E5%B0%94%E6%96%AF%E7%89%B9%E6%8B%89%E6%96%AF-%E5%AE%9A%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">weierstrass(魏尔斯特拉斯)定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E8%B0%83%E6%9C%89%E7%95%8C%E5%8E%9F%E7%90%86%E7%9A%84%E5%BA%94%E7%94%A8-pi-%E5%92%8C-e"><span class="nav-number">1.2.</span> <span class="nav-text">单调有界原理的应用: $\pi$ 和 $e$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pi-%E5%89%B2%E5%9C%86%E6%9C%AF"><span class="nav-number">1.3.</span> <span class="nav-text">$\pi$ : 割圆术</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -451,7 +414,7 @@ a &amp;= 2\sin\frac{180^\circ}{n}
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-count">75</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -600,7 +563,7 @@ a &amp;= 2\sin\frac{180^\circ}{n}
     };
     (function () {
       var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
       script.defer = true;
       document.head.appendChild(script);
     })();

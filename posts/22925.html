@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"cansult.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="noip出分了之后悲痛欲绝励志退役然后就把blog全删掉了??? 后来还是想再苟一苟??? 于是有了新的翻车集...">
+  <meta name="description" content="noip出分了之后悲痛欲绝励志退役然后就把blog全删掉了??? 后来还是想再苟一苟??? 于是有了新的翻车集…">
 <meta property="og:type" content="article">
 <meta property="og:title" content="新的翻车集 [翻车]">
 <meta property="og:url" content="http://cansult.github.io/posts/22925.html">
 <meta property="og:site_name" content="Cansult&#39;s blog">
-<meta property="og:description" content="noip出分了之后悲痛欲绝励志退役然后就把blog全删掉了??? 后来还是想再苟一苟??? 于是有了新的翻车集...">
+<meta property="og:description" content="noip出分了之后悲痛欲绝励志退役然后就把blog全删掉了??? 后来还是想再苟一苟??? 于是有了新的翻车集…">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="8101-12-31T16:00:00.000Z">
 <meta property="article:modified_time" content="2020-10-27T14:17:37.436Z">
@@ -250,80 +250,80 @@
       
         <p>noip出分了之后悲痛欲绝励志退役然后就把blog全删掉了???</p>
 <p>后来还是想再苟一苟???</p>
-<p>于是有了新的翻车集...</p>
+<p>于是有了新的翻车集…</p>
 <a id="more"></a>
-<ol type="1">
+<ol>
 <li>ST表的边界和查询的时候应该返回<code>max(st[l][jg - 1], st[r - (1 &lt;&lt; (jg - 1)) + 1][jg - 1]);</code>(右边要<code>+1</code>避免遗漏)</li>
-<li>关流同步 + <code>cin.tie(NULL)</code> 还是不如快读...<strong>关了流同步文件操作会GG</strong></li>
-<li>高精度进位的条件是<code>&lt;=</code>...高精去前导<code>0</code>的时候不要忘记只有一位数<code>0</code>的情况...</li>
-<li>tarjan 求强连通分量是单向边...</li>
-<li>炸空间...算好空间比算好时间更加重要</li>
+<li>关流同步 + <code>cin.tie(NULL)</code> 还是不如快读…<strong>关了流同步文件操作会GG</strong></li>
+<li>高精度进位的条件是<code>&lt;=</code>…高精去前导<code>0</code>的时候不要忘记只有一位数<code>0</code>的情况…</li>
+<li>tarjan 求强连通分量是单向边…</li>
+<li>炸空间…算好空间比算好时间更加重要</li>
 <li>开栈: <code>-O2 -Wshadow -Wunused -g -Wall -Wextra -Wl,--stack=67108864</code></li>
 <li>防炸<code>LL</code>先除后乘, 防炸精度先乘后除</li>
-<li>求最大的<span class="math inline">\(ans\)</span>没有取<span class="math inline">\(\max\)</span>????</li>
-<li><strong>线段树没有<code>push_down</code>就递归了???<del>(这两个都是特别困的时候犯的错误)</del>, 又犯了.................</strong></li>
-<li>初始化数组的时候, 数组大小是<code>MAXN</code>, 结果初始化的时候循环到了<code>MAXN</code> ...</li>
-<li><strong>有了思路就去写代码...甚至没有去手玩样例...</strong></li>
-<li>如果这么写<span class="math inline">\(\max\)</span>函数: <code>#define max(a, b) ((a) &gt; (b) ? (a) :(b))</code>, 然后你又将函数的返回值当成变量放在了<code>max()</code>里, 而你的函数又恰好会对某些全局的值造成影响, 你就会发现你的值被改变了两次...<span class="math inline">\(\to \mathrm {GG}(WA+TLE)\)</span></li>
-<li><code>lazy</code>标记...覆盖是用<code>=</code>, 区间加是<code>+=</code>...</li>
-<li>数组代表的意思自己给忘了...记得加点注释吧</li>
-<li><strong>树链剖分<code>while</code>里比较的是<code>if (ta[ta[x].top].deep &lt; ta[ta[y].top].deep)</code>, 而不是<code>if (ta[x].deep &gt; ta[y].deep)</code>, (怎么感觉最近犯的错误越来越低级了...</strong></li>
-<li><code>(b[dq].le + b[dq].ri) &gt;&gt; 1</code>写成<code>(le + ri) &gt;&gt; 1</code><span class="math inline">\(\to \mathrm{GG}\)</span>(爆栈) (怎么感觉最近犯的错误越来越低级了...</li>
-<li><code>priority_queue</code>中的<code>cmp</code>如果是仿函数别忘了里面的大小比较是正好相反的...</li>
-<li>反向边的编号计算应该是这样: <code>#define bh(x, i) ((MAXN) * (i) + (x))</code>, 而不是<code>#define bh(x, i) ((MAXK) * (i) + (x))</code>, 即注意每一次都是复制了一整张图...</li>
-<li>谨慎用宏...改加的不该加的括号都想清楚了...能加就加上吧...反着你也背不过运算优先级...</li>
-<li>SA...居然能把<code>last = i</code>写成<code>i = last</code>...SA打的还是不是很熟...</li>
-<li>SA把<code>sa[tong[fir[i]]--] = i</code>写成了<code>sa[tong[fir[i]--]]</code>...也许我应该在中括号之间加个空格啥的...<code>fir</code>数组你减个**啊...</li>
-<li>SPFA...<code>inq[dq]</code>忘了置成<code>false</code>...还有<code>dq = q.front()</code>后忘了<code>q.pop()</code>...我真是越来越傻逼了...</li>
-<li><span class="math inline">\(exgcd\)</span> <span class="math inline">\(ax + by = 1\)</span>最后<span class="math inline">\(x\)</span>加上的是<span class="math inline">\(b / \gcd\)</span>...不是<span class="math inline">\(y / \gcd\)</span>...你求出的是<span class="math inline">\(a, b\)</span>的<span class="math inline">\(\gcd\)</span>...用<span class="math inline">\(y\)</span>除是要闹哪样...果然我越来越傻逼了...</li>
-<li><span class="math inline">\(exgcd\)</span> 最后是<span class="math inline">\(y -= a / b * x\)</span>而不是什么奇奇怪怪的东西...过了这么长时间背的还是不熟啊...<del>主要是不想做数论题</del></li>
+<li>求最大的$ans$没有取$\max$????</li>
+<li><strong>线段树没有<code>push_down</code>就递归了???<del>(这两个都是特别困的时候犯的错误)</del>, 又犯了……………..</strong></li>
+<li>初始化数组的时候, 数组大小是<code>MAXN</code>, 结果初始化的时候循环到了<code>MAXN</code> …</li>
+<li><strong>有了思路就去写代码…甚至没有去手玩样例…</strong></li>
+<li>如果这么写$\max$函数: <code>#define max(a, b) ((a) &gt; (b) ? (a) :(b))</code>, 然后你又将函数的返回值当成变量放在了<code>max()</code>里, 而你的函数又恰好会对某些全局的值造成影响, 你就会发现你的值被改变了两次…$\to \mathrm {GG}(WA+TLE)$</li>
+<li><code>lazy</code>标记…覆盖是用<code>=</code>, 区间加是<code>+=</code>…</li>
+<li>数组代表的意思自己给忘了…记得加点注释吧</li>
+<li><strong>树链剖分<code>while</code>里比较的是<code>if (ta[ta[x].top].deep &lt; ta[ta[y].top].deep)</code>, 而不是<code>if (ta[x].deep &gt; ta[y].deep)</code>, (怎么感觉最近犯的错误越来越低级了…</strong></li>
+<li><code>(b[dq].le + b[dq].ri) &gt;&gt; 1</code>写成<code>(le + ri) &gt;&gt; 1</code>$\to \mathrm{GG}$(爆栈) (怎么感觉最近犯的错误越来越低级了…</li>
+<li><code>priority_queue</code>中的<code>cmp</code>如果是仿函数别忘了里面的大小比较是正好相反的…</li>
+<li>反向边的编号计算应该是这样: <code>#define bh(x, i) ((MAXN) * (i) + (x))</code>, 而不是<code>#define bh(x, i) ((MAXK) * (i) + (x))</code>, 即注意每一次都是复制了一整张图…</li>
+<li>谨慎用宏…改加的不该加的括号都想清楚了…能加就加上吧…反着你也背不过运算优先级…</li>
+<li>SA…居然能把<code>last = i</code>写成<code>i = last</code>…SA打的还是不是很熟…</li>
+<li>SA把<code>sa[tong[fir[i]]--] = i</code>写成了<code>sa[tong[fir[i]--]]</code>…也许我应该在中括号之间加个空格啥的…<code>fir</code>数组你减个**啊…</li>
+<li>SPFA…<code>inq[dq]</code>忘了置成<code>false</code>…还有<code>dq = q.front()</code>后忘了<code>q.pop()</code>…我真是越来越傻逼了…</li>
+<li>$exgcd$ $ax + by = 1$最后$x$加上的是$b / \gcd$…不是$y / \gcd$…你求出的是$a, b$的$\gcd$…用$y$除是要闹哪样…果然我越来越傻逼了…</li>
+<li>$exgcd$ 最后是$y -= a / b * x$而不是什么奇奇怪怪的东西…过了这么长时间背的还是不熟啊…<del>主要是不想做数论题</del></li>
 <li>找负环的时候别忘了在<code>dfs</code>回溯的时候把当前节点的<code>vis</code>标记置为<code>false</code>, 防止横叉边被误判成负环</li>
-<li>写错变量名...</li>
-<li>数组把<code>MAXN * 32</code>写成<code>MAXN &lt;&lt; 32</code>...而且编译完了测样例是WA而不是RE...</li>
-<li>函数传参数的时候忘改成<code>LL</code>....</li>
-<li>输出忘了<code>%lld</code>...</li>
-<li><code>dinic</code>的<code>bfs()</code>忘记写<code>dis[s] = 1</code>...</li>
-<li><code>INF</code>赋小了...这个需要仔细算一下</li>
-<li><code>m</code>和<code>n</code>写反...或者没改全...比如求平均数除错了...</li>
-<li>树剖: <code>x = ta[ta[x].top].fa</code>...而不是<code>x = ta[x].top</code></li>
-<li>codeblocks用中文工程名...还怀疑codeblocks不能调试...</li>
+<li>写错变量名…</li>
+<li>数组把<code>MAXN * 32</code>写成<code>MAXN &lt;&lt; 32</code>…而且编译完了测样例是WA而不是RE…</li>
+<li>函数传参数的时候忘改成<code>LL</code>….</li>
+<li>输出忘了<code>%lld</code>…</li>
+<li><code>dinic</code>的<code>bfs()</code>忘记写<code>dis[s] = 1</code>…</li>
+<li><code>INF</code>赋小了…这个需要仔细算一下</li>
+<li><code>m</code>和<code>n</code>写反…或者没改全…比如求平均数除错了…</li>
+<li>树剖: <code>x = ta[ta[x].top].fa</code>…而不是<code>x = ta[x].top</code></li>
+<li>codeblocks用中文工程名…还怀疑codeblocks不能调试…</li>
 <li><code>for (int i = g[dq]; ~i; i = b[i].next)</code>没有<code>memset(g, -1, sizeof(g));</code></li>
-<li>ST表: <code>if (le + (t &lt;&lt; 1) - 1 &lt;= n)</code> 以及 <code>if (le + (1 &lt;&lt; t) &lt;= n)</code>...直接给我<span class="math inline">\(RE\)</span>成零分了...</li>
-<li>进行一个类似<code>fr[i] = fr[i - 1] + a[i] * i</code>的预处理时(只把<code>fr[]</code>设为<code>LL</code>了)没有把<code>a[]</code>开成<code>LL</code>, 这样在进行乘法的时候就已经炸了...</li>
-<li>分块的时候最后一个右边界没有和<span class="math inline">\(n\)</span>取<span class="math inline">\(min\)</span>, 然后就凉了</li>
+<li>ST表: <code>if (le + (t &lt;&lt; 1) - 1 &lt;= n)</code> 以及 <code>if (le + (1 &lt;&lt; t) &lt;= n)</code>…直接给我$RE$成零分了…</li>
+<li>进行一个类似<code>fr[i] = fr[i - 1] + a[i] * i</code>的预处理时(只把<code>fr[]</code>设为<code>LL</code>了)没有把<code>a[]</code>开成<code>LL</code>, 这样在进行乘法的时候就已经炸了…</li>
+<li>分块的时候最后一个右边界没有和$n$取$min$, 然后就凉了</li>
 <li>进行会爆<code>int</code>的位运算, 写成了<code>1 &lt;&lt; i</code>, 应该是<code>1ll &lt;&lt; i</code></li>
-<li>在有多种边的图中, 跑<span class="math inline">\(kruskal\)</span>, 把存这一个边数组排了序, 结果<span class="math inline">\(kruskal\)</span>的时候加了另一种边...</li>
-<li>数组不要开小, 尤其主席树...不要尝试算准空间...往大里开就完事了</li>
+<li>在有多种边的图中, 跑$kruskal$, 把存这一个边数组排了序, 结果$kruskal$的时候加了另一种边…</li>
+<li>数组不要开小, 尤其主席树…不要尝试算准空间…往大里开就完事了</li>
 <li>排序时注意相等的情况应该让哪个排在前面</li>
-<li>树状数组<code>for(int i = x; i &lt;= n; i += lowbit(i))</code>注意判断是否传入的是<span class="math inline">\(0\)</span></li>
-<li><span class="math inline">\(tarjan\)</span>缩点的时候要判断两个点是否属于一个连通分量</li>
-<li><span class="math inline">\(tarjan\)</span>缩点之后可能会出现重边, 注意对答案的影响</li>
+<li>树状数组<code>for(int i = x; i &lt;= n; i += lowbit(i))</code>注意判断是否传入的是$0$</li>
+<li>$tarjan$缩点的时候要判断两个点是否属于一个连通分量</li>
+<li>$tarjan$缩点之后可能会出现重边, 注意对答案的影响</li>
 <li>倍增求LCA的时候, 在两个点跳到一个深度的时候记得看看这两个点是否已经相等了</li>
 <li>网络流题目给的邻接矩阵, 建图的时候忘了加反向边</li>
 <li>带取膜的前缀和, 求区间和的时候忘了处理负数</li>
-<li>忘记输出答案 以为<span class="math inline">\(RE\)</span>了...</li>
-<li><code>int</code>的范围是<code>2e9</code>...不要想当然的读入用<code>int</code>然后溢出</li>
+<li>忘记输出答案 以为$RE$了…</li>
+<li><code>int</code>的范围是<code>2e9</code>…不要想当然的读入用<code>int</code>然后溢出</li>
 <li>试除小于根号质数来分解质因数的时候别忘了除完最后可能不为<code>1</code></li>
-<li>倍增没有给<code>lgn</code>赋值...居然还能过不少点真是太真实了...</li>
-<li>没有注意到可能图不是连通图...</li>
+<li>倍增没有给<code>lgn</code>赋值…居然还能过不少点真是太真实了…</li>
+<li>没有注意到可能图不是连通图…</li>
 <li>SAM没有<code>init()</code></li>
 <li>分块忘记处理询问区间包含的数很少, 没有包含任何一个块的情况</li>
-<li><span class="math inline">\(0\)</span>是自然数</li>
+<li>$0$是自然数</li>
 <li>按秩合并的并查集在合并的时候没有判断他们两个是否已经属于一个并查集了 (还有合并可并对的时候)</li>
 <li>全局的结构体似乎里面的值也不一定都是<code>0</code>? 还是需要初始化一下的啊</li>
 <li>注意特殊情况的特判</li>
 <li>多组数据 一组数据读到一半就判断出答案了 然后就直接跳到了下一组 导致下一组的读入加上了这一组未读入的部分</li>
-<li>线性基没有判断要插入的数当前这一位是不是<code>1</code>...</li>
+<li>线性基没有判断要插入的数当前这一位是不是<code>1</code>…</li>
 <li>树刨忘记写最后他们在一条重链上的情况了 = =</li>
 <li>据说开场看题的时候要先把一眼分标出来?</li>
-<li><strong>AC自动机预处理<code>fail</code>边的时候忘了把下一层节点<code>push</code>进队列了...</strong></li>
+<li><strong>AC自动机预处理<code>fail</code>边的时候忘了把下一层节点<code>push</code>进队列了…</strong></li>
 <li>转化来转化去的时候 别忘了搞清楚编号究竟是哪个的编号 这个函数要传的是什么的编号</li>
 <li>矩阵乘法 矩阵的大小(结构体里的<code>n</code>和<code>m</code>)没有赋值</li>
 <li><code>int</code>直接传入<code>long long</code>的时候会出现错误(前面的32位似乎随机)</li>
-<li>bfs的时候把<code>dis</code>初始化为<code>0</code>结果判定的时候写的是<code>if (!dis[b[i].to])</code>然后把源点更新了...</li>
+<li>bfs的时候把<code>dis</code>初始化为<code>0</code>结果判定的时候写的是<code>if (!dis[b[i].to])</code>然后把源点更新了…</li>
 <li>网络流少加了反向边</li>
 <li>忘了函数的返回值是啥类型的</li>
-<li>矩阵乘法是<span class="math inline">\(A\)</span>的行去乘以<span class="math inline">\(B\)</span>的列, 别搞叉劈了</li>
+<li>矩阵乘法是$A$的行去乘以$B$的列, 别搞叉劈了</li>
 </ol>
 
     </div>
@@ -344,13 +344,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/61115.html" rel="prev" title="翻车笔记 Tyvj1952 Easy && OSU! [期望DP]">
-      <i class="fa fa-chevron-left"></i> 翻车笔记 Tyvj1952 Easy && OSU! [期望DP]
+    <a href="/posts/3632.html" rel="prev" title="颓废笔记 Diary [颓废]">
+      <i class="fa fa-chevron-left"></i> 颓废笔记 Diary [颓废]
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/3632.html" rel="next" title="颓废笔记 Diary [颓废]">
-      颓废笔记 Diary [颓废] <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -424,7 +421,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-count">75</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -573,7 +570,7 @@
     };
     (function () {
       var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
       script.defer = true;
       document.head.appendChild(script);
     })();

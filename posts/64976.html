@@ -252,19 +252,16 @@
       
         <p>不会ABC了已经</p>
 <a id="more"></a>
-<h3 id="懵逼的-题目">懵逼的 题目</h3>
-<p><a target="_blank" rel="noopener" href="https://abc096.contest.atcoder.jp/tasks/abc096_d">qwq</a></p>
-<h3 id="扯淡的-题解">扯淡的 题解</h3>
-<p>当时和Ycrpro看这道题的时候完全是懵逼的啊!</p>
-<p>我翻了哥德巴赫猜想, 猜了是否5个素数的和不可能是合数, 算了<span class="math inline">\(5000\)</span>以内的素数和为合数的情况, 找了<span class="math inline">\(2, 4, 6\)</span>个素数和的规律</p>
+<h3 id="懵逼的-题目"><a href="#懵逼的-题目" class="headerlink" title="懵逼的 题目"></a>懵逼的 题目</h3><p><a target="_blank" rel="noopener" href="https://abc096.contest.atcoder.jp/tasks/abc096_d">qwq</a></p>
+<h3 id="扯淡的-题解"><a href="#扯淡的-题解" class="headerlink" title="扯淡的 题解"></a>扯淡的 题解</h3><p>当时和Ycrpro看这道题的时候完全是懵逼的啊!</p>
+<p>我翻了哥德巴赫猜想, 猜了是否5个素数的和不可能是合数, 算了$5000$以内的素数和为合数的情况, 找了$2, 4, 6$个素数和的规律</p>
 <p>就是没有想到</p>
 <blockquote>
-<p>其实题目名称有点小提示，让这些数的个位是1，5个这样的数加起来一定是5的倍数，也就是合数了。</p>
-<p>——from <a target="_blank" rel="noopener" href="https://blog.csdn.net/swunHJ/article/details/80211192">一个不知名的大佬</a></p>
+<p> 其实题目名称有点小提示，让这些数的个位是1，5个这样的数加起来一定是5的倍数，也就是合数了。</p>
+<p> ——from <a target="_blank" rel="noopener" href="https://blog.csdn.net/swunHJ/article/details/80211192">一个不知名的大佬</a></p>
 </blockquote>
 <p>[人生重来算了.jpg]</p>
-<h3 id="沙茶的-代码">沙茶的 代码</h3>
-<p>去年的欧拉筛我居然没忘...</p>
+<h3 id="沙茶的-代码"><a href="#沙茶的-代码" class="headerlink" title="沙茶的 代码"></a>沙茶的 代码</h3><p>去年的欧拉筛我居然没忘…</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN (100000 + 5)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">bool</span> isp[MAXN];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; prime;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(isp, <span class="literal">true</span>, <span class="keyword">sizeof</span>(isp));</span><br><span class="line">	isp[<span class="number">1</span>] = <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; MAXN; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (isp[i])</span><br><span class="line">			prime.push_back(i);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; prime.size() &amp;&amp; prime[j] * i &lt; MAXN; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			isp[i * prime[j]] = <span class="literal">false</span>;</span><br><span class="line">			<span class="keyword">if</span> (i % prime[j] == <span class="number">0</span>)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	freopen(<span class="string">&quot;in.in&quot;</span>, <span class="string">&quot;r&quot;</span>, <span class="built_in">stdin</span>);</span><br><span class="line">	init();</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">	<span class="keyword">int</span> last = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (; last &lt; prime.size(); last++)</span><br><span class="line">			<span class="keyword">if</span> (prime[last] % <span class="number">10</span> == <span class="number">1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, prime[last]);</span><br><span class="line">				++last;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>By 大沙茶 Cansult</p>
 
@@ -369,7 +366,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-count">75</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -518,7 +515,7 @@
     };
     (function () {
       var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
       script.defer = true;
       document.head.appendChild(script);
     })();

@@ -253,25 +253,31 @@
 <p>爷总算也会斜率优化辣!</p>
 <a id="more"></a>
 <p>从<a target="_blank" rel="noopener" href="https://darkbzoj.tk/problem/1010">例题</a>讲起, 先写个朴素的dp式子</p>
-<script type="math/tex; mode=display">
+<p><span class="math display">\[
 f_i\textrm{ 代表前i个玩具装箱后的最小代价} \\
-f_i = \min\{f_j + (i - j - 1 + S_i - S_j - L) ^ 2\} \quad (j < i)</script><p>我们发现这狗东西是$n^2$的, 我们把式子化简一下</p>
-<script type="math/tex; mode=display">
+f_i = \min\{f_j + (i - j - 1 + S_i - S_j - L) ^ 2\} \quad (j &lt; i)
+\]</span></p>
+<p>我们发现这狗东西是<span class="math inline">\(n^2\)</span>的, 我们把式子化简一下</p>
+<p><span class="math display">\[
 f_i = \min\{f_j + [(i + S_i) - (j + S_j) - L - 1]^2\} \\
-\text{令 }A_i = S_i + i,\, L' = L + 1,\, B_i = A_i + L'\\
-f_i = \min\{f_j + (A_i - A_j - L')^2\}\\
+\text{令 }A_i = S_i + i,\, L&#39; = L + 1,\, B_i = A_i + L&#39;\\
+f_i = \min\{f_j + (A_i - A_j - L&#39;)^2\}\\
 f_i = \min\{f_j + (A_i - B_j)^2\}\\
 f_i = \min\{f_j + A_i^2 - 2A_iB_j + B_j^2\}\\
-f_i - A_i^2 = \min\{f_j - 2A_iB_j + B_j^2\}</script><p>我们发现我们基本上把与 i 相关的和与 j 相关的都分到了等式的两侧, 除了 $2A_iB_j$</p>
-<p>我们发现如果我们把和 $i$ 相关的和与 $j$ 相关的部分分开之后, 有丶像一个一次方程:</p>
+f_i - A_i^2 = \min\{f_j - 2A_iB_j + B_j^2\}
+\]</span></p>
+<p>我们发现我们基本上把与 i 相关的和与 j 相关的都分到了等式的两侧, 除了 <span class="math inline">\(2A_iB_j\)</span></p>
+<p>我们发现如果我们把和 <span class="math inline">\(i\)</span> 相关的和与 <span class="math inline">\(j\)</span> 相关的部分分开之后, 有丶像一个一次方程:</p>
 <p>我们设</p>
-<script type="math/tex; mode=display">
+<p><span class="math display">\[
 \begin{cases}
 y = f_i - A_i^2\\
 x = B_j\\
 k = 2A_i\\
 b = f_j + B_j^2
-\end{cases}</script>
+\end{cases}
+\]</span></p>
+
     </div>
 
     

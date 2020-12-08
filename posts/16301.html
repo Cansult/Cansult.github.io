@@ -251,40 +251,54 @@
       
         <p>他妈的, 信息学竞赛真是太有意思了</p>
 <a id="more"></a>
-<h3 id="二分图"><a href="#二分图" class="headerlink" title="二分图"></a>二分图</h3><p>一张图, 可以分成两组$A, B$, 组内的点没有边相连</p>
-<h3 id="二分图的匹配"><a href="#二分图的匹配" class="headerlink" title="二分图的匹配"></a>二分图的匹配</h3><p>一组边, 边的端点互不相同</p>
-<h3 id="二分图的最大匹配"><a href="#二分图的最大匹配" class="headerlink" title="二分图的最大匹配"></a>二分图的最大匹配</h3><p>边数最多的一组边</p>
-<h3 id="求二分图最大匹配的匈牙利算法"><a href="#求二分图最大匹配的匈牙利算法" class="headerlink" title="求二分图最大匹配的匈牙利算法"></a>求二分图最大匹配的匈牙利算法</h3><p>每次找一条增广路, 这条路径满足: 起始边是未选边, 终止边是未选边, 中间的边选边与未选边交替存在, <strong>且连接两个未选点</strong></p>
+<h3 id="二分图">二分图</h3>
+<p>一张图, 可以分成两组<span class="math inline">\(A, B\)</span>, 组内的点没有边相连</p>
+<h3 id="二分图的匹配">二分图的匹配</h3>
+<p>一组边, 边的端点互不相同</p>
+<h3 id="二分图的最大匹配">二分图的最大匹配</h3>
+<p>边数最多的一组边</p>
+<h3 id="求二分图最大匹配的匈牙利算法">求二分图最大匹配的匈牙利算法</h3>
+<p>每次找一条增广路, 这条路径满足: 起始边是未选边, 终止边是未选边, 中间的边选边与未选边交替存在, <strong>且连接两个未选点</strong></p>
 <p>然后我们把这条增广路中选边和未选边置反(选边变为未选, 未选变为选, etc), 这样选边的数量就会+1, 依次进行下去, 直到找不到增广路, 我们就找到了二分图的最大匹配</p>
-<h3 id="点覆盖"><a href="#点覆盖" class="headerlink" title="点覆盖"></a>点覆盖</h3><p>规定一个点覆盖与他相连的所有边, 一个能覆盖所有边的点集称为点覆盖</p>
-<h3 id="最小点覆盖"><a href="#最小点覆盖" class="headerlink" title="最小点覆盖"></a>最小点覆盖</h3><p>点数量最少的点集称为最小点覆盖</p>
-<h3 id="独立集"><a href="#独立集" class="headerlink" title="独立集"></a>独立集</h3><p>一个点集, 内部的点没有边相连(二分图的一部就是一个独立集)</p>
-<h3 id="最大独立集"><a href="#最大独立集" class="headerlink" title="最大独立集"></a>最大独立集</h3><p>点数最多的独立集(易知二分图的独立集大小比两部中点数多的一部的点的数量要多)</p>
-<hr>
+<h3 id="点覆盖">点覆盖</h3>
+<p>规定一个点覆盖与他相连的所有边, 一个能覆盖所有边的点集称为点覆盖</p>
+<h3 id="最小点覆盖">最小点覆盖</h3>
+<p>点数量最少的点集称为最小点覆盖</p>
+<h3 id="独立集">独立集</h3>
+<p>一个点集, 内部的点没有边相连(二分图的一部就是一个独立集)</p>
+<h3 id="最大独立集">最大独立集</h3>
+<p>点数最多的独立集(易知二分图的独立集大小比两部中点数多的一部的点的数量要多)</p>
+<hr />
 <p>好, 上面的都很简单, 下面我们开始了</p>
-<h3 id="Konig定理"><a href="#Konig定理" class="headerlink" title="König定理"></a>König定理</h3><p>二分图的最小点覆盖大小 = 二分图的最大匹配</p>
-<p>证明: </p>
-<p>对于一个已经完成最大匹配的二分图, 从他的右部每一个不与选边相连的点, 沿着 “未选边-选边-未选边-选边-…” 的顺序dfs, 易知此dfs路径的结尾一定是一个选边, 否则可以成为一条增广路进行增广, 与已知矛盾.</p>
-<p>对每一条dfs路径经过的点进行标记. </p>
+<h3 id="könig定理">König定理</h3>
+<p>二分图的最小点覆盖大小 = 二分图的最大匹配</p>
+<p>证明:</p>
+<p>对于一个已经完成最大匹配的二分图, 从他的右部每一个不与选边相连的点, 沿着 "未选边-选边-未选边-选边-..." 的顺序dfs, 易知此dfs路径的结尾一定是一个选边, 否则可以成为一条增广路进行增广, 与已知矛盾.</p>
+<p>对每一条dfs路径经过的点进行标记.</p>
 <p>从整张图来看, 左部标记的点 和 右部未被标记的点 即为最小点覆盖</p>
 <p>step.1: 证明这个点集是一个点覆盖</p>
-<p>运用反证法: 假设存在一条边, 他的左端点未被标记, 右端点被标记, 则说明该图存在增广路, 与已知矛盾(右端点被标记说明他的右端点是一条”未选边-选边-…-未选边”的结尾, 而左端点未被标记说明上一条路径无法继续延伸, 也就是右端点也是一个未选点, 可以作为结尾形成一条增广路)</p>
+<p>运用反证法: 假设存在一条边, 他的左端点未被标记, 右端点被标记, 则说明该图存在增广路, 与已知矛盾(右端点被标记说明他的右端点是一条"未选边-选边-...-未选边"的结尾, 而左端点未被标记说明上一条路径无法继续延伸, 也就是右端点也是一个未选点, 可以作为结尾形成一条增广路)</p>
 <p>step. 2: 证明这个点集的大小是最大匹配</p>
 <p>对于每一条匹配边, 有且仅有一个端点属于上述点集(如果是dfs到的边就是左端点属于, 否则就是右端点属于)</p>
 <p>step. 3: 证明这个点集是最小的点覆盖</p>
-<p>首先我们很容易知道, 最大匹配一定$\le$最小点覆盖 (最大匹配比二分图左右两部最小的点数要小)</p>
+<p>首先我们很容易知道, 最大匹配一定<span class="math inline">\(\le\)</span>最小点覆盖 (最大匹配比二分图左右两部最小的点数要小)</p>
 <p>然后刚刚证明了最大匹配 = 我们刚刚的点集, 所以我们刚刚的点集就是最小点覆盖</p>
 <p>好了完事了</p>
-<h3 id="最小边覆盖"><a href="#最小边覆盖" class="headerlink" title="最小边覆盖"></a>最小边覆盖</h3><p>一个边集, 所有的点都是这个边集中边的端点</p>
-<h3 id="最小边覆盖-点数-最大匹配"><a href="#最小边覆盖-点数-最大匹配" class="headerlink" title="最小边覆盖 = 点数 - 最大匹配"></a>最小边覆盖 = 点数 - 最大匹配</h3><p>证明: 考虑选边加入边集, 显然可以先选最大匹配中边集, 可以保证选这个数量的边时可以覆盖更多的点. 然后对于剩下的点, 随便选与他相连的边即可</p>
+<h3 id="最小边覆盖">最小边覆盖</h3>
+<p>一个边集, 所有的点都是这个边集中边的端点</p>
+<h3 id="最小边覆盖-点数---最大匹配">最小边覆盖 = 点数 - 最大匹配</h3>
+<p>证明: 考虑选边加入边集, 显然可以先选最大匹配中边集, 可以保证选这个数量的边时可以覆盖更多的点. 然后对于剩下的点, 随便选与他相连的边即可</p>
 <p>即: 最小边覆盖 = 最大匹配 + (点数 - 最大匹配 * 2) = 点数 - 最大匹配</p>
-<h3 id="最大独立集-点数-最大匹配"><a href="#最大独立集-点数-最大匹配" class="headerlink" title="最大独立集 = 点数 - 最大匹配"></a>最大独立集 = 点数 - 最大匹配</h3><p>证明: 考虑从全体点集中删点得出独立集, 发现我们删掉的点组成一个点覆盖, 而要得到最大独立集, 我们要删掉的是一个最小点覆盖.</p>
+<h3 id="最大独立集-点数---最大匹配">最大独立集 = 点数 - 最大匹配</h3>
+<p>证明: 考虑从全体点集中删点得出独立集, 发现我们删掉的点组成一个点覆盖, 而要得到最大独立集, 我们要删掉的是一个最小点覆盖.</p>
 <p>即: 最大独立集 = 点数 - 最小点覆盖 = 点数 - 最大匹配</p>
-<h3 id="DAG的最小不相交路径覆盖"><a href="#DAG的最小不相交路径覆盖" class="headerlink" title="DAG的最小不相交路径覆盖"></a>DAG的最小不相交路径覆盖</h3><p>用最少个数的不相交路径覆盖所有的点</p>
-<p>拆点, 将每个点$V$分为$\{V_x, V_y\}$, 对于原图的一条边$U \to V$, 在新图连接$U_y \to V_x$. 易知新图为二分图</p>
+<h3 id="dag的最小不相交路径覆盖">DAG的最小不相交路径覆盖</h3>
+<p>用最少个数的不相交路径覆盖所有的点</p>
+<p>拆点, 将每个点<span class="math inline">\(V\)</span>分为<span class="math inline">\(\{V_x, V_y\}\)</span>, 对于原图的一条边<span class="math inline">\(U \to V\)</span>, 在新图连接<span class="math inline">\(U_y \to V_x\)</span>. 易知新图为二分图</p>
 <p>DAG最小不相交路径覆盖 = 原图节点数 - 二分图最大匹配</p>
 <p>证明: 开始时将原图每一个点都看作一条路径, 于是在二分图中每匹配一条边就是将两条路径连接在一起. 而二分图匹配的特点保证了一个点不会有两条出边, 也不会有两条入边</p>
-<h3 id="DAG的最小可相交路径覆盖"><a href="#DAG的最小可相交路径覆盖" class="headerlink" title="DAG的最小可相交路径覆盖"></a>DAG的最小可相交路径覆盖</h3><p>用最少可相交的路径覆盖所有的点</p>
+<h3 id="dag的最小可相交路径覆盖">DAG的最小可相交路径覆盖</h3>
+<p>用最少可相交的路径覆盖所有的点</p>
 <p>用floyd传递闭包之后用最小不相交路径覆盖就行了</p>
 <p>考虑到两条路径在开头和结尾相交其实对答案是没有影响的, 所以对答案真正有影响的是在中间节点相交, 而floyd传递闭包后相当与可以跨过中间节点, 也就没有了不可相交的限制</p>
 <p>By Cansult</p>
@@ -373,7 +387,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE"><span class="nav-number">1.</span> <span class="nav-text">二分图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE%E7%9A%84%E5%8C%B9%E9%85%8D"><span class="nav-number">2.</span> <span class="nav-text">二分图的匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE%E7%9A%84%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D"><span class="nav-number">3.</span> <span class="nav-text">二分图的最大匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%E7%9A%84%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">求二分图最大匹配的匈牙利算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%82%B9%E8%A6%86%E7%9B%96"><span class="nav-number">5.</span> <span class="nav-text">点覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E7%82%B9%E8%A6%86%E7%9B%96"><span class="nav-number">6.</span> <span class="nav-text">最小点覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8B%AC%E7%AB%8B%E9%9B%86"><span class="nav-number">7.</span> <span class="nav-text">独立集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E7%8B%AC%E7%AB%8B%E9%9B%86"><span class="nav-number">8.</span> <span class="nav-text">最大独立集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Konig%E5%AE%9A%E7%90%86"><span class="nav-number">9.</span> <span class="nav-text">König定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E8%BE%B9%E8%A6%86%E7%9B%96"><span class="nav-number">10.</span> <span class="nav-text">最小边覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E8%BE%B9%E8%A6%86%E7%9B%96-%E7%82%B9%E6%95%B0-%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D"><span class="nav-number">11.</span> <span class="nav-text">最小边覆盖 &#x3D; 点数 - 最大匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E7%8B%AC%E7%AB%8B%E9%9B%86-%E7%82%B9%E6%95%B0-%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D"><span class="nav-number">12.</span> <span class="nav-text">最大独立集 &#x3D; 点数 - 最大匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DAG%E7%9A%84%E6%9C%80%E5%B0%8F%E4%B8%8D%E7%9B%B8%E4%BA%A4%E8%B7%AF%E5%BE%84%E8%A6%86%E7%9B%96"><span class="nav-number">13.</span> <span class="nav-text">DAG的最小不相交路径覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DAG%E7%9A%84%E6%9C%80%E5%B0%8F%E5%8F%AF%E7%9B%B8%E4%BA%A4%E8%B7%AF%E5%BE%84%E8%A6%86%E7%9B%96"><span class="nav-number">14.</span> <span class="nav-text">DAG的最小可相交路径覆盖</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE"><span class="nav-number">1.</span> <span class="nav-text">二分图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE%E7%9A%84%E5%8C%B9%E9%85%8D"><span class="nav-number">2.</span> <span class="nav-text">二分图的匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE%E7%9A%84%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D"><span class="nav-number">3.</span> <span class="nav-text">二分图的最大匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%E7%9A%84%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">求二分图最大匹配的匈牙利算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%82%B9%E8%A6%86%E7%9B%96"><span class="nav-number">5.</span> <span class="nav-text">点覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E7%82%B9%E8%A6%86%E7%9B%96"><span class="nav-number">6.</span> <span class="nav-text">最小点覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8B%AC%E7%AB%8B%E9%9B%86"><span class="nav-number">7.</span> <span class="nav-text">独立集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E7%8B%AC%E7%AB%8B%E9%9B%86"><span class="nav-number">8.</span> <span class="nav-text">最大独立集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#k%C3%B6nig%E5%AE%9A%E7%90%86"><span class="nav-number">9.</span> <span class="nav-text">König定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E8%BE%B9%E8%A6%86%E7%9B%96"><span class="nav-number">10.</span> <span class="nav-text">最小边覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E8%BE%B9%E8%A6%86%E7%9B%96-%E7%82%B9%E6%95%B0---%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D"><span class="nav-number">11.</span> <span class="nav-text">最小边覆盖 &#x3D; 点数 - 最大匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E7%8B%AC%E7%AB%8B%E9%9B%86-%E7%82%B9%E6%95%B0---%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D"><span class="nav-number">12.</span> <span class="nav-text">最大独立集 &#x3D; 点数 - 最大匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dag%E7%9A%84%E6%9C%80%E5%B0%8F%E4%B8%8D%E7%9B%B8%E4%BA%A4%E8%B7%AF%E5%BE%84%E8%A6%86%E7%9B%96"><span class="nav-number">13.</span> <span class="nav-text">DAG的最小不相交路径覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dag%E7%9A%84%E6%9C%80%E5%B0%8F%E5%8F%AF%E7%9B%B8%E4%BA%A4%E8%B7%AF%E5%BE%84%E8%A6%86%E7%9B%96"><span class="nav-number">14.</span> <span class="nav-text">DAG的最小可相交路径覆盖</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

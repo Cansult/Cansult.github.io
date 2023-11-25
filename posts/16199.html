@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"cansult.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="垂死病中惊坐起, 笑闻学弟切SAM 是时候补一篇学习笔记了 为啥每次我打后缀自动机都出来孩子战斗机啊">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习笔记 SAM">
+<meta property="og:url" content="http://cansult.github.io/posts/16199.html">
+<meta property="og:site_name" content="Cansult&#39;s blog">
+<meta property="og:description" content="垂死病中惊坐起, 笑闻学弟切SAM 是时候补一篇学习笔记了 为啥每次我打后缀自动机都出来孩子战斗机啊">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-01-07T11:16:50.000Z">
+<meta property="article:modified_time" content="2019-04-08T10:13:40.000Z">
+<meta property="article:author" content="Cansult Chen">
+<meta property="article:tag" content="字符串">
+<meta property="article:tag" content="SAM">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://cansult.github.io/posts/16199.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>学习笔记 SAM | Cansult's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Cansult's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">即使愿望永远无法实现<br/>我也不愿就这样放手</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://cansult.github.io/posts/16199.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Cansult Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cansult's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          学习笔记 SAM
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-01-07 19:16:50" itemprop="dateCreated datePublished" datetime="2019-01-07T19:16:50+08:00">2019-01-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-04-08 18:13:40" itemprop="dateModified" datetime="2019-04-08T18:13:40+08:00">2019-04-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>垂死病中惊坐起, 笑闻学弟切SAM</p>
+<p>是时候补一篇学习笔记了</p>
+<p>为啥每次我打后缀自动机都出来孩子战斗机啊</p>
+<span id="more"></span>
+<h3 id="定义">定义</h3>
+<blockquote>
+<p>// 基本上是自己瞎捷豹编的</p>
+</blockquote>
+<p><code>s</code>: SAM的起点, 一切转移从这里开始...</p>
+<p><code>endpos[(string) x]</code>:
+字符串<code>x</code>在原串中出现位置(取<code>x</code>结尾的下标)的集合</p>
+<p>终点:
+所有<code>endpos</code>包含<code>n</code>的节点都是终点(感谢yt姐姐告诉我终点有很多个qwq)</p>
+<p>节点: 自动机中的点, 一个节点包含着一类<code>endpos</code>相同(必须 完
+全 一 致 )的子串</p>
+<p><code>maxlen[x]</code>和<code>minlen[x]</code>:
+代表节点<code>x</code>中包含的长度最长的子串和长度最短的子串(有的时候也省略为起长度)</p>
+<p>节点后缀: 对于节点<code>x</code>,
+节点后缀就是<code>maxlen[x]</code>的所有后缀,
+显然这个节点包含的所有的子串属于这个点的节点后缀,
+而长度大于<code>minlen[x]</code>的节点后缀就是这个节点所包含的节点</p>
+<p>边: - <code>trans[x][y]</code>:
+在节点<code>x</code>处后一个字符为<code>y</code>时转移到的节点;
+如果不能识别, <code>trans[x][y] = NULL</code> -
+<code>suff_link[x]</code>: 指向 [包含
+[第一个长度小于<code>minlen[x]</code>的节点后缀] 的节点],
+因为<code>minlen</code>沿着<code>suff_link</code>是单调递减的,
+所以最后一定会变为空串, 即指向初始节点<code>s</code> -
+<code>suff_path[x]</code>: 从节点<code>x</code>开始,
+由<code>suff_link</code>一直向上, 组成的路径,
+终点为<code>s</code>(显然<code>suff_path[x]</code>上的节点的<code>endpos</code>都会包含<code>endpos[x]</code>)</p>
+<h3 id="转移">转移</h3>
+<blockquote>
+<p>// 一个大分类讨论...</p>
+</blockquote>
+<p><code>maxlen</code>为当前串的节点为<code>x</code>,
+新加入的字符为<code>y</code>...我们现在需要给所有合法的后缀都在后面加上一个字符<code>y</code>,
+因为原串扩充了一位所以肯定要增加一个节点, 先<code>++cntn</code>为敬</p>
+<h4 id="i">I</h4>
+<p>对于任意节点<span class="math inline">\(j \in
+\text{suff_path[x]}\)</span>, 都有<code>trans[j][y] = NULL</code></p>
+<p>也就是所有的终点(<code>suff_path[x]</code>上所有点的<code>endpos</code>都包含<code>n</code>,
+也就是说他们都是终点)即当前串的所有后缀在当前串的子串都不能向<code>y</code>转移,
+既然坑上没有萝卜我们就可以直接让<code>suff_path</code>上的节点<code>trans[j][y] = cntn</code>;
+最后让<code>suff_link[cntn] = s</code>,
+因为之前的串上没有<code>trans[j][y]</code>, 终点又变成1个了</p>
+<h4 id="ii">II</h4>
+<p>在沿着<code>suff_path[x]</code>向上跳的时候,
+对于<code>trans[j][y] = NULL</code>的点,
+同<strong>I</strong>我们可以直接把他们的<code>trans</code>赋成<code>cntn</code>;</p>
+<p>而遇到<code>trans[j][y] != NULL</code>且<code>maxlen[trans[j][y]] = maxlen[j] + 1</code>(为什么放在下面说)的情况时,
+我们发现我们没有必要继续向上跳了(上面的点也一定有<code>trans[j][y] != NULL</code>)我们可以直接把这些<code>trans[j][y]</code>作为终点,
+让<code>suff_link[x] = trans[j][y]</code>然后就可以直接返回了</p>
+<h4 id="iii">III</h4>
+<p>在沿着<code>suff_path[x]</code>向上跳的时候,
+<code>trans[j][y] = NULL</code>时处理还是同上</p>
+<p>否则<code>trans[j][y] != NULL</code>且<code>maxlen[trans[j][y]] &gt; maxlen[j] + 1</code>:
+这个<code>trans[j][y]</code>并不是直接由<code>j</code>转移来的,
+所以如果我们把这个点当做一个终点的话,
+就会造成非后缀被识别为后缀(因为到达了终点), 所以我们要复制一个新点;</p>
+<p>我们新建一个点<code>c</code>,
+<code>suff_link[c] = suff_link[trans[j][y]], trans[c] = trans[trans[j][y]], maxlen[c] = maxlen[j] + 1</code>,
+即我们新建一个节点作为终点, 且是只由<code>j</code>转移来的,
+然后后面的就和<strong>II</strong>是一样的了:
+<code>suff_link[cntn] = c</code></p>
+<p>然后再做一些处理:
+修改<code>suff_link[trans[j][y]] = c</code>(节点<code>c</code>与<code>trans[j][y]</code>的最长公共后缀是最长的);
+沿着<code>suff_path[j]</code>向上走,
+对于路径上所有通过<code>y</code>转移到<code>trans[j][y]</code>的节点<code>g</code>:
+<code>trans[g][y] = c</code>(这些节点的后缀都是<code>j</code>的后缀,
+加上<code>y</code>后也就是新串的后缀);</p>
+<hr />
+<p>是不是也不是很难?</p>
+<h3 id="几道例题">几道例题</h3>
+<h4 id="后缀自动机二重复旋律5"><a
+target="_blank" rel="noopener" href="https://hihocoder.com/problemset/problem/1445">后缀自动机二·重复旋律5</a></h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LL long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXZ = <span class="number">26</span>, MAXN = <span class="number">1000000</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">SAM</span> &#123;</span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">node</span> &#123;</span><br><span class="line">		<span class="type">int</span> trans[MAXZ], suff_link, maxlen;</span><br><span class="line">		<span class="built_in">node</span> (<span class="type">int</span> ml = <span class="number">0</span>): <span class="built_in">suff_link</span>(<span class="number">0</span>), <span class="built_in">maxlen</span>(ml) &#123; <span class="built_in">memset</span>(trans, <span class="number">0</span>, <span class="built_in">sizeof</span>(trans)); &#125;</span><br><span class="line">	&#125; b[MAXN * <span class="number">2</span>];</span><br><span class="line">	<span class="type">int</span> s, last, cntb;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123; s = last = cntb = <span class="number">1</span>; &#125;</span><br><span class="line">	<span class="function"><span class="type">int</span> <span class="title">ins</span><span class="params">(<span class="type">char</span> xc)</span> </span>&#123;</span><br><span class="line">		<span class="type">int</span> y = xc - <span class="string">&#x27;a&#x27;</span>, dq = ++cntb, dql = last;</span><br><span class="line">		b[dq] = <span class="built_in">node</span>(b[dql].maxlen + <span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span> (; dql &amp;&amp; !b[dql].trans[y]; dql = b[dql].suff_link)	b[dql].trans[y] = dq;</span><br><span class="line">		<span class="keyword">if</span> (!dql)	b[dq].suff_link = s;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (b[b[dql].trans[y]].maxlen == b[dql].maxlen + <span class="number">1</span>)	b[dq].suff_link = b[dql].trans[y];</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="type">int</span> c = ++cntb, bd = b[dql].trans[y];</span><br><span class="line">			b[c] = <span class="built_in">node</span>(b[dql].maxlen + <span class="number">1</span>);</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; MAXZ; i++)	b[c].trans[i] = b[bd].trans[i];</span><br><span class="line">			b[c].suff_link = b[bd].suff_link;</span><br><span class="line">			b[bd].suff_link = b[dq].suff_link = c;</span><br><span class="line">			<span class="keyword">for</span> (; dql &amp;&amp; b[dql].trans[y] == bd; dql = b[dql].suff_link)	b[dql].trans[y] = c;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> (last = dq);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;refun;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	refun.<span class="built_in">init</span>();</span><br><span class="line">	<span class="type">char</span> srs[MAXN];</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, srs);</span><br><span class="line">	<span class="type">int</span> n = <span class="built_in">strlen</span>(srs);</span><br><span class="line">	LL ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">		<span class="type">int</span> last = refun.<span class="built_in">ins</span>(srs[i]);</span><br><span class="line">		ans += (refun.b[last].maxlen - refun.b[refun.b[last].suff_link].maxlen);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>, ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="后缀自动机三重复旋律6"><a
+target="_blank" rel="noopener" href="https://hihocoder.com/problemset/problem/1449">后缀自动机三·重复旋律6</a></h4>
+<p>这题还是挺有意思的</p>
+<p><code>endpos[x]</code>就是所有<code>suff_link[j] == x</code>(这些<code>j</code>被称为<span
+class="math inline">\(parent\)</span>树上<code>x</code>的儿子)的<code>endpos</code>的并(看不懂的去瞅一眼定义...);
+如果这个<code>x</code>包含了总串的某个前缀,
+这个<code>endpos[x]</code>还要再加上自身的位置(这个位置肯定不会包含在<code>x</code>的儿子中,
+因为儿子都比<code>x</code>要长, 不会是原串这个位置的前缀)</p>
+<p>然后数组开小了加上手残调了一个多小时...</p>
+<p>我不知道我都干了什么...</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LL long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXZ = <span class="number">26</span>, MAXN = <span class="number">1000000</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">SAM</span> &#123;</span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">node</span> &#123;</span><br><span class="line">		<span class="type">int</span>  maxlen, suff_link, trans[MAXZ];</span><br><span class="line">		<span class="built_in">node</span>(<span class="type">int</span> maxlen = <span class="number">0</span>): <span class="built_in">maxlen</span>(maxlen), <span class="built_in">suff_link</span>(<span class="number">0</span>) &#123; <span class="built_in">memset</span>(trans, <span class="number">0</span>, <span class="built_in">sizeof</span>(trans)); &#125;</span><br><span class="line">	&#125; b[MAXN &lt;&lt; <span class="number">1</span>];</span><br><span class="line">	<span class="type">int</span> s, last, cntb;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123; s = last = cntb = <span class="number">1</span>; &#125;</span><br><span class="line">	<span class="function"><span class="type">int</span> <span class="title">ins</span><span class="params">(<span class="type">char</span> xc)</span> </span>&#123;</span><br><span class="line">		<span class="type">int</span> dq = ++cntb, y = xc - <span class="string">&#x27;a&#x27;</span>, dql = last;</span><br><span class="line">		b[dq] = <span class="built_in">node</span>(b[last].maxlen + <span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span> (; dql &amp;&amp; !b[dql].trans[y]; dql = b[dql].suff_link)	b[dql].trans[y] = dq;</span><br><span class="line">		<span class="keyword">if</span> (!dql)	b[dq].suff_link = s;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (b[dql].maxlen + <span class="number">1</span> == b[b[dql].trans[y]].maxlen)	b[dq].suff_link = b[dql].trans[y];</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="type">int</span> c = ++cntb, dqd = b[dql].trans[y];</span><br><span class="line">			b[c] = <span class="built_in">node</span>(b[dql].maxlen + <span class="number">1</span>); <span class="comment">// 这个地方一不小心打成 b[c] = node(b[last].maxlen + 1); 了...我也不知道我怎么搞的...</span></span><br><span class="line">			b[c].suff_link = b[dqd].suff_link;</span><br><span class="line">			b[dqd].suff_link = b[dq].suff_link = c;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; MAXZ; i++)	b[c].trans[i] = b[dqd].trans[i];</span><br><span class="line">			<span class="keyword">for</span> (; dql &amp;&amp; b[dql].trans[y] == dqd; dql = b[dql].suff_link)	b[dql].trans[y] = c;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> (last = dq);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;refun;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">edg</span> &#123;</span><br><span class="line">	<span class="type">int</span> to, next;</span><br><span class="line">&#125; b[MAXN &lt;&lt; <span class="number">1</span>];</span><br><span class="line"><span class="type">int</span> g[MAXN &lt;&lt; <span class="number">1</span>], cntb, size[MAXN &lt;&lt; <span class="number">1</span>], ans[MAXN]; </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">adn</span><span class="params">(<span class="type">int</span> from, <span class="type">int</span> to)</span> </span>&#123;</span><br><span class="line">	b[++cntb].next = g[from];</span><br><span class="line">	b[cntb].to = to;</span><br><span class="line">	g[from] = cntb;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> dq)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = g[dq]; i; i = b[i].next)	size[dq] += <span class="built_in">dfs</span>(b[i].to);</span><br><span class="line">	ans[refun.b[dq].maxlen] = <span class="built_in">max</span>(ans[refun.b[dq].maxlen], size[dq]);</span><br><span class="line">	<span class="keyword">return</span> size[dq];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	refun.<span class="built_in">init</span>();</span><br><span class="line">	<span class="type">int</span> n = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">	    <span class="type">char</span> src = <span class="built_in">getchar</span>();</span><br><span class="line">	    <span class="keyword">if</span> (src &lt; <span class="string">&#x27;a&#x27;</span> || src &gt; <span class="string">&#x27;z&#x27;</span>) <span class="keyword">break</span>;</span><br><span class="line">		size[refun.<span class="built_in">ins</span>(src)] = <span class="number">1</span>, ++n;</span><br><span class="line">	&#125; <span class="keyword">while</span> (<span class="literal">true</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= refun.cntb; i++)	<span class="built_in">adn</span>(refun.b[i].suff_link, i);</span><br><span class="line">	<span class="built_in">dfs</span>(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">1</span>; i--)	ans[i] = <span class="built_in">max</span>(ans[i], ans[i + <span class="number">1</span>]);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans[i]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="后缀自动机四重复旋律7"><a
+target="_blank" rel="noopener" href="https://hihocoder.com/problemset/problem/1457">后缀自动机四·重复旋律7</a></h4>
+<p>这种有多个串的题...如果一个答案只能在一个位置算贡献,
+我们就不能对多个串分开来算了, 我们可以把这些串都拼在一起,
+然后在中间加上不可见字符作为分割</p>
+<p>这样这个题就很简单了...</p>
+<p>忘初始化了...身败名裂</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXN (2000000 + 5)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXZ (11)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> Refun (1000000000 + 7)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LL long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">SAM</span> &#123;</span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">node</span> &#123;</span><br><span class="line">		<span class="type">int</span> maxlen, suff_link, trans[MAXZ], vsize; </span><br><span class="line">		LL sum;</span><br><span class="line">		<span class="built_in">node</span>(<span class="type">int</span> maxlen = <span class="number">0</span>): <span class="built_in">maxlen</span>(maxlen), <span class="built_in">suff_link</span>(<span class="number">0</span>), <span class="built_in">sum</span>(<span class="number">0</span>), <span class="built_in">vsize</span>(<span class="number">0</span>) &#123; <span class="built_in">memset</span>(trans, <span class="number">0</span>, <span class="built_in">sizeof</span>(trans)); &#125;</span><br><span class="line">	&#125; b[MAXN &lt;&lt; <span class="number">1</span>];</span><br><span class="line">	<span class="type">int</span> s, last, cntb, du[MAXN];</span><br><span class="line">	<span class="type">bool</span> inq[MAXN &lt;&lt; <span class="number">1</span>];</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123; s = last = cntb = <span class="number">1</span>; &#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">ins</span><span class="params">(<span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">		<span class="type">int</span> dq = ++cntb, dql = last;</span><br><span class="line">		b[dq] = <span class="built_in">node</span>(b[dql].maxlen + <span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span> (; dql &amp;&amp; !b[dql].trans[y]; dql = b[dql].suff_link) b[dql].trans[y] = dq;</span><br><span class="line">		<span class="keyword">if</span> (!dql) b[dq].suff_link = s;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (b[dql].maxlen + <span class="number">1</span> == b[b[dql].trans[y]].maxlen) b[dq].suff_link =b[dql].trans[y];</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="type">int</span> c = ++cntb, dqd = b[dql].trans[y];</span><br><span class="line">			b[c] = <span class="built_in">node</span>(b[dql].maxlen + <span class="number">1</span>);</span><br><span class="line">			b[c].suff_link = b[dqd].suff_link;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; MAXZ; i++) b[c].trans[i] = b[dqd].trans[i];</span><br><span class="line">			b[dqd].suff_link = b[dq].suff_link = c;</span><br><span class="line">			<span class="keyword">for</span> (; dql &amp;&amp; b[dql].trans[y] == dqd; dql = b[dql].suff_link) b[dql].trans[y] = c;</span><br><span class="line">		&#125;</span><br><span class="line">		last = dq;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		LL ans = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= cntb; i++)</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; MAXZ; j++)</span><br><span class="line">				<span class="keyword">if</span> (b[i].trans[j])</span><br><span class="line">					++du[b[i].trans[j]];</span><br><span class="line">		queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">		q.<span class="built_in">push</span>(<span class="number">1</span>);</span><br><span class="line">		b[<span class="number">1</span>].vsize = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">			<span class="type">int</span> dq = q.<span class="built_in">front</span>();</span><br><span class="line">			ans = (ans + b[dq].sum) % Refun;</span><br><span class="line">			q.<span class="built_in">pop</span>();</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; MAXZ; i++)</span><br><span class="line">				<span class="keyword">if</span> (b[dq].trans[i]) &#123;</span><br><span class="line">					--du[b[dq].trans[i]];</span><br><span class="line">					<span class="keyword">if</span> (i != <span class="number">10</span>) &#123;</span><br><span class="line">						b[b[dq].trans[i]].vsize += b[dq].vsize;</span><br><span class="line">						b[b[dq].trans[i]].sum = (b[b[dq].trans[i]].sum + b[dq].sum * <span class="number">10</span> + i * b[dq].vsize) % Refun;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">if</span> (!du[b[dq].trans[i]])</span><br><span class="line">						q.<span class="built_in">push</span>(b[dq].trans[i]);</span><br><span class="line">				&#125;</span><br><span class="line">		&#125;</span><br><span class="line"> 		<span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>, ans);</span><br><span class="line">	&#125;</span><br><span class="line">&#125; refun;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">char</span> s[MAXN];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">	refun.<span class="built_in">init</span>();</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, s);</span><br><span class="line">		<span class="type">int</span> tn = <span class="built_in">strlen</span>(s);</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; tn; j++)</span><br><span class="line">			refun.<span class="built_in">ins</span>(s[j] - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">		refun.<span class="built_in">ins</span>(<span class="number">10</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	refun.<span class="built_in">solve</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="后缀自动机五重复旋律8"><a
+target="_blank" rel="noopener" href="https://hihocoder.com/problemset/problem/1465">后缀自动机五·重复旋律8</a></h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">咕咕咕</span><br></pre></td></tr></table></figure>
+<p>By 准备退役旅游的 Cansult</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag"><i class="fa fa-tag"></i> 字符串</a>
+              <a href="/tags/SAM/" rel="tag"><i class="fa fa-tag"></i> SAM</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/21016.html" rel="prev" title="翻车笔记 [Hnoi2017]影魔 [清奇脑回路, 扫描线, 离线]">
+      <i class="fa fa-chevron-left"></i> 翻车笔记 [Hnoi2017]影魔 [清奇脑回路, 扫描线, 离线]
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/26622.html" rel="next" title="水题笔记 1396 识别子串 && 2865 字符串识别 [SAM]">
+      水题笔记 1396 识别子串 && 2865 字符串识别 [SAM] <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AC%E7%A7%BB"><span class="nav-number">2.</span> <span class="nav-text">转移</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#i"><span class="nav-number">2.1.</span> <span class="nav-text">I</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ii"><span class="nav-number">2.2.</span> <span class="nav-text">II</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iii"><span class="nav-number">2.3.</span> <span class="nav-text">III</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%A0%E9%81%93%E4%BE%8B%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">几道例题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA%E4%BA%8C%E9%87%8D%E5%A4%8D%E6%97%8B%E5%BE%8B5"><span class="nav-number">3.1.</span> <span class="nav-text">后缀自动机二·重复旋律5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA%E4%B8%89%E9%87%8D%E5%A4%8D%E6%97%8B%E5%BE%8B6"><span class="nav-number">3.2.</span> <span class="nav-text">后缀自动机三·重复旋律6</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%9B%9B%E9%87%8D%E5%A4%8D%E6%97%8B%E5%BE%8B7"><span class="nav-number">3.3.</span> <span class="nav-text">后缀自动机四·重复旋律7</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA%E4%BA%94%E9%87%8D%E5%A4%8D%E6%97%8B%E5%BE%8B8"><span class="nav-number">4.</span> <span class="nav-text">后缀自动机五·重复旋律8</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Cansult Chen"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Cansult Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Cansult" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Cansult" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cansult Chen</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

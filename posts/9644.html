@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"cansult.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="据说这节肥肠难">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数笔记 数学分析 2.4 数列的收敛准则">
+<meta property="og:url" content="http://cansult.github.io/posts/9644.html">
+<meta property="og:site_name" content="Cansult&#39;s blog">
+<meta property="og:description" content="据说这节肥肠难">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-10-22T09:24:00.000Z">
+<meta property="article:modified_time" content="2020-10-26T07:06:32.741Z">
+<meta property="article:author" content="Cansult Chen">
+<meta property="article:tag" content="文化课">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://cansult.github.io/posts/9644.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>大数笔记 数学分析 2.4 数列的收敛准则 | Cansult's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Cansult's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">即使愿望永远无法实现<br/>我也不愿就这样放手</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://cansult.github.io/posts/9644.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Cansult Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cansult's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          大数笔记 数学分析 2.4 数列的收敛准则
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-10-22 17:24:00" itemprop="dateCreated datePublished" datetime="2020-10-22T17:24:00+08:00">2020-10-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-10-26 15:06:32" itemprop="dateModified" datetime="2020-10-26T15:06:32+08:00">2020-10-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">大数笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>据说这节肥肠难</p>
+<span id="more"></span>
+<h2 id="单调有界收敛定理及其应用">单调有界收敛定理及其应用</h2>
+<h3 id="weierstrass魏尔斯特拉斯定理">weierstrass(魏尔斯特拉斯)定理</h3>
+<p>定理 2.4.1:</p>
+<blockquote>
+<p>单调增的数列<span class="math inline">\(\{u_n\}\)</span>有极限<span
+class="math inline">\(\iff\)</span><span
+class="math inline">\(\{u_n\}\)</span>有上界<br />
+单调减的数列<span class="math inline">\(\{u_n\}\)</span>有极限<span
+class="math inline">\(\iff\)</span><span
+class="math inline">\(\{u_n\}\)</span>有下界</p>
+</blockquote>
+<p>证明:<br />
+"<span class="math inline">\(\Rightarrow\)</span>": 显然</p>
+<p>"<span class="math inline">\(\Leftarrow\)</span>": 只证<span
+class="math inline">\(\{u_n\}\)</span>单增有上界时 <span
+class="math inline">\(\lim\limits_{k\to \infty}{u_n}\)</span>存在:<br />
+由确界原理知, <span class="math inline">\(\{u_n\}\)</span>有上确界<span
+class="math inline">\(\beta\)</span>, 下证<span
+class="math inline">\(\lim\limits_{n\to\infty}u_n = \beta\)</span> <span
+class="math display">\[
+\beta = \sup\{u_n\} \Rightarrow \forall n \in \mathbb{N^+}, u_n \le
+\beta \tag{1}
+\]</span> <span class="math display">\[
+\forall \varepsilon &gt; 0, \exists N \in \mathbb{N^+}, s.t. u_N &gt;
+\beta - \varepsilon \tag{2}
+\]</span> <span class="math display">\[
+\{u_n\}单增 \Rightarrow n &gt; N时, u_n \ge u_N \tag{3}
+\]</span> 由<span class="math inline">\((1)(2)(3)\)</span>可知 <span
+class="math display">\[
+\forall \varepsilon &gt; 0, \exists N\in \mathbb{N^+}, 当n &gt; N时,
+\beta - \varepsilon &lt; u_n \le u_n \le \beta &lt; \beta + \varepsilon
+\]</span> <span class="math display">\[
+即\lim\limits_{n\to\infty} u_n = \beta = \sup\{u_n\}
+\]</span></p>
+<hr />
+<p>EX. 2.4.1: 若<span class="math inline">\(x_1 = 1, x_{n + 1} =
+\frac{1}{2}(x_n + \frac{2}{x_n}), n\in\mathbb{N^+}\)</span>, 证明<span
+class="math inline">\(\{x_n\}\)</span>收敛, 并求出<span
+class="math inline">\(\lim\limits_{n \to \infty}x_n\)</span></p>
+<p>证明:<br />
+step. 1: 证<span
+class="math inline">\(\{x_n\}\)</span>有下界(归纳法)<br />
+用归纳法证明<span class="math inline">\(x_n &gt; \sqrt 2, \forall n &gt;
+1, n \in \mathbb{N^+}\)</span>:<br />
+<span class="math inline">\(n = 2\)</span>时<span
+class="math inline">\(x_2 = \frac{3}{2} &gt; 2\)</span>成立<br />
+假设<span class="math inline">\(n = k\)</span>时成立, 下证<span
+class="math inline">\(n = k + 1\)</span>时成立<br />
+<span class="math display">\[
+x_{k + 1} = \frac{1}{2}(x_{k} + \frac{2}{k_k})\ge\frac{1}{2} \cdot 2
+\cdot \sqrt{x_k \cdot \frac{2}{x_k}} = \sqrt{2}
+\]</span> <span class="math display">\[
+``=&quot;成立\iff x_k = \frac{2}{x_k} 即 x_k = \sqrt{2}
+\]</span> <span class="math display">\[
+\therefore \forall n &gt; 2, n\in\mathbb{N^+}, x_n &gt; \sqrt{2}
+\]</span></p>
+<p>step. 2: 证<span class="math inline">\(\{x_n\}\)</span>单减</p>
+<p><span class="math display">\[
+x^2 &gt; 2(x_n &gt; 0) \Rightarrow \frac{2}{x_n} &lt; x_n \Rightarrow
+x_{n + 1} = \frac{1}{2}(x_n + \frac{2}{x_n}) &lt; x_n
+\]</span> <span class="math display">\[
+\therefore \{x_n\}单减
+\]</span></p>
+<p>由定理2.4.1可知, <span class="math inline">\(\lim\limits_{n \to
+\infty}{x_n}\)</span>存在, 记为<span class="math inline">\(a\)</span>,
+在<span class="math inline">\(x_{n + 1} = \frac{1}{2}(x_n +
+\frac{2}{x_n})\)</span>两边令<span class="math inline">\(n\to
+\infty\)</span> <span class="math display">\[
+a = \frac{1}{2}(a + \frac{2}{a})
+\]</span> <span class="math display">\[
+a = \sqrt{2}
+\]</span></p>
+<hr />
+<p>注: 在证明<span class="math inline">\(\{x_n\}\)</span>单调时,
+一般采用下列方法:<br />
+1. 讨论<span class="math inline">\(x_n - x_{n + 1}\)</span><br />
+如在EX. 2.4.1中, <span class="math inline">\(x_{n + 1} = \frac{1}{2}(x_n
++ \frac{2}{x_n})\)</span>, <span class="math inline">\(x_n =
+\frac{1}{2}(x_{n - 1} + \frac{2}{x_{n - 1}})\)</span><br />
+<span class="math display">\[
+   \begin{aligned}
+      x_{n + 1} - x_{n} &amp;= \frac{1}{2}(x_n - x_{n - 1}) +
+(\frac{1}{x_n} - \frac{1}{x_{n - 1}})\\
+   &amp;=(x_n - x_{n + 1})(\frac{1}{2} - \frac{1}{x_n\cdot x_{n - 1}})
+   \end{aligned}\]</span> <span class="math display">\[
+   {x_n}单调\iff x_n + 1 - x_n 与 x_n - x_{n + 1}同号
+   \]</span> 2. 讨论<span class="math inline">\(\frac{x_n}{x_{n +
+1}}\)</span></p>
+<hr />
+<p>EX. 2.4.2: <span class="math inline">\(x_1 &gt; 0, x_{n + 1} = 1 +
+\frac{x_n}{1 + x_n}, \forall n\in\mathbb{N^+}\)</span>, 证明<span
+class="math inline">\(\lim\limits_{n\to\infty}x_n\)</span>存在并求出<br />
+证明:<br />
+step. 1: 证明 <span class="math inline">\(1 &lt; x_n &lt; 2, \forall n
+\ge 2, n\in\mathbb{N^+}\)</span></p>
+<blockquote>
+<p>这里的 <span class="math inline">\(x_n &lt; 2\)</span> 是用 <span
+class="math inline">\(a = 1 + \frac{a}{1 + a}\)</span> 猜出来的</p>
+</blockquote>
+<p>运用归纳法: <span class="math inline">\(n = 2\)</span> 时, <span
+class="math inline">\(x_2 = 1 + \frac{x_1}{1 + x_1} \in (1,
+2)\)</span><br />
+假设当 <span class="math inline">\(n = k\)</span> 时, <span
+class="math inline">\(x_n \in (1, 2)\)</span> , 所以<span
+class="math inline">\(x_{k + 1} = 1 + \frac{x_k}{1 + x_k} \in (1,
+2)\)</span></p>
+<p>step. 2: 证明<span class="math inline">\(\{x_n\}\)</span>单调 <span
+class="math display">\[
+x_{n + 1} - x_n = \frac{x_n - x_{n - 1}}{(1 + x_n)(1 + x_{n - 1})}
+\]</span> <span class="math display">\[
+(1 + x_n)(1 + x_{n - 1}) &gt; 0 \Rightarrow x_{n + 1} - {x_n}与x_n -
+x_{n - 1}同号
+\]</span> <span class="math display">\[
+\Rightarrow \{x_n\}单调 \Rightarrow \lim\limits_{n\to\infty}x_n 存在,
+记为a
+\]</span></p>
+<p>step. 3: 求<span class="math inline">\(a\)</span><br />
+在 <span class="math inline">\(x_{n + 1} = 1 + \frac{x_n}{1 +
+x_n}\)</span> 两边令 <span class="math inline">\(n\to\infty\)</span></p>
+<p><span class="math display">\[
+a = 1 + \frac{a}{1 + a} (a \in [1, 2])
+\]</span> <span class="math display">\[
+\Rightarrow a = \frac{1 + \sqrt{5}}{2}
+\]</span></p>
+<p>EX. 2.4.3: 证明 <span
+class="math inline">\(\lim\limits_{n\to\infty}\frac{a^n}{n!} = 0\,\, (a
+&gt; 1)\)</span></p>
+<p>证明: 令 <span class="math inline">\(u_n = \frac{a^n}{n!} &gt;
+0\)</span>, 则 <span class="math inline">\(\frac{u_{n + 1}}{u_n} =
+\frac{a}{n + 1} \to 0 &lt; 1\)</span></p>
+<p><span class="math display">\[
+\therefore\exists N\in\mathbb{N^+}, n &gt; N 时, \frac{u_{n + 1}}{u_n}
+&lt; 1, 即 u_{n + 1} &lt; u_n
+\]</span> <span class="math inline">\(u_n &gt; 0\)</span>,
+根据单调有界原理, <span
+class="math inline">\(\lim\limits_{n\to\infty}u_n\)</span>存在,
+记为<span class="math inline">\(A \ge 0\)</span><br />
+由 <span class="math inline">\(x_n + 1 = \frac{a ^ {n + 1}}{(n + 1)!} =
+x_n \cdot \frac{a}{n + 1}\)</span>, 令两边<span
+class="math inline">\(n\to\infty\)</span>, 则 <span
+class="math display">\[
+\begin{aligned}
+  A &amp;= 0 \cdot A\\
+  A &amp;= 0
+\end{aligned}
+\]</span></p>
+<h3 id="单调有界原理的应用-pi-和-e">单调有界原理的应用: <span
+class="math inline">\(\pi\)</span> 和 <span
+class="math inline">\(e\)</span></h3>
+<h3 id="pi-割圆术"><span class="math inline">\(\pi\)</span> :
+割圆术</h3>
+<p>单位圆内有一内接正<span class="math inline">\(n\)</span>边形,
+边长为<span class="math inline">\(a\)</span>, 则 <span
+class="math display">\[
+\begin{aligned}
+a^2 &amp;= 4\sin^2\frac{180^\circ}{n}\\
+a &amp;= 2\sin\frac{180^\circ}{n}
+\end{aligned}
+\]</span> 所以正<span class="math inline">\(n\)</span>边形的半周长 <span
+class="math inline">\(L_n = \frac{n}{2}\cdot a = n \cdot
+\sin\frac{180^\circ}{n}\)</span><br />
+下证</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%96%87%E5%8C%96%E8%AF%BE/" rel="tag"><i class="fa fa-tag"></i> 文化课</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/16301.html" rel="prev" title="学习笔记 二分图基础">
+      <i class="fa fa-chevron-left"></i> 学习笔记 二分图基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/24951.html" rel="next" title="水题笔记 [ZJOI2007]矩阵游戏 [二分图]">
+      水题笔记 [ZJOI2007]矩阵游戏 [二分图] <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E8%B0%83%E6%9C%89%E7%95%8C%E6%94%B6%E6%95%9B%E5%AE%9A%E7%90%86%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">单调有界收敛定理及其应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#weierstrass%E9%AD%8F%E5%B0%94%E6%96%AF%E7%89%B9%E6%8B%89%E6%96%AF%E5%AE%9A%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">weierstrass(魏尔斯特拉斯)定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E8%B0%83%E6%9C%89%E7%95%8C%E5%8E%9F%E7%90%86%E7%9A%84%E5%BA%94%E7%94%A8-pi-%E5%92%8C-e"><span class="nav-number">1.2.</span> <span class="nav-text">单调有界原理的应用: \(\pi\) 和 \(e\)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pi-%E5%89%B2%E5%9C%86%E6%9C%AF"><span class="nav-number">1.3.</span> <span class="nav-text">\(\pi\) :
+割圆术</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Cansult Chen"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Cansult Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Cansult" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Cansult" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cansult Chen</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

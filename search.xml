@@ -733,9 +733,9 @@
       
         <tags>
             
-            <tag> 翻车 </tag>
-            
             <tag> 清奇脑回路 </tag>
+            
+            <tag> 翻车 </tag>
             
             <tag> AC自动机 </tag>
             
@@ -789,11 +789,11 @@
       
         <tags>
             
-            <tag> 翻车 </tag>
-            
             <tag> 清奇脑回路 </tag>
             
             <tag> 贪心 </tag>
+            
+            <tag> 翻车 </tag>
             
         </tags>
       
@@ -1032,9 +1032,9 @@
       
         <tags>
             
-            <tag> 扫描线 </tag>
-            
             <tag> 清奇脑回路 </tag>
+            
+            <tag> 扫描线 </tag>
             
             <tag> 离线 </tag>
             
@@ -1455,9 +1455,9 @@
       
         <tags>
             
-            <tag> 线段树 </tag>
-            
             <tag> 清奇脑回路 </tag>
+            
+            <tag> 线段树 </tag>
             
         </tags>
       
@@ -1509,9 +1509,9 @@
       
         <tags>
             
-            <tag> 线段树 </tag>
-            
             <tag> 清奇脑回路 </tag>
+            
+            <tag> 线段树 </tag>
             
             <tag> 前缀和 </tag>
             
@@ -1569,9 +1569,9 @@
       
         <tags>
             
-            <tag> 翻车 </tag>
-            
             <tag> 清奇脑回路 </tag>
+            
+            <tag> 翻车 </tag>
             
         </tags>
       
@@ -1681,9 +1681,9 @@
       
         <tags>
             
-            <tag> 翻车 </tag>
-            
             <tag> 清奇脑回路 </tag>
+            
+            <tag> 翻车 </tag>
             
             <tag> 分治 </tag>
             
@@ -1712,9 +1712,9 @@
       
         <tags>
             
-            <tag> 翻车 </tag>
-            
             <tag> 清奇脑回路 </tag>
+            
+            <tag> 翻车 </tag>
             
             <tag> 树链剖分 </tag>
             
@@ -1743,9 +1743,9 @@
       
         <tags>
             
-            <tag> 线段树 </tag>
-            
             <tag> 清奇脑回路 </tag>
+            
+            <tag> 线段树 </tag>
             
             <tag> 主席树 </tag>
             
@@ -1826,9 +1826,9 @@
       
         <tags>
             
-            <tag> 翻车 </tag>
-            
             <tag> 清奇脑回路 </tag>
+            
+            <tag> 翻车 </tag>
             
             <tag> 分块 </tag>
             
@@ -1884,9 +1884,9 @@
       
         <tags>
             
-            <tag> 翻车 </tag>
-            
             <tag> 清奇脑回路 </tag>
+            
+            <tag> 翻车 </tag>
             
             <tag> 网络流 </tag>
             
@@ -1946,9 +1946,9 @@
       
         <tags>
             
-            <tag> 翻车 </tag>
-            
             <tag> 清奇脑回路 </tag>
+            
+            <tag> 翻车 </tag>
             
             <tag> KMP </tag>
             
@@ -2029,11 +2029,11 @@
       
         <tags>
             
-            <tag> 线段树 </tag>
-            
             <tag> 清奇脑回路 </tag>
             
             <tag> 贪心 </tag>
+            
+            <tag> 线段树 </tag>
             
             <tag> 图论 </tag>
             
@@ -2089,6 +2089,8 @@
       
         <tags>
             
+            <tag> 清奇脑回路 </tag>
+            
             <tag> 线段树 </tag>
             
             <tag> 扫描线 </tag>
@@ -2098,8 +2100,6 @@
             <tag> 标记持久化 </tag>
             
             <tag> 翻车 </tag>
-            
-            <tag> 清奇脑回路 </tag>
             
         </tags>
       

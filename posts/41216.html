@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Trebuchet+MS:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Courier+New:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cansult.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-light"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":10,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="做 CppQuiz ，总结一下错题 计数器： 21 &#x2F; 163">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cppquiz 错题集">
+<meta property="og:url" content="https://cansult.github.io/posts/41216.html">
+<meta property="og:site_name" content="Cansult&#39;s blog">
+<meta property="og:description" content="做 CppQuiz ，总结一下错题 计数器： 21 &#x2F; 163">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cansult.github.io/pictures/2506061.png">
+<meta property="og:image" content="https://cansult.github.io/pictures/2506062.png">
+<meta property="og:image" content="https://cansult.github.io/pictures/2506063.png">
+<meta property="og:image" content="https://cansult.github.io/pictures/2506064.png">
+<meta property="og:image" content="https://cansult.github.io/pictures/2506065.png">
+<meta property="article:published_time" content="2024-03-06T11:20:44.000Z">
+<meta property="article:modified_time" content="2026-08-14T12:07:59.850Z">
+<meta property="article:author" content="Cansult Chen">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="语言">
+<meta property="article:tag" content="错题集">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cansult.github.io/pictures/2506061.png">
+
+
+<link rel="canonical" href="https://cansult.github.io/posts/41216.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cansult.github.io/posts/41216.html","path":"posts/41216.html","title":"cppquiz 错题集"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>cppquiz 错题集 | Cansult's blog</title>
+  
+
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","display_overflow":"scroll","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-mml-chtml.js","integrity":"sha256-ihPtDDm7pTmSF9ViEsItlvsrBTsNkz0MOXMchzOwCQw="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cansult's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">即使愿望永远无法实现<br>我也不愿就这样放手</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#313"><span class="nav-number">1.</span> <span class="nav-text">313</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#244"><span class="nav-number">2.</span> <span class="nav-text">244</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#250"><span class="nav-number">3.</span> <span class="nav-text">250</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#148"><span class="nav-number">4.</span> <span class="nav-text">148</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#251"><span class="nav-number">5.</span> <span class="nav-text">251</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#242"><span class="nav-number">6.</span> <span class="nav-text">242</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#184"><span class="nav-number">7.</span> <span class="nav-text">184</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#122"><span class="nav-number">8.</span> <span class="nav-text">122</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#217"><span class="nav-number">9.</span> <span class="nav-text">217</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#335"><span class="nav-number">10.</span> <span class="nav-text">335</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#261"><span class="nav-number">11.</span> <span class="nav-text">261</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#178"><span class="nav-number">12.</span> <span class="nav-text">178</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#225"><span class="nav-number">13.</span> <span class="nav-text">225</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#233"><span class="nav-number">14.</span> <span class="nav-text">233</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#131"><span class="nav-number">15.</span> <span class="nav-text">131</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#365"><span class="nav-number">16.</span> <span class="nav-text">365</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#319"><span class="nav-number">17.</span> <span class="nav-text">319</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#52"><span class="nav-number">18.</span> <span class="nav-text">52</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#350"><span class="nav-number">19.</span> <span class="nav-text">350</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#198"><span class="nav-number">20.</span> <span class="nav-text">198</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#291"><span class="nav-number">21.</span> <span class="nav-text">291</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#130"><span class="nav-number">22.</span> <span class="nav-text">130</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#289"><span class="nav-number">23.</span> <span class="nav-text">289</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#239"><span class="nav-number">24.</span> <span class="nav-text">239</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#354"><span class="nav-number">25.</span> <span class="nav-text">354</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#186"><span class="nav-number">26.</span> <span class="nav-text">186</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#159"><span class="nav-number">27.</span> <span class="nav-text">159</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#208"><span class="nav-number">28.</span> <span class="nav-text">208</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#312"><span class="nav-number">29.</span> <span class="nav-text">312</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1"><span class="nav-number">30.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#113"><span class="nav-number">31.</span> <span class="nav-text">113</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#228"><span class="nav-number">32.</span> <span class="nav-text">228</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#375"><span class="nav-number">33.</span> <span class="nav-text">375</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Cansult Chen"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Cansult Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cansult" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cansult" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cansult.github.io/posts/41216.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Cansult Chen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cansult's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="cppquiz 错题集 | Cansult's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          cppquiz 错题集
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-03-06 19:20:44" itemprop="dateCreated datePublished" datetime="2024-03-06T19:20:44+08:00">2024-03-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-08-14 20:07:59" itemprop="dateModified" datetime="2026-08-14T20:07:59+08:00">2026-08-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BF%BB%E8%BD%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">翻车笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>做 <a target="_blank" rel="noopener" href="https://cppquiz.org/">CppQuiz</a> ，总结一下错题</p>
+<p>计数器：</p>
+<p><font color=#b11d23>21 &#x2F; 163</font> </p>
+<span id="more"></span>
+
+<h3 id="313"><a href="#313" class="headerlink" title="313"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/313">313</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">float</span> &amp;&amp;)</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;f&quot;</span>; &#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">int</span> &amp;&amp;)</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;i&quot;</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span>... T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">g</span><span class="params">(T &amp;&amp;... v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    (<span class="built_in">f</span>(v), ...);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">g</span>(<span class="number">1.0f</span>, <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>右值引用本身是左值，但是在隐式转换后就变成了 prvalue</p>
+<h3 id="244"><a href="#244" class="headerlink" title="244"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/244">244</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">A</span> &#123;</span><br><span class="line">    <span class="keyword">static_assert</span>(<span class="literal">false</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>与模版参数推导无关的 ill-form 会导致整个程序 ill-from ，是UB</p>
+<h3 id="250"><a href="#250" class="headerlink" title="250"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/250">250</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">(T...)</span> </span>&#123;std::cout &lt;&lt; <span class="string">&#x27;A&#x27;</span>;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">(T...)</span> </span>&#123;std::cout &lt;&lt; <span class="string">&#x27;B&#x27;</span>;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;  </span><br><span class="line">   <span class="built_in">foo</span>(<span class="number">1</span>); </span><br><span class="line">   <span class="built_in">foo</span>(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面那个是 C 风格的 <code>va_list</code> ，下面那个才是参数包</p>
+<p>对于 <code>foo(1)</code></p>
+<p>两个都不需要隐式转换</p>
+<p>如果推导 A 可以被传入推导 B 中，那么推导 A 是一个更特化的推导。如果分不出来，就是 ill-form</p>
+<p>对于 <code>foo(1, 2)</code></p>
+<p>第一个函数需要将第二个参数隐式转换为 <code>...</code> ，而第二个不需要，所以第二个更好</p>
+<h3 id="148"><a href="#148" class="headerlink" title="148"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/148">148</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">volatile</span> <span class="type">int</span> a;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  std::cout &lt;&lt; (a + a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>读 volatile glvalue 有 side-effect </p>
+<p>顺序不确定的对同一个内存做有 side-effect 的访问是 UB</p>
+<h3 id="251"><a href="#251" class="headerlink" title="251"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/251">251</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(T)</span> </span>&#123; std::cout &lt;&lt; <span class="number">1</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;&gt;</span><br><span class="line"><span class="type">void</span> f&lt;&gt;(<span class="type">int</span>*) &#123; std::cout &lt;&lt; <span class="number">2</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(T*)</span> </span>&#123; std::cout &lt;&lt; <span class="number">3</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> *p = <span class="literal">nullptr</span>; </span><br><span class="line">    <span class="built_in">f</span>( p );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>T*</code> 可以传入 <code>T</code> 中，反过来不行，所以 <code>T*</code> 更加特化</p>
+<p>而重载决议先考虑模版，再考虑显式特化，所以模版函数 <code>f(T)</code> 的特化 <code>f&lt;&gt;(int*)</code> 不被考虑</p>
+<h3 id="242"><a href="#242" class="headerlink" title="242"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/242">242</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;type_traits&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">g</span><span class="params">(<span class="type">int</span>&amp;)</span> </span>&#123; std::cout &lt;&lt; <span class="string">&#x27;L&#x27;</span>; &#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">g</span><span class="params">(<span class="type">int</span>&amp;&amp;)</span> </span>&#123; std::cout &lt;&lt; <span class="string">&#x27;R&#x27;</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(T&amp;&amp; t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (std::is_same_v&lt;T, <span class="type">int</span>&gt;) &#123; std::cout &lt;&lt; <span class="number">1</span>; &#125; </span><br><span class="line">    <span class="keyword">if</span> (std::is_same_v&lt;T, <span class="type">int</span>&amp;&gt;) &#123; std::cout &lt;&lt; <span class="number">2</span>; &#125; </span><br><span class="line">    <span class="keyword">if</span> (std::is_same_v&lt;T, <span class="type">int</span>&amp;&amp;&gt;) &#123; std::cout &lt;&lt; <span class="number">3</span>; &#125; </span><br><span class="line">    <span class="built_in">g</span>(std::forward&lt;T&gt;(t));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">f</span>(<span class="number">42</span>);</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">f</span>(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>42</code>: rvalue ，<code>T</code> 推导为 <code>int</code></p>
+<p><code>i</code>: lvalue ，<code>T</code> 推导为 <code>int&amp;</code></p>
+<h3 id="184"><a href="#184" class="headerlink" title="184"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/184">184</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Base</span> &#123;</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">int</span>)</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;i&quot;</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Derived</span> : Base &#123;</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">double</span>)</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;d&quot;</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Derived d;</span><br><span class="line">  <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">  d.<span class="built_in">f</span>(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>派生类隐藏基类的同名函数</p>
+<h3 id="122"><a href="#122" class="headerlink" title="122"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/122">122</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">(<span class="type">unsigned</span> ll)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;1&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">(<span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span>)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;2&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">foo</span>(<span class="number">2ull</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>ll</code> 会被优先解释为一个 <code>unsigned</code> 变量</p>
+<p>有空看看<a target="_blank" rel="noopener" href="https://timsong-cpp.github.io/cppwp/n4659/dcl.spec">这个的3~4条</a></p>
+<h3 id="217"><a href="#217" class="headerlink" title="217"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/217">217</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="type">const</span>&amp; a = i &gt; <span class="number">0</span> ? i : <span class="number">1</span>;</span><br><span class="line">    i = <span class="number">2</span>;</span><br><span class="line">    std::cout &lt;&lt; i &lt;&lt; a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>条件表达式的返回值的左右性取决于<a target="_blank" rel="noopener" href="https://timsong-cpp.github.io/cppwp/n4659/expr.cond">这个的2~5条</a>，本题中 <code>i</code> 是 lvalue ，<code>1</code> 是 prvalue ，返回值为 prvalue</p>
+<h3 id="335"><a href="#335" class="headerlink" title="335"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/335">335</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstddef&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">void</span>*)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(std::<span class="type">nullptr_t</span>)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span>* a&#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">f</span>(a);</span><br><span class="line">    <span class="built_in">f</span>(<span class="literal">nullptr</span>);</span><br><span class="line">    <span class="built_in">f</span>(<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>nullprr</code> 的类型是 <code>std::nullptr_t</code> 的 prvalue</p>
+<p>但是 <code>NULL</code> 的定义并不确定，可以是 <code>int long std::nullptr_t</code> 想不到吧</p>
+<h3 id="261"><a href="#261" class="headerlink" title="261"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/261">261</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sstream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="function">std::stringstream <span class="title">ss</span><span class="params">(<span class="string">&quot;a&quot;</span>)</span></span>;</span><br><span class="line">  std::cout &lt;&lt; ss.<span class="built_in">str</span>();</span><br><span class="line">  ss &lt;&lt; <span class="string">&quot;b&quot;</span>;</span><br><span class="line">  std::cout &lt;&lt; ss.<span class="built_in">str</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>stringstream</code> 不传参数的情况下默认从开头开始，会覆盖原有数据</p>
+<h3 id="178"><a href="#178" class="headerlink" title="178"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/178">178</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> <span class="type">int</span> a = <span class="number">5</span>,b = <span class="number">2</span>;</span><br><span class="line"> std::cout &lt;&lt; a+++++b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对符号的识别是接受尽可能长的字符，即使可能导致剩下的符号无法识别</p>
+<h3 id="225"><a href="#225" class="headerlink" title="225"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/225">225</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">X</span> &#123;</span><br><span class="line">    <span class="built_in">X</span>() &#123; std::cout &lt;&lt; <span class="string">&quot;1&quot;</span>; &#125;</span><br><span class="line">    <span class="built_in">X</span>(<span class="type">const</span> X &amp;) &#123; std::cout &lt;&lt; <span class="string">&quot;3&quot;</span>; &#125;</span><br><span class="line">    ~<span class="built_in">X</span>() &#123; std::cout &lt;&lt; <span class="string">&quot;2&quot;</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;4&quot;</span>; &#125;</span><br><span class="line"></span><br><span class="line">&#125; object;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">X</span>(object);</span><br><span class="line">    object.<span class="built_in">f</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>“所有会被识别为声明的东西都会被识别为声明”</p>
+<p>所以 <code>X(object)</code> 实际上声明了一个类型为 <code>X</code> 的 <code>object</code>, 而不是拷贝构造了一个临时变量</p>
+<p>想不到吧</p>
+<blockquote>
+<p>An expression-statement with a function-style explicit type conversion as its leftmost subexpression can be indistinguishable from a declaration where the first declarator starts with a (. In those cases the statement is a declaration.</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://timsong-cpp.github.io/cppwp/std23/stmt.ambig#1">src</a></p>
+<h3 id="233"><a href="#233" class="headerlink" title="233"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/233">233</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;type_traits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">X</span> &#123;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">f</span><span class="params">()</span> <span class="type">const</span>&amp;&amp;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> ptr = &amp;X::f;</span><br><span class="line">    cout &lt;&lt; is_same_v&lt;<span class="keyword">decltype</span>(ptr), <span class="built_in">int</span>()&gt;</span><br><span class="line">         &lt;&lt; is_same_v&lt;<span class="keyword">decltype</span>(ptr), <span class="built_in">int</span>(X::*)()&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>返回值 参数列表 左右值引用修饰符 cv修饰符 异常 都是函数的一部分</p>
+<h3 id="131"><a href="#131" class="headerlink" title="131"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/131">131</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="function"><span class="keyword">explicit</span> <span class="title">C</span><span class="params">(<span class="type">int</span>)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;i&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">C</span>(<span class="type">double</span>) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;d&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="function">C <span class="title">c1</span><span class="params">(<span class="number">7</span>)</span></span>;</span><br><span class="line">  C c2 = <span class="number">7</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个题其实挺蛋疼的, 也解释了做题的必要性, 有的东西光看了学了真不一定能搞明白; 甚至做题没做仔细没仔细看自己和答案的过程差在哪, 都可能把盲点放过去…因为过程错了结果说不定还是对的</p>
+<p>比如我第一次做这个题的时候以为在考构造函数</p>
+<p>其实是考初始化</p>
+<p>我之前甚至都没注意到初始化这么个和吃饭喝水一样平常的东西</p>
+<p>默认初始化不等于默认构造函数, 拷贝初始化不等于拷贝构造函数</p>
+<p>简单来说就是下面这坨</p>
+<p><img src="/../pictures/2506061.png" alt="初始化"></p>
+<p>然后复制初始化只考虑转换构造函数 (没有 explicit 修饰的), 而直接初始化考虑</p>
+<p>列表初始化分直接列表初始化（考虑 explicit 和非 explicit 构造函数）和复制列表初始化（考虑 explicit 和非 explicit 构造函数，但只能调用非 explicit 构造函数 (有点没懂, 那这里的考虑的意义是啥) ）</p>
+<p>记吧, 没啥好说的</p>
+<p><img src="/../pictures/2506062.png" alt="直接初始化"></p>
+<p><img src="/../pictures/2506063.png" alt="复制初始化"></p>
+<p><img src="/../pictures/2506064.png" alt="列表初始化"></p>
+<p>还有一些乱七八糟的初始化</p>
+<p><img src="/../pictures/2506065.png" alt="其他初始化"></p>
+<p>然后在说下构造函数相关的</p>
+<p><code>c2</code> 作为复制初始化理论上是构造一个匿名对象然后拷贝或移动，但是在 C++17 后会保证被优化掉，实际上没有拷贝或移动或析构函数被调用 (C++11 14 可能被优化掉, 如果没有, 会优先调移动构造函数)</p>
+<h3 id="365"><a href="#365" class="headerlink" title="365"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/365">365</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">short</span> zero = <span class="number">0</span>, one = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span> (zero - one &lt; zero)</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;less&quot;</span>;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;more&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>算数操作中，如果所有操作数都能被提升为 <code>int</code> 那么就都会被提升为 <code>int</code> ，无符号会被提升为 <code>unsigned int</code></p>
+<p>所以如果 <code>unsigned short</code> 的字节数小于 <code>int</code> 那么实际上相当于都是 <code>int</code> 运算</p>
+<p>而在一些机器上 <code>unsigned short</code> 和 <code>int</code> 的字节数一样，会被提升为 <code>unsigned int</code> ，则会溢出</p>
+<p><a target="_blank" rel="noopener" href="https://timsong-cpp.github.io/cppwp/n4659/expr#11.5">整数提升</a></p>
+<p><a target="_blank" rel="noopener" href="https://timsong-cpp.github.io/cppwp/n4659/conv.prom#1">标准转换</a></p>
+<p><a target="_blank" rel="noopener" href="https://timsong-cpp.github.io/cppwp/n4659/conv.rank">转换等级</a></p>
+<p>这个东西似乎是为了符合 CPU 的整形运算器的字节长度而搞出来的</p>
+<h3 id="319"><a href="#319" class="headerlink" title="319"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/319">319</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">A</span> &#123;</span><br><span class="line">    <span class="built_in">A</span>() &#123; std::cout &lt;&lt; <span class="string">&quot;a&quot;</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;1&quot;</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">B</span> &#123;</span><br><span class="line">    <span class="built_in">B</span>() &#123; std::cout &lt;&lt; <span class="string">&quot;b&quot;</span>; &#125;</span><br><span class="line">    <span class="built_in">B</span>(<span class="type">const</span> A&amp;) &#123; std::cout &lt;&lt; <span class="string">&quot;B&quot;</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;2&quot;</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> L = [](<span class="keyword">auto</span> flag) -&gt; <span class="keyword">auto</span> &#123;<span class="keyword">return</span> flag ? A&#123;&#125; : B&#123;&#125;;&#125;;</span><br><span class="line">    <span class="built_in">L</span>(<span class="literal">true</span>).<span class="built_in">foo</span>();</span><br><span class="line">    <span class="built_in">L</span>(<span class="literal">false</span>).<span class="built_in">foo</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>decltype( ? : )</code> 的结果：如果后两个操作数有一个隐式转换，那么使用转换的结果作为返回的类型。</p>
+<p><a target="_blank" rel="noopener" href="https://timsong-cpp.github.io/cppwp/n4659/expr.cond#4">规范</a></p>
+<h3 id="52"><a href="#52" class="headerlink" title="52"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/52">52</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">B</span>() &#123; std::cout &lt;&lt; <span class="string">&quot;B&quot;</span>; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">friend</span> B <span class="title">A::createB</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">A</span>() &#123; std::cout &lt;&lt; <span class="string">&quot;A&quot;</span>; &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function">B <span class="title">createB</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="built_in">B</span>(); &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  A a;</span><br><span class="line">  B b = a.<span class="built_in">createB</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>CE ，你需要先声明 <code>A::createB();</code></p>
+<h3 id="350"><a href="#350" class="headerlink" title="350"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/350">350</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Q</span>&#123;</span><br><span class="line">    <span class="type">int</span> v=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">Q</span>(Q&amp;&amp;)&#123;</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;M&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">Q</span>(<span class="type">const</span> Q&amp;)&#123;</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;C&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">Q</span>()&#123;</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;D&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">change</span><span class="params">()</span></span>&#123;</span><br><span class="line">            ++v;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">            std::cout &lt;&lt; v;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">takeQfunc</span><span class="params">(std::function&lt;<span class="type">void</span>(Q)&gt; qfunc)</span></span>&#123;</span><br><span class="line">    Q q;</span><br><span class="line">    q.<span class="built_in">func</span>();</span><br><span class="line">    <span class="built_in">qfunc</span>(q);</span><br><span class="line">    q.<span class="built_in">func</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">takeQfunc</span>([](Q&amp;&amp; q)&#123;</span><br><span class="line">        q.<span class="built_in">change</span>();</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>qfunc(q)</code> 实际上拷贝了一个 <code>q</code> ，然后绑定给了 <code>Q&amp;&amp; q</code> ，所以发生了一次拷贝，并且原本的 <code>q</code> 没有发生改变</p>
+<p>当然如果直接把左值传入右值参数肯定是不行的，但是<code>function</code>就可以</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">R</span>, <span class="keyword">class</span>... ArgTypes&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">function</span>&lt;<span class="built_in">R</span>(ArgTypes...)&gt; &#123;</span><br><span class="line">(...)</span><br><span class="line"><span class="function">R <span class="title">operator</span><span class="params">()</span><span class="params">(ArgTypes...)</span> <span class="type">const</span></span>;</span><br><span class="line">(...)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>模板推导把 <code>lambda</code> 的 <code>Q&amp;&amp;</code> 推导为了 <code>Q</code></p>
+<p>所以发生了一次拷贝 并且匿名变量传入了右值引用中</p>
+<h3 id="198"><a href="#198" class="headerlink" title="198"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/198">198</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> A &#123;</span><br><span class="line">  <span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> &#123; <span class="type">int</span> x; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> B &#123;</span><br><span class="line">  <span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> &#123; <span class="type">int</span> x; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> A::x = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  std::cout &lt;&lt; B::x;</span><br><span class="line">  A::x=<span class="number">1</span>;</span><br><span class="line">  std::cout &lt;&lt; B::x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意 <code>extern &quot;C&quot;</code> 和 <code>extern &quot;C&quot; {}</code> 的区别</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> <span class="type">int</span> i;                   <span class="comment">// declaration</span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> &#123;</span><br><span class="line">  <span class="type">int</span> i;                            <span class="comment">// definition</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>而在所有的 <code>extern &quot;C&quot;</code> 中，<code>namespace</code> 是<a target="_blank" rel="noopener" href="https://timsong-cpp.github.io/cppwp/n4659/dcl.link#6">不起作用的</a></p>
+<p>所以出现了重复定义</p>
+<h3 id="291"><a href="#291" class="headerlink" title="291"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/291">291</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> _global = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  std::cout &lt;&lt; _global;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>是保留字 ub</p>
+<blockquote>
+<p>In addition, some identifiers are reserved for use by C++ implementations and shall not be used otherwise; no diagnostic is required.</p>
+<p>   Each identifier that contains a double underscore __ or begins with an underscore followed by an uppercase letter is reserved to the implementation for any use.</p>
+<p>   Each identifier that begins with an underscore is reserved to the implementation for use as a name in the global namespace.</p>
+</blockquote>
+<h3 id="130"><a href="#130" class="headerlink" title="130"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/130">130</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">adl</span><span class="params">(T)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;T&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">S</span></span><br><span class="line">&#123;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">call_adl</span><span class="params">(T t)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">adl</span>(<span class="built_in">S</span>());</span><br><span class="line">  <span class="built_in">adl</span>(t);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">adl</span><span class="params">(S)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;S&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">call_adl</span>(<span class="built_in">S</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>与模版参数相关的名字查找会被推迟到模板参数确定的地方，而名字查找只找之前的</p>
+<h3 id="289"><a href="#289" class="headerlink" title="289"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/289">289</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">int</span> a = []() &#123; <span class="type">static</span> <span class="type">int</span> b = <span class="number">1</span>; <span class="keyword">return</span> b++; &#125;())</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   std::cout &lt;&lt; a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="built_in">f</span>();</span><br><span class="line">   <span class="built_in">f</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>默认参数是将参数压入栈中，而不是简单的编译期替换(?)，所以两次调用的lambda是相同的</p>
+<h3 id="239"><a href="#239" class="headerlink" title="239"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/249">239</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    <span class="type">char</span> <span class="type">const</span> &amp;b = a;</span><br><span class="line">    cout &lt;&lt; b;</span><br><span class="line">    a++;</span><br><span class="line">    cout &lt;&lt; b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>引用只能指向相同类型或者派生类</p>
+<p>不相关类型之间的引用建立会导致隐式类型转换，因此 <code>const char&amp;</code> 实际上指向的是一个右值临时变量。</p>
+<p>如果是指针的话可能就是要考虑大小端了吧</p>
+<h3 id="354"><a href="#354" class="headerlink" title="354"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/354">354</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">S</span> &#123;</span><br><span class="line">    <span class="type">char</span> s;</span><br><span class="line">    <span class="built_in">S</span>(<span class="type">char</span> s): s&#123;s&#125; &#123;&#125;</span><br><span class="line">    ~<span class="built_in">S</span>() &#123; std::cout &lt;&lt; s; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">S <span class="title">a</span><span class="params">(<span class="string">&#x27;a&#x27;</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">S <span class="title">b</span><span class="params">(<span class="string">&#x27;b&#x27;</span>)</span></span>;</span><br><span class="line">    std::<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>std::exit(0)</code> 有自己的<a target="_blank" rel="noopener" href="https://timsong-cpp.github.io/cppwp/n4659/support.start.term#9.1">析构顺序</a></p>
+<p>但是总之他<strong>不管</strong>自动变量的析构，这点好像还挺要命的</p>
+<h3 id="186"><a href="#186" class="headerlink" title="186"></a><a href="cppquiz.org/quiz/question/186">186</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;typeinfo&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">takes_pointer</span><span class="params">(<span class="type">int</span>* pointer)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeid</span>(pointer) == <span class="keyword">typeid</span>(<span class="type">int</span>[])) std::cout &lt;&lt; <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeid</span>(pointer) == <span class="keyword">typeid</span>(<span class="type">int</span>*)) std::cout &lt;&lt; <span class="string">&#x27;p&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">takes_array</span><span class="params">(<span class="type">int</span> array[])</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeid</span>(array) == <span class="keyword">typeid</span>(<span class="type">int</span>[])) std::cout &lt;&lt; <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeid</span>(array) == <span class="keyword">typeid</span>(<span class="type">int</span>*)) std::cout &lt;&lt; <span class="string">&#x27;p&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span>* pointer = <span class="literal">nullptr</span>;</span><br><span class="line">  <span class="type">int</span> array[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">  <span class="built_in">takes_pointer</span>(array);</span><br><span class="line">  <span class="built_in">takes_array</span>(pointer);</span><br><span class="line"></span><br><span class="line">  std::cout &lt;&lt; (<span class="keyword">typeid</span>(<span class="type">int</span>*) == <span class="keyword">typeid</span>(<span class="type">int</span>[]));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>C++对数组参数的处理感觉有点傻逼</p>
+<p><code>int[]</code> 的类型是有一个 <code>int</code> 的数组</p>
+<p>数组传入时会被退化为一个纯右值的指针</p>
+<p>而 <code>int[]</code> 作为函数参数时，会在<strong>确定每个参数的类型之后</strong>，变为 <code>int*</code> </p>
+<h3 id="159"><a href="#159" class="headerlink" title="159"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/159">159</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> i;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; x &lt;&lt; i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    i = <span class="number">3</span>;</span><br><span class="line">    <span class="built_in">f</span>(i++);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函数调用是一个序列化点</p>
+<p>所有与参数相关的数值计算和负作用都会在调用之前完成</p>
+<h3 id="208"><a href="#208" class="headerlink" title="208"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/208">208</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> default_constructed = <span class="literal">false</span>;</span><br><span class="line"><span class="type">bool</span> constructed = <span class="literal">false</span>;</span><br><span class="line"><span class="type">bool</span> assigned = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">C</span>() &#123; default_constructed = <span class="literal">true</span>; &#125;</span><br><span class="line">    <span class="built_in">C</span>(<span class="type">int</span>) &#123; constructed = <span class="literal">true</span>; &#125;</span><br><span class="line">    C&amp; <span class="keyword">operator</span>=(<span class="type">const</span> C&amp;) &#123; assigned = <span class="literal">true</span>; <span class="keyword">return</span> *<span class="keyword">this</span>;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    map&lt;<span class="type">int</span>, C&gt; m;</span><br><span class="line">    m[<span class="number">7</span>] = <span class="built_in">C</span>(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; default_constructed &lt;&lt; constructed &lt;&lt; assigned;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>map</code> 在用 <code>[]</code> 访问不存在的key时会先<code>insert</code>一个，哪怕待会就赋值了</p>
+<h3 id="312"><a href="#312" class="headerlink" title="312"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/312">312</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> x = <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span> : <span class="keyword">public</span> A, B &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">D</span> : <span class="keyword">private</span> A, B &#123;&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    C c;</span><br><span class="line">    c.x = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    D d;</span><br><span class="line">    d.x = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; c.x &lt;&lt; d.x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>没想到吧 继承的可见性修饰符并不对逗号后面的生效</p>
+<p>但是struct默认是公有继承 class默认是私有继承</p>
+<p>所以其实ce的是<code>c.x = 3</code>这句</p>
+<h3 id="1"><a href="#1" class="headerlink" title="1"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/1">1</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt; <span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(T &amp;i)</span> </span>&#123; std::cout &lt;&lt; <span class="number">1</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;&gt; <span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">const</span> <span class="type">int</span> &amp;i)</span> </span>&#123; std::cout &lt;&lt; <span class="number">2</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> i = <span class="number">42</span>;</span><br><span class="line">  <span class="built_in">f</span>(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对包含模板函数的重载决议步骤如下</p>
+<ol>
+<li>对所有模板函数做类型推导. 本例中 <code>T</code> 被推导为 <code>int</code>, 第一个函数的形参为 <code>int &amp;i</code></li>
+<li>将推到成功的模板函数加入候选函数集合中</li>
+<li>将所有同名非模板函数加入候选函数集合中</li>
+<li>对候选函数做重载决议</li>
+</ol>
+<p>在其他条件都相同的情况下对于引用而言, 带有 c-v 修饰符的模板会比不带的更特化(也很好理解, <code>const int&amp;</code> 能接受 <code>const int</code> 而 <code>int&amp;</code> 不行), 因此重载决议挑选了第一个函数</p>
+<h3 id="113"><a href="#113" class="headerlink" title="113"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/113">113</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(T)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">int</span>)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">int</span>)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">f</span>(<span class="number">0.0</span>);</span><br><span class="line">    <span class="built_in">f</span>(<span class="number">0</span>);</span><br><span class="line">    f&lt;&gt;(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="228"><a href="#228" class="headerlink" title="228"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/228">228</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> ...Ts&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">X</span> &#123;</span><br><span class="line">  <span class="built_in">X</span>(Ts ...args) : <span class="built_in">Var</span>(<span class="number">0</span>, args...) &#123;&#125;</span><br><span class="line">  <span class="type">int</span> Var;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  X&lt;&gt; x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果一个可变参数模板的每一个合法特化, 其模板参数包都必须为空, 那么程序非良构, 因此产生了一个 UB</p>
+<h3 id="375"><a href="#375" class="headerlink" title="375"></a><a target="_blank" rel="noopener" href="https://cppquiz.org/quiz/question/375">375</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;utility&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">A</span> &#123;</span><br><span class="line">  <span class="built_in">A</span>() = <span class="keyword">default</span>;</span><br><span class="line">  <span class="built_in">A</span>(<span class="type">const</span> A &amp;a) &#123; std::cout &lt;&lt; <span class="string">&#x27;1&#x27;</span>; &#125;</span><br><span class="line">  <span class="built_in">A</span>(A &amp;&amp;a) &#123; std::cout &lt;&lt; <span class="string">&#x27;2&#x27;</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">A a;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  [a = std::<span class="built_in">move</span>(a)]() &#123;</span><br><span class="line">    [a = std::<span class="built_in">move</span>(a)]() &#123;&#125;;</span><br><span class="line">  &#125;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>lambda 的按值捕获需要把 lambda 声明为 <code>mutable</code> 才能修改捕获的变量</p>
+<p>否则 lambda 的 <code>operator()</code> 是 <code>const</code> 的</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AF%AD%E8%A8%80/" rel="tag"># 语言</a>
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/%E9%94%99%E9%A2%98%E9%9B%86/" rel="tag"># 错题集</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/42661.html" rel="next" title="Linux 内存管理入门">
+                  Linux 内存管理入门 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Cansult Chen</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

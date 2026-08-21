@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Trebuchet+MS:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Courier+New:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cansult.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-light"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":10,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="学内存, 写点总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 内存管理入门">
+<meta property="og:url" content="https://cansult.github.io/posts/42661.html">
+<meta property="og:site_name" content="Cansult&#39;s blog">
+<meta property="og:description" content="学内存, 写点总结">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cansult.github.io/pictures/2401194.png">
+<meta property="og:image" content="https://cansult.github.io/pictures/2401193.png">
+<meta property="article:published_time" content="2024-03-06T11:30:21.000Z">
+<meta property="article:modified_time" content="2026-08-21T10:51:34.865Z">
+<meta property="article:author" content="Cansult Chen">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="内存">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cansult.github.io/pictures/2401194.png">
+
+
+<link rel="canonical" href="https://cansult.github.io/posts/42661.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cansult.github.io/posts/42661.html","path":"posts/42661.html","title":"Linux 内存管理入门"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Linux 内存管理入门 | Cansult's blog</title>
+  
+
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","display_overflow":"scroll","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-mml-chtml.js","integrity":"sha256-ihPtDDm7pTmSF9ViEsItlvsrBTsNkz0MOXMchzOwCQw="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cansult's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">即使愿望永远无法实现<br>我也不愿就这样放手</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AC%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">硬件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">软件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98"><span class="nav-number">2.1.</span> <span class="nav-text">虚拟内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">页表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2"><span class="nav-number">2.3.</span> <span class="nav-text">进程切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NUMA"><span class="nav-number">2.4.</span> <span class="nav-text">NUMA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">2.5.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Cansult Chen"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Cansult Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cansult" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cansult" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cansult.github.io/posts/42661.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Cansult Chen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cansult's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Linux 内存管理入门 | Cansult's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux 内存管理入门
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-03-06 19:30:21" itemprop="dateCreated datePublished" datetime="2024-03-06T19:30:21+08:00">2024-03-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-08-21 18:51:34" itemprop="dateModified" datetime="2026-08-21T18:51:34+08:00">2026-08-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>学内存, 写点总结</p>
+<span id="more"></span>
+
+<h2 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h2><p><strong>cell</strong>: 一个电容, 一个三级管, 存储一个 bit</p>
+<p>row: 一行 cell</p>
+<p>word line: 这个 row 的控制线, 可以决定哪些行接入 bitline </p>
+<p>bitline: 一列 cell 的控制线</p>
+<p><strong>bank</strong>: word line $\times$ bit line 形成的 cell 矩阵</p>
+<p>row buffer: bank 每次读取的时候会先激活一整个 row, 再取出需要的列</p>
+<p><strong>bank group</strong>: 一个芯片里共用芯片的 io routing 的 bank; 同一时间, 一个 bank group 中只能有一个 bank 输出数据</p>
+<p><strong>dram 芯片</strong>: 多个 bank group, 和一些乱七八糟的玩意</p>
+<p>x_: x4 x8 x16… 每个 dram 芯片提供多少 bit</p>
+<p><strong>rank</strong>: 内存控制器一次访问到的芯片组叫做一个 rank</p>
+<p>beat: 每个芯片提供的 bit $\times$ 这个 rank 的芯片数量, 即一个 rank 一次读取的 bit 数</p>
+<p>burst length: 一次 burst 读取, 读取多少次 beat</p>
+<p>总线宽度: 等于一个 beat 的 bit 数; 一个时钟周期在上下沿分别读取两个 beat</p>
+<p>sub channel: ddr5 后把一个 channel 拆成两部分, 两部分可以分别读不同地址的内存, 加速随机小内存的读取</p>
+<p>burst: 一个 burst 内存读取就是 BL 次这样的读取; 相对分别进行 BL 次单次内存读取可以节约一些共用的部分, 比如找基地址和激活行的过程等</p>
+<p><strong>dimm</strong>: 内存条, 可以有多个 rank</p>
+<p>缓存行: CPU 缓存失效就会读一整个缓存行</p>
+<h2 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h2><h3 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a>虚拟内存</h3><p>进程描述符</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">task_struct</span> &#123;</span></span><br><span class="line">  <span class="comment">// 进程id</span></span><br><span class="line">  <span class="type">pid_t</span>    pid;</span><br><span class="line">  <span class="comment">// 用于标识线程所属的进程 pid</span></span><br><span class="line">  <span class="type">pid_t</span>    tgid;</span><br><span class="line">  <span class="comment">// 进程打开的文件信息</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">files_struct</span>  *<span class="title">files</span>;</span></span><br><span class="line">  <span class="comment">// 内存描述符表示进程虚拟地址空间</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">mm_struct</span>  *<span class="title">mm</span>;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>mm_struct</code>就是其虚拟内存的信息，<code>fork</code>时直接将子进程的指针指向父进程的资源，增加父进程资源的引用计数。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">mm_struct</span> &#123;</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> task_size; <span class="comment">/* size of task vm space */</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> start_code, end_code, start_data, end_data;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> start_brk, brk, start_stack;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> arg_start, arg_end, env_start, env_end; <span class="comment">/* 参数列表的起始和结束，环境变量的起始和结束，位于栈底*/</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> mmap_base; <span class="comment">/* base of mmap area，动态链接区的起始，动态链接区向下（低地址）扩展，包括动态链接的程序的code, data, bss和mmap调用申请的地址 */</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> total_vm; <span class="comment">/* Total pages mapped */</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> locked_vm; <span class="comment">/* Pages that have PG_mlocked set，不能换出到硬盘的页数量*/</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> pinned_vm; <span class="comment">/* Refcount permanently increased，不能换出到硬盘，也不能移动的页数量 */</span></span><br><span class="line">  <span class="comment">/* 各个段映射的页面总数 */</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> data_vm; <span class="comment">/* VM_WRITE &amp; ~VM_SHARED &amp; ~VM_STACK */</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> exec_vm; <span class="comment">/* VM_EXEC &amp; ~VM_WRITE &amp; ~VM_STACK */</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> stack_vm; <span class="comment">/* VM_STACK */</span></span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">rb_root</span> <span class="title">mm_rb</span>;</span> <span class="comment">/* 红黑树的根节点 */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 当前进程顶级页表的虚拟起始地址，会在进程切换时调用 load_new_mm_cr3 函数转换虚拟地址为物理地址到 CR3 寄存器</span></span><br><span class="line">  <span class="type">pgd_t</span> * pgd;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>vma</code>描述一个内存区域，例如各个段、在<code>malloc</code>申请的内存大于<code>128k</code>时创建的匿名映射（小于时直接移动堆顶指针）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">vm_area_struct</span> &#123;</span></span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">vm_area_struct</span> *<span class="title">vm_next</span>, *<span class="title">vm_prev</span>;</span> <span class="comment">/* 链表的前驱后继 */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">rb_node</span> <span class="title">vm_rb</span>;</span> <span class="comment">/* 自己的红黑树节点 */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">anon_vma_chain</span>;</span> </span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">mm_struct</span> *<span class="title">vm_mm</span>;</span> <span class="comment">/* The address space we belong to. */</span></span><br><span class="line"> </span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> vm_start; <span class="comment">/* Our start address within vm_mm. */</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> vm_end; <span class="comment">/* The first byte after our end address within vm_mm. */</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   * Access permissions of this VMA.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="type">pgprot_t</span> vm_page_prot;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> vm_flags; <span class="comment">/* 访问权限 */</span></span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">anon_vma_chain</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">anon_vma</span> *<span class="title">anon_vma</span>;</span> <span class="comment">/* Serialized by page_table_lock，真正访问内存时发生缺页中断，才会建立和物理内存的双向映射 */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">file</span> * <span class="title">vm_file</span>;</span> <span class="comment">/* File we map to (can be NULL). */</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> vm_pgoff; <span class="comment">/* Offset (within vm_file) in PAGE_SIZE units */</span> </span><br><span class="line">  <span class="type">void</span> * vm_private_data; <span class="comment">/* was vm_pte (shared mem) */</span></span><br><span class="line">  <span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">vm_operations_struct</span> *<span class="title">vm_ops</span>;</span> <span class="comment">/* Function pointers to deal with this struct. 类似某种虚函数*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="页表"><a href="#页表" class="headerlink" title="页表"></a>页表</h3><p>物理内存被分为<code>4k</code>大小的页，通过<code>struct page</code>管理，每个<code>struct page</code>有全局唯一的<code>PFN</code>与之对应。<code>PageFrameNumber</code>通过最低级的页表管理，linux最多支持五层页表：<code>PGD-&gt;P4D-&gt;PUD-&gt;PMD-&gt;PTE</code></p>
+<p><img src="/../pictures/2401194.png"></p>
+<h3 id="进程切换"><a href="#进程切换" class="headerlink" title="进程切换"></a>进程切换</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * context_switch - switch to the new MM and the new thread&#x27;s register state.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">static</span> __always_inline <span class="keyword">struct</span> rq *</span><br><span class="line"><span class="title function_">context_switch</span><span class="params">(<span class="keyword">struct</span> rq *rq, <span class="keyword">struct</span> task_struct *prev,</span></span><br><span class="line"><span class="params">           <span class="keyword">struct</span> task_struct *next, <span class="keyword">struct</span> rq_flags *rf)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!next-&gt;mm) &#123; <span class="comment">// to kernel</span></span><br><span class="line">    <span class="comment">// 每个进程都会拷贝一份内核的页表到自己的页表（若内核页表发生更改，会其他进程会在访问时发生缺页中断来同步。arm64 有专门的寄存器负责存储内核页表，无需拷贝），所以内核无需切换页表，直接将内核的 active_mm 指向系统调用的进程的 mm 即可</span></span><br><span class="line">    <span class="comment">// ........ 内核线程的切换</span></span><br><span class="line"></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123; <span class="comment">// to user</span></span><br><span class="line">    <span class="comment">// ........ 用户进程的切换</span></span><br><span class="line"></span><br><span class="line">    membarrier_switch_mm(rq, prev-&gt;active_mm, next-&gt;mm);</span><br><span class="line">    <span class="comment">// 切换进程虚拟内存空间</span></span><br><span class="line">    switch_mm_irqs_off(prev-&gt;active_mm, next-&gt;mm, next);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 切换 CPU 上下文和进程栈</span></span><br><span class="line">  switch_to(prev, next, prev);</span><br><span class="line">  barrier();</span><br><span class="line">  <span class="keyword">return</span> finish_task_switch(prev);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="NUMA"><a href="#NUMA" class="headerlink" title="NUMA"></a>NUMA</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">pglist_data</span> &#123;</span></span><br><span class="line">  <span class="comment">// NUMA 节点id</span></span><br><span class="line">  <span class="type">int</span> node_id;</span><br><span class="line">  <span class="comment">// 指向 NUMA 节点内管理所有物理页 page 的数组</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">page</span> *<span class="title">node_mem_map</span>;</span></span><br><span class="line">  <span class="comment">// NUMA 节点内第一个物理页的 pfn</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> node_start_pfn;</span><br><span class="line">  <span class="comment">// NUMA 节点内所有可用的物理页个数（不包含内存空洞）</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> node_present_pages;</span><br><span class="line">  <span class="comment">// NUMA 节点内所有的物理页个数（包含内存空洞）</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> node_spanned_pages; </span><br><span class="line">  <span class="comment">// 保证多进程可以并发安全的访问 NUMA 节点</span></span><br><span class="line">  <span class="type">spinlock_t</span> node_size_lock;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125; <span class="comment">// 一个 NUMA 节点</span></span><br><span class="line"><span class="comment">// 所有 NUMA 节点通过一个全局数组 node_data[] 组织起来</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../pictures/2401193.png"></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>bin的技术小屋.聊聊linux内核.<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzg2MzU3Mjc3Ng==&action=getalbum&album_id=2559805446807928833&scene=173&from_msgid=&from_itemidx=&count=3&nolastread=1&scene=21#wechat_redirect">源地址.</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%86%85%E5%AD%98/" rel="tag"># 内存</a>
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/41216.html" rel="prev" title="cppquiz 错题集">
+                  <i class="fa fa-angle-left"></i> cppquiz 错题集
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/20346.html" rel="next" title="C++ 内存序入门">
+                  C++ 内存序入门 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Cansult Chen</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"cansult.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-light"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":10,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cansult.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":10,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
 
     <meta name="description" content="一个有趣的问题, AC 能不能动态加减模板串?">
 <meta property="og:type" content="article">
@@ -27,14 +27,14 @@
 <meta property="og:site_name" content="Cansult&#39;s blog">
 <meta property="og:description" content="一个有趣的问题, AC 能不能动态加减模板串?">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://cansult.github.io/DACA.jpeg">
+<meta property="og:image" content="https://cansult.github.io/pictures/2603111.jpg">
 <meta property="article:published_time" content="2026-03-11T10:47:10.000Z">
-<meta property="article:modified_time" content="2026-08-21T10:52:47.997Z">
+<meta property="article:modified_time" content="2026-09-19T05:02:21.018Z">
 <meta property="article:author" content="Cansult Chen">
 <meta property="article:tag" content="AC 自动机">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cansult.github.io/DACA.jpeg">
+<meta name="twitter:image" content="https://cansult.github.io/pictures/2603111.jpg">
 
 
 <link rel="canonical" href="https://cansult.github.io/posts/14038.html">
@@ -261,7 +261,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-08-21 18:52:47" itemprop="dateModified" datetime="2026-08-21T18:52:47+08:00">2026-08-21</time>
+      <time title="Modified: 2026-09-19 13:02:21" itemprop="dateModified" datetime="2026-09-19T13:02:21+08:00">2026-09-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -308,7 +308,7 @@
 </ul>
 <p>最坏情况为 $O(\sum_{n\in fail^{-1}}{descendants(n)}) \le \mathrm{size}(trie) \times \mathrm{height}(trie)$ 上界非常松, 在此场景中基本不会超过直接重构, 且最坏情况出现的概率较小</p>
 <p>平时空间会略大, 因为要同时记录 fail 的头和尾, 但峰值空间小于重构方案</p>
-<p><img src="/DACA.jpeg"></p>
+<p><img src="/../pictures/2603111.jpg"></p>
 <p>构造过程: </p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">    index_type now = q.<span class="built_in">front</span>();</span><br><span class="line">    q.<span class="built_in">pop</span>();</span><br><span class="line">    aca_nodes_[now].dfn = ++cntdfn;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; kv : aca_nodes_[now].son_index) &#123;</span><br><span class="line">        <span class="type">const</span> char_type&amp; c = kv.first;</span><br><span class="line">        <span class="type">const</span> index_type&amp; son = kv.second;</span><br><span class="line">        index_type fail_index = aca_nodes_[now].fail_index;</span><br><span class="line">        <span class="keyword">while</span> (fail_index &amp;&amp; aca_nodes_[fail_index].son_index.<span class="built_in">find</span>(c) == aca_nodes_[fail_index].son_index.<span class="built_in">end</span>()) &#123; </span><br><span class="line">            <span class="comment">// 以深度为势能函数, 摊还复杂度是可以接受的</span></span><br><span class="line">            fail_index = aca_nodes_[fail_index].fail_index;</span><br><span class="line">        &#125;</span><br><span class="line">        fail_index = aca_nodes_[fail_index].son_index[c];</span><br><span class="line">        aca_nodes_[son].fail_index = fail_index;</span><br><span class="line"></span><br><span class="line">        aca_nodes_[son].match_nodes.<span class="built_in">insert</span>(aca_nodes_[son].match_nodes.<span class="built_in">end</span>(), aca_nodes_[fail_index].match_nodes.<span class="built_in">begin</span>(), aca_nodes_[fail_index].match_nodes.<span class="built_in">end</span>());</span><br><span class="line"></span><br><span class="line">        q.<span class="built_in">push</span>(son);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Trebuchet+MS:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Courier+New:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cansult.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":10,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="学下 cutlass, 写点总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cutlass 入门">
+<meta property="og:url" content="https://cansult.github.io/posts/20643.html">
+<meta property="og:site_name" content="Cansult&#39;s blog">
+<meta property="og:description" content="学下 cutlass, 写点总结">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-09-11T11:16:15.000Z">
+<meta property="article:modified_time" content="2026-10-26T07:51:53.929Z">
+<meta property="article:author" content="Cansult Chen">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="cutlass">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cansult.github.io/posts/20643.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cansult.github.io/posts/20643.html","path":"posts/20643.html","title":"cutlass 入门"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>cutlass 入门 | Cansult's blog</title>
+  
+
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","display_overflow":"scroll","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-mml-chtml.js","integrity":"sha256-ihPtDDm7pTmSF9ViEsItlvsrBTsNkz0MOXMchzOwCQw="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cansult's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">即使愿望永远无法实现<br>我也不愿就这样放手</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#swizzle"><span class="nav-number">1.</span> <span class="nav-text">swizzle</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E8%BF%87%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">具体过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E8%B4%A8"><span class="nav-number">1.2.</span> <span class="nav-text">本质</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#swizzle-%E8%9E%8D%E5%85%A5-layout-%E4%BC%98%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">swizzle 融入 layout 优化</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Cansult Chen"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Cansult Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cansult" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cansult" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cansult.github.io/posts/20643.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Cansult Chen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cansult's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="cutlass 入门 | Cansult's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          cutlass 入门
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-09-11 19:16:15" itemprop="dateCreated datePublished" datetime="2026-09-11T19:16:15+08:00">2026-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-10-26 15:51:53" itemprop="dateModified" datetime="2026-10-26T15:51:53+08:00">2026-10-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>学下 cutlass, 写点总结</p>
+<span id="more"></span>
+
+<h2 id="swizzle"><a href="#swizzle" class="headerlink" title="swizzle"></a>swizzle</h2><p>为减少 (主要是 mma ldmatrix 的) bank conflict, 需要对 shape stride offset 后得到的标量一维地址进行 swizzle, 记作 Swizzle o Offset o Layout</p>
+<p>(mma 只能小矩阵的乘法, 导致多个线程加载一个小部分的内存, 在行主序的情况下更容易导致 bank conflict, 可以参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/27381896431">文章</a>)</p>
+<h3 id="具体过程"><a href="#具体过程" class="headerlink" title="具体过程"></a>具体过程</h3><p><code>swizzle&lt;B, M, S&gt;</code></p>
+<ul>
+<li>B: Base / num_bits: 参与亦或的位的长度 (len(z) &#x3D;&#x3D; len(y))</li>
+<li>M: Mask / num_base: 保持不变的末尾长度, 可以看做变换中的单位长度</li>
+<li>S: Shift / num_shift: 参与亦或的两段 bit 的距离</li>
+</ul>
+<p>贴下 cutlass 中的原注释</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> INPUT:</span><br><span class="line"> 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0</span><br><span class="line">|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |</span><br><span class="line">  x  w  v  u  t  s  r  q  p  o  n  m  l Y3 Y2 Y1 Y0  k  j  i  h  g  f  e Z3 Z2 Z1 Z0  d  c  b  a</span><br><span class="line">                                         ^        ^                       ^        ^</span><br><span class="line">                          Extract y bits |        |                       |        |</span><br><span class="line">                          by bitwise and |        |      num_shift        |        |</span><br><span class="line">                          with mask      |        |&lt;----------------------|-------&gt;|   num_base</span><br><span class="line">                                         |________|      (&gt;0 here)        |________|  &lt;--------&gt;</span><br><span class="line">                                             |                                |</span><br><span class="line">                                             ----------------------------------</span><br><span class="line">                                             shift Yi bits, xor w/input    ___|____</span><br><span class="line">                                                                          |        | Ai = Yi ^ Zi</span><br><span class="line"> OUTPUT:                                                                  v        v</span><br><span class="line"> 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0</span><br><span class="line">|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |</span><br><span class="line">  x  w  v  u  t  s  r  q  p  o  n  m  l Y3 Y2 Y1 Y0  k  j  i  h  g  f  e A3 A2 A1 A1  d  c  b  a</span><br></pre></td></tr></table></figure>
+
+<p>总的来说, swizzle 的输出就是把输入的一部分和另一部分做异或</p>
+<h3 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/671419093">参考</a></p>
+<p>swizzle 本质就是把二维坐标中的 <code>new_icol = icol xor irow</code></p>
+<p>从这个角度理解, 就可以:</p>
+<ul>
+<li>把坐标的低 <code>M</code> 位看做操作的具体单元</li>
+<li>更高的 <code>S</code> 位看做是表示列号的范围</li>
+<li>再高的 <code>B</code> 位看做是表示行号的范围</li>
+</ul>
+<p>这样, 定义中的 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">true_mask = ((1 &lt;&lt; B) - 1) &lt;&lt; (M + S)</span><br><span class="line">new_idx = (idx xor (idx &amp; true_mask))</span><br></pre></td></tr></table></figure>
+
+<p>就可以理解为列号异或行号了</p>
+<h2 id="swizzle-融入-layout-优化"><a href="#swizzle-融入-layout-优化" class="headerlink" title="swizzle 融入 layout 优化"></a>swizzle 融入 layout 优化</h2><p>在某些 <code>slice</code>(固定某些坐标) 的情况下, <code>swizzle(layout(irow, icol))</code> 可以被简化为一个 <code>new_layout(irow, icol)</code>, 而结果不变, 这样可以节约运算</p>
+<p>这种简化要求 <code>swizzle</code> 具有一些性质, 比较简单的要求就是在 <code>slice</code> 的要求下, <code>y</code> 和 <code>z</code> 的所有对应的位 <code>i</code> 中, <code>y_i</code> 和 <code>z_i</code> 有一个不变:</p>
+<ul>
+<li>都不变: 显然, swizzle 的结果不变</li>
+<li><code>y_i</code> 不变: </li>
+<li><code>z_i</code> 不变:</li>
+</ul>
+<p>有一个简单的判断方法可以快速判断: </p>
+<p>设 <code>A = slice(max_index)</code>, <code>A</code> 中为 1 的位就是 swizzle 前活跃的位 (和数位 dp 之类的类似, 如果 slice 的这一位可以活动, 那能表示的最大值的这一位一定是 1)</p>
+<p><code>collision_bitwise = A and (~sw(A))</code></p>
+<p><strong>证明:</strong></p>
+<p>对一对 $Y_i&#x2F;Z_i$，设：$a_z&#x3D;A_{Z_i},\ a_y&#x3D;A_{Y_i}$</p>
+<p>则： $\operatorname{sw}(A)_{Z_i}&#x3D;a_z\oplus a_y$</p>
+<p>四种情况是：</p>
+<table>
+<thead>
+<tr>
+<th align="right">$a_z$</th>
+<th align="right">$a_y$</th>
+<th>含义</th>
+<th align="right">$\operatorname{sw}(A)_{Z_i}$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">0</td>
+<td align="right">0</td>
+<td>都不 active</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="right">0</td>
+<td align="right">1</td>
+<td>只有 $Y_i$ active</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td align="right">0</td>
+<td>只有 $Z_i$ active</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td align="right">1</td>
+<td>$Y_i,Z_i$ 同时 active</td>
+<td align="right">0</td>
+</tr>
+</tbody></table>
+<p>再观察 $C$ 在 $Z_i$ 位置上的值：$C_{Z_i}&#x3D;A_{Z_i}\land \neg \operatorname{sw}(A)_{Z_i}$</p>
+<p>代入：$C_{Z_i}&#x3D;a_z\land\neg(a_z\oplus a_y)$</p>
+<table>
+<thead>
+<tr>
+<th align="right">$a_z$</th>
+<th align="right">$a_y$</th>
+<th align="right">$a_z\oplus a_y$</th>
+<th align="right">$a_z\land\neg(a_z\oplus a_y)$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+</tbody></table>
+<p>$C_i$ 为 1 当且仅当 $Z_i$ 和 $Y_i$ 都 active (对 <code>sw(A)</code> 取反消除了 $Y, Z$ 之外的位的影响)</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/cutlass/" rel="tag"># cutlass</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/3005.html" rel="prev" title="回归">
+                  <i class="fa fa-angle-left"></i> 回归
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/51160.html" rel="next" title="cuda 入门">
+                  cuda 入门 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Cansult Chen</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

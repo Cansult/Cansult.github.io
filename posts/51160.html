@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Trebuchet+MS:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Courier+New:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cansult.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":10,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="学 cuda, 写点总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cuda 入门">
+<meta property="og:url" content="https://cansult.github.io/posts/51160.html">
+<meta property="og:site_name" content="Cansult&#39;s blog">
+<meta property="og:description" content="学 cuda, 写点总结">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cansult.github.io/pictures/2610084.png">
+<meta property="og:image" content="https://cansult.github.io/pictures/2610085.png">
+<meta property="og:image" content="https://cansult.github.io/pictures/2610081.png">
+<meta property="og:image" content="https://cansult.github.io/pictures/2610082.png">
+<meta property="og:image" content="https://cansult.github.io/pictures/2610083.png">
+<meta property="article:published_time" content="2026-09-11T11:16:15.000Z">
+<meta property="article:modified_time" content="2026-10-26T07:51:53.925Z">
+<meta property="article:author" content="Cansult Chen">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="cuda">
+<meta property="article:tag" content="gpu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cansult.github.io/pictures/2610084.png">
+
+
+<link rel="canonical" href="https://cansult.github.io/posts/51160.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cansult.github.io/posts/51160.html","path":"posts/51160.html","title":"cuda 入门"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>cuda 入门 | Cansult's blog</title>
+  
+
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","display_overflow":"scroll","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-mml-chtml.js","integrity":"sha256-ihPtDDm7pTmSF9ViEsItlvsrBTsNkz0MOXMchzOwCQw="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cansult's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">即使愿望永远无法实现<br>我也不愿就这样放手</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AC%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">硬件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1"><span class="nav-number">1.1.</span> <span class="nav-text">抽象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E5%86%85%E5%AD%98%E8%AE%BF%E9%97%AE"><span class="nav-number">2.1.</span> <span class="nav-text">合并内存访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E9%93%BA"><span class="nav-number">2.2.</span> <span class="nav-text">平铺</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%B2%97%E5%8C%96"><span class="nav-number">2.3.</span> <span class="nav-text">线程粗化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E7%BA%A6"><span class="nav-number">3.1.</span> <span class="nav-text">规约</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%92%E5%B9%B6"><span class="nav-number">3.2.</span> <span class="nav-text">归并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%BC%80%E5%92%8C"><span class="nav-number">3.3.</span> <span class="nav-text">前缀和</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Kogge-Stone"><span class="nav-number">3.3.1.</span> <span class="nav-text">Kogge-Stone</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Brent-Kung"><span class="nav-number">3.3.2.</span> <span class="nav-text">Brent-Kung</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SpMV-Sparse-Matrix-Vector-Multiplication"><span class="nav-number">3.4.</span> <span class="nav-text">SpMV (Sparse Matrix-Vector Multiplication)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#COO-COOrdinate"><span class="nav-number">3.4.1.</span> <span class="nav-text">COO (COOrdinate)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSR-Compressed-Sparse-Row"><span class="nav-number">3.4.2.</span> <span class="nav-text">CSR (Compressed Sparse Row)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ELL-ELLPACK-%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9A%84-SpMV-%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">3.4.3.</span> <span class="nav-text">ELL (ELLPACK 中使用的 SpMV 实现方式)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ELL-COO"><span class="nav-number">3.4.4.</span> <span class="nav-text">ELL-COO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JDS-Jagged-Diagonal-Storage"><span class="nav-number">3.4.5.</span> <span class="nav-text">JDS (Jagged Diagonal Storage)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BFS"><span class="nav-number">3.5.</span> <span class="nav-text">BFS</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Cansult Chen"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Cansult Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cansult" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cansult" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cansult.github.io/posts/51160.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Cansult Chen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cansult's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="cuda 入门 | Cansult's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          cuda 入门
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-09-11 19:16:15" itemprop="dateCreated datePublished" datetime="2026-09-11T19:16:15+08:00">2026-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-10-26 15:51:53" itemprop="dateModified" datetime="2026-10-26T15:51:53+08:00">2026-10-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>学 cuda, 写点总结</p>
+<span id="more"></span>
+
+<h2 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h2><h3 id="抽象"><a href="#抽象" class="headerlink" title="抽象"></a>抽象</h3><h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><h3 id="合并内存访问"><a href="#合并内存访问" class="headerlink" title="合并内存访问"></a>合并内存访问</h3><h3 id="平铺"><a href="#平铺" class="headerlink" title="平铺"></a>平铺</h3><h3 id="线程粗化"><a href="#线程粗化" class="headerlink" title="线程粗化"></a>线程粗化</h3><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="规约"><a href="#规约" class="headerlink" title="规约"></a>规约</h3><h3 id="归并"><a href="#归并" class="headerlink" title="归并"></a>归并</h3><h3 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h3><h4 id="Kogge-Stone"><a href="#Kogge-Stone" class="headerlink" title="Kogge-Stone"></a>Kogge-Stone</h4><p>没什么好说的, 和树形规约看上去挺像的, 区别在于每次迭代参与的线程是哪些: 规约在每一轮都把一半的数据计算贡献后抛弃, 而前缀和是每一轮计算完成计算完成了前 $2^{offset}$ 的前缀和, 但是不抛弃这些数据, 后续仍会用到</p>
+<p>或者看做类似 st 表和 LCA 的倍增算法, 第 <code>stride</code> 轮的第 <code>i</code> 项代表 <code>sum([i - 2**stride, i])</code></p>
+<p><img src="/../pictures/2610084.png" alt="Kogge-Stone"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__global__ <span class="type">void</span> <span class="title">Kogge_Stone_scan_kernel</span><span class="params">(<span class="type">float</span> *X, <span class="type">float</span> *Y, <span class="type">unsigned</span> <span class="type">int</span> N)</span></span>&#123;</span><br><span class="line">    __shared__ <span class="type">float</span> XY[SECTION_SIZE];</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> i = blockIdx.x*blockDim.x + threadIdx.x;</span><br><span class="line">    <span class="keyword">if</span>(i &lt; N) &#123;</span><br><span class="line">        XY[threadIdx.x] = X[i];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        XY[threadIdx.x] = <span class="number">0.0f</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">unsigned</span> <span class="type">int</span> stride = <span class="number">1</span>; stride &lt; blockDim.x; stride *= <span class="number">2</span>) &#123;</span><br><span class="line">        __syncthreads();</span><br><span class="line">        <span class="type">float</span> temp;</span><br><span class="line">        <span class="keyword">if</span>(threadIdx.x &gt;= stride)</span><br><span class="line">            temp = XY[threadIdx.x] + XY[threadIdx.x-stride];</span><br><span class="line">        __syncthreads();</span><br><span class="line">        <span class="keyword">if</span>(threadIdx.x &gt;= stride)</span><br><span class="line">            XY[threadIdx.x] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(i &lt; N) &#123;</span><br><span class="line">        Y[i] = XY[threadIdx.x];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也类似 ST 表, 总的计算量是 $\mathrm O(n\log n)$, 对前缀和来说偏大</p>
+<p>而且受制于显示中资源的限制, <code>SECTION_SIZE</code> 不可能太大, 效率还会进一步下降</p>
+<h4 id="Brent-Kung"><a href="#Brent-Kung" class="headerlink" title="Brent-Kung"></a>Brent-Kung</h4><p>我们实际上无用计算了很多部分, 尤其是 <code>stride</code> 小而 <code>i</code> 大的部分</p>
+<p>考虑怎么减少这部分</p>
+<ul>
+<li>upsweep 就是先构造一个树状数组, <code>index</code> 从 <code>1</code> 开始的情况下 (很遗憾代码是从 <code>0</code> 开始的, 所以接下来会有点混乱), <code>XY[i]</code> 存储的就是 <code>sum(i - lowbit(i), i]</code></li>
+</ul>
+<p>树状数组的前缀和查询就是 <code>i -= lowbit(i)</code> 的 <code>XY[i]</code> 循环累加, 逐个累加总计算量还是太高, 考虑通过贡献计算</p>
+<ul>
+<li>downsweep 的过程是使树状数组维护的区间和真正变成前缀和:</li>
+</ul>
+<p>假设当前时刻所有 <code>lowbit(i) &gt;= stride</code> 的位置都已经完成处理, 即 <code>XY[i] == pre[i]</code>; 初始时 <code>XY[1000..000] == pre[1000..000]</code> 满足条件</p>
+<p>处理 <code>i</code> 时需要 <code>XY[i - lowbit(i)]</code> 已经完成处理:</p>
+<p>注意到, 当 <code>x = stride</code> 是 <code>2</code> 的幂时, 设 $p &#x3D; (2n + 1)x$, 则 $\mathrm{lowbit}(p) &#x3D;&#x3D; x$, $\mathrm{lowbit}(p - x) &#x3D; 2nx \ge x$</p>
+<p>所以 $p - x$ 的位置一定已经完成了处理, <code>pre[p]</code> 可以直接由 <code>XY[p - x] + XY[p]</code> 得出</p>
+<p><img src="/../pictures/2610085.png" alt="Brent-Kung"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__global__ <span class="type">void</span> <span class="title">Brent_Kung_scan_kernel</span><span class="params">(<span class="type">float</span> *X, <span class="type">float</span> *Y, <span class="type">unsigned</span> <span class="type">int</span> N)</span> </span>&#123;</span><br><span class="line">    __shared__ <span class="type">float</span> XY[SECTION_SIZE];</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> i = <span class="number">2</span>*blockIdx.x*blockDim.x + threadIdx.x;</span><br><span class="line">    <span class="keyword">if</span>(i &lt; N) XY[threadIdx.x] = X[i];</span><br><span class="line">    <span class="keyword">if</span>(i + blockDim.x &lt; N) XY[threadIdx.x + blockDim.x] = X[i + blockDim.x];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">unsigned</span> <span class="type">int</span> stride = <span class="number">1</span>; stride &lt;= blockDim.x; stride *= <span class="number">2</span>) &#123;</span><br><span class="line">        __syncthreads();</span><br><span class="line">        <span class="type">unsigned</span> <span class="type">int</span> index = (threadIdx.x + <span class="number">1</span>)*<span class="number">2</span>*stride - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(index &lt; SECTION_SIZE) &#123;</span><br><span class="line">            XY[index] += XY[index - stride];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> stride = SECTION_SIZE/<span class="number">4</span>; stride &gt; <span class="number">0</span>; stride /= <span class="number">2</span>) &#123;</span><br><span class="line">        __syncthreads();</span><br><span class="line">        <span class="type">unsigned</span> <span class="type">int</span> index = (threadIdx.x + <span class="number">1</span>)*stride*<span class="number">2</span> - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(index + stride &lt; SECTION_SIZE) &#123;</span><br><span class="line">            XY[index + stride] += XY[index];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">__syncthreads();</span><br><span class="line">    <span class="keyword">if</span> (i &lt; N) Y[i] = XY[threadIdx.x];</span><br><span class="line">    <span class="keyword">if</span> (i + blockDim.x &lt; N) Y[i + blockDim.x] = XY[threadIdx.x + blockDim.x];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Brent-Kung 主要减少的是计算次数, 可能使用于限制能耗的场景; 单纯的计算时间可能不如 Kogge-Stone, 毕竟要做两遍计算</p>
+<h3 id="SpMV-Sparse-Matrix-Vector-Multiplication"><a href="#SpMV-Sparse-Matrix-Vector-Multiplication" class="headerlink" title="SpMV (Sparse Matrix-Vector Multiplication)"></a>SpMV (<em>Sparse Matrix-Vector Multiplication</em>)</h3><p>一个稀疏矩阵乘一个向量, 一般认为这个向量是稠密的</p>
+<h4 id="COO-COOrdinate"><a href="#COO-COOrdinate" class="headerlink" title="COO (COOrdinate)"></a>COO (<em>COOrdinate</em>)</h4><p>最简单的形式, 坐标表 <code>row[n], col[n], val[n]</code> 记录稀疏矩阵中非 0 位置的坐标和值. 并行处理非 0 值</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__global__ <span class="type">void</span> <span class="title">SpMV_COO</span><span class="params">(<span class="type">const</span> coo* matrix, <span class="type">const</span> <span class="type">float</span>* x, <span class="type">float</span>* y)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> ind = blockIdx.x * blockDim.x + threadIdx.x;</span><br><span class="line">    <span class="keyword">if</span> (ind &lt; matrix-&gt;size) &#123;</span><br><span class="line">        <span class="type">int</span> row = matrix-&gt;row[ind];</span><br><span class="line">        <span class="type">int</span> col = matrix-&gt;col[ind];</span><br><span class="line">        <span class="type">float</span> val = matrix-&gt;val[ind];</span><br><span class="line">        <span class="built_in">atomic_add</span>(&amp;y[row], x[col] * val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>空间效率: 高</li>
+<li>灵活性: 可任意增删元素 </li>
+<li>可访问性: 简单获取当前元素的行列坐标, 但无法快速遍历某行某列</li>
+<li>控制发散: 无</li>
+<li>内存访问: 全部合并</li>
+<li>由于相同行的值会在不同线程累加到同一个位置, 需要额外的原子操作开销</li>
+</ul>
+<h4 id="CSR-Compressed-Sparse-Row"><a href="#CSR-Compressed-Sparse-Row" class="headerlink" title="CSR (Compressed Sparse Row)"></a>CSR (<em>Compressed Sparse Row</em>)</h4><p>将坐标按所属的行分类. 并行处理所有行, 一行的内容在一个线程内处理, 避免原子操作的开销</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__global__ <span class="type">void</span> <span class="title">SpMV_CSR</span><span class="params">(<span class="type">const</span> csr* matrix, <span class="type">const</span> <span class="type">float</span>* x, <span class="type">float</span>* y)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> row = blockIdx.x * blockDim.x + threadIdx.x;</span><br><span class="line">    <span class="keyword">if</span> (row &lt; matrix-&gt;row_size) &#123;</span><br><span class="line">        <span class="type">float</span> sum = <span class="number">0.0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = matrix-&gt;row_ptr[row]; i &lt; matrix-&gt;row_ptr[row + <span class="number">1</span>]; i ++) &#123;</span><br><span class="line">            <span class="type">int</span> col = matrix-&gt;col[i];</span><br><span class="line">            <span class="type">float</span> val = matrix-&gt;val[i];</span><br><span class="line">            sum += x[col] * val;</span><br><span class="line">        &#125;</span><br><span class="line">        y[row] += sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>空间效率: 高</li>
+<li>灵活性: 增删元素 需要整体挪动后续坐标</li>
+<li>可访问性: 简单获取当前元素的行列坐标, 只能快速遍历某行</li>
+<li>控制发散: 取决于一个 warp 内不同行间非 0 列的长度差异</li>
+<li>内存访问: 非合并</li>
+</ul>
+<h4 id="ELL-ELLPACK-中使用的-SpMV-实现方式"><a href="#ELL-ELLPACK-中使用的-SpMV-实现方式" class="headerlink" title="ELL (ELLPACK 中使用的 SpMV 实现方式)"></a>ELL (<em>ELLPACK 中使用的 SpMV 实现方式</em>)</h4><p>将坐标按所属行分组后, 将所有行填充 0 至最长的那一行; 而后存储为列主序的数组; 并行处理所有行</p>
+<p><img src="/../pictures/2610081.png" alt="ELL"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__global__ <span class="type">void</span> <span class="title">SpMV_ELL</span><span class="params">(<span class="type">const</span> ell* matrix, <span class="type">const</span> <span class="type">float</span>* x, <span class="type">float</span>* y)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> row  = blockIdx.x * blockDim.x + threadIdx.x;</span><br><span class="line">    <span class="keyword">if</span> (row &lt; matrix-&gt;row_size) &#123;</span><br><span class="line">        <span class="type">float</span> sum = <span class="number">0.0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> t = <span class="number">0</span>; t &lt; matrix-&gt;row_non_0_num[row]; t++) &#123;</span><br><span class="line">            <span class="type">int</span> i = t * matrix-&gt;row_len + row;</span><br><span class="line">            <span class="type">int</span> col = matrix-&gt;col[i];</span><br><span class="line">            <span class="type">float</span> val = matrix-&gt;val[i];</span><br><span class="line">            sum += x[col] * val;</span><br><span class="line">        &#125;</span><br><span class="line">        y[row] += sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>空间效率: 取决于不同行间非 0 列的长度差异 </li>
+<li>灵活性: 在非最长的一行增加元素可以直接把占位的 0 改为要增加的值; 在最长的一行增加则需要增加全体占位</li>
+<li>可访问性: 简单获取当前元素的行列坐标, 只能快速遍历某行</li>
+<li>控制发散: 取决于一个 warp 内不同行间非 0 列的长度差异</li>
+<li>内存访问: 合并</li>
+</ul>
+<h4 id="ELL-COO"><a href="#ELL-COO" class="headerlink" title="ELL-COO"></a>ELL-COO</h4><p>注意到在有几列相当长的情况下, 填充会带来相当大的内存浪费, 我们可以把超过阈值的几行多出来的部分使用 COO 来存储; 其他部分依旧使用 ELL</p>
+<p><img src="/../pictures/2610082.png" alt="ELL-COO"></p>
+<h4 id="JDS-Jagged-Diagonal-Storage"><a href="#JDS-Jagged-Diagonal-Storage" class="headerlink" title="JDS (Jagged Diagonal Storage)"></a>JDS (<em>Jagged Diagonal Storage</em>)</h4><p>JDS 将不同行按照包含的非 0 列的多少进行排序, 并行处理所有行; 通过排序, 一个 warp 内不同行间的非 0 列长度基本是相近的, 可以减少控制发散; 改为列主序也是为了合并内存访问</p>
+<p><img src="/../pictures/2610083.png" alt="JDS"></p>
+<p>代码和 ELL 差不多</p>
+<p>排序的消耗可能比较大, 更适合多次使用这一矩阵的情景</p>
+<h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><p>有并行处理顶点 / 边 / bfs 队列的</p>
+<p>但是我感觉都不如直接用邻接矩阵做矩阵快速幂</p>
+<p>可能中间结果矩阵会变稠密, 导致空间上涨</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/cuda/" rel="tag"># cuda</a>
+              <a href="/tags/gpu/" rel="tag"># gpu</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/20643.html" rel="prev" title="cutlass 入门">
+                  <i class="fa fa-angle-left"></i> cutlass 入门
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Cansult Chen</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

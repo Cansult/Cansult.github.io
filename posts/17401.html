@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Trebuchet+MS:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Courier+New:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cansult.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":10,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="学变形金刚, 写点总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Transformer 入门">
+<meta property="og:url" content="https://cansult.github.io/posts/17401.html">
+<meta property="og:site_name" content="Cansult&#39;s blog">
+<meta property="og:description" content="学变形金刚, 写点总结">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-06-30T11:27:04.000Z">
+<meta property="article:modified_time" content="2026-10-30T13:50:43.972Z">
+<meta property="article:author" content="Cansult Chen">
+<meta property="article:tag" content="LLM">
+<meta property="article:tag" content="Transformer">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cansult.github.io/posts/17401.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cansult.github.io/posts/17401.html","path":"posts/17401.html","title":"Transformer 入门"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Transformer 入门 | Cansult's blog</title>
+  
+
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","display_overflow":"scroll","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-mml-chtml.js","integrity":"sha256-ihPtDDm7pTmSF9ViEsItlvsrBTsNkz0MOXMchzOwCQw="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cansult's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">即使愿望永远无法实现<br>我也不愿就这样放手</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#flash-attention"><span class="nav-number">1.</span> <span class="nav-text">flash attention</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#V1"><span class="nav-number">1.1.</span> <span class="nav-text">V1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#V2"><span class="nav-number">1.2.</span> <span class="nav-text">V2</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#split-K-split-Q"><span class="nav-number">1.2.1.</span> <span class="nav-text">split K -&gt; split Q</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#V3"><span class="nav-number">1.3.</span> <span class="nav-text">V3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#radix-attention"><span class="nav-number">2.</span> <span class="nav-text">radix attention</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Cansult Chen"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Cansult Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cansult" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cansult" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cansult.github.io/posts/17401.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Cansult Chen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cansult's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Transformer 入门 | Cansult's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Transformer 入门
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-06-30 19:27:04" itemprop="dateCreated datePublished" datetime="2026-06-30T19:27:04+08:00">2026-06-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-10-30 21:50:43" itemprop="dateModified" datetime="2026-10-30T21:50:43+08:00">2026-10-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>学变形金刚, 写点总结</p>
+<span id="more"></span>
+<h3 id="flash-attention">flash attention</h3>
+<p>先定义下常用变量</p>
+<p>$$<br>
+\begin{flalign*}<br>
+Q_{N \times d} &amp;= X_{N \times d_{token}}W_{d_{token} \times d} &amp;&amp; \\<br>
+O_{N \times d} &amp;= \mathrm{attn} = \mathrm{softmax}(\frac{QK^T}{\sqrt{d}})V &amp;&amp; \\<br>
+S_{N \times N} &amp;= \frac{QK^T}{\sqrt{d}} &amp;&amp; \\<br>
+P_{N \times N} &amp;= \mathrm{softmax}(S) &amp;&amp; \\<br>
+m_{N \times 1} &amp;= \mathrm{rowmax}(S) &amp;&amp; \\<br>
+l_{N \times 1} &amp;= \mathrm{rowsum}(\exp(S - m)) &amp;&amp; \\<br>
+O_{N \times d} &amp;= PV &amp;&amp; \\<br>
+\end{flalign*}<br>
+$$</p>
+<p><code>safe_softmax(X)[i] = expf(X[i] - max(X)) / sum( expf( X[i] - max(X) ) )</code></p>
+<p>$N$ 通常很大, 考虑分 Tile</p>
+<p>$Q, O$ 分 $T_r = \frac{N}{B_r}$ 片, $Q_i, O_i: B_r \times d$</p>
+<p>$K, V$ 分 $T_c = \frac{N}{B_c}$ 片, $K_i, V_i: B_c \times d$</p>
+<p>$m, l$ 分 $T_r$ 片, $m_i, l_i: B_r \times 1$</p>
+<h4 id="V1">V1</h4>
+<p>考虑要得到 $O_{i, j}$ 的话, 需要 $P_{i, :} \cdot V_{:, j}$</p>
+<p>而 $P_{i, :}$ 需要</p>
+<p>$$<br>
+\frac{\exp(\frac{1}{\sqrt{d}} \times Q_{i, :} \times K^T  - m_i)}{l_i}<br>
+$$</p>
+<p>$K_{N \times d}$ 按 $N$ 方向分片后, $K^T$ 被分成了横向的几块, 每一列是被完整保存的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">     K^T</span><br><span class="line">┌────┬────┬────┬─────┐</span><br><span class="line">│    │    │    │     │</span><br><span class="line">│  1 │  2 │ .. │ T_c │</span><br><span class="line">│    │    │    │     │</span><br><span class="line">└────┴────┴────┴─────┘</span><br></pre></td></tr></table></figure>
+<p>$Q_{N\times d} \times K^T_i$ 是最终 $Q \times K^T$ 的一部分, 在经过**全局** softmax 处理后, 这部分 乘上 $V_i$ 就是 $O_{N\times d}$ 的一部分贡献</p>
+<p>(当然每次循环的时候我们是没有全局 softmax 的, 所以需要 online softmax 的技术去算贡献)</p>
+<p>要求最终值只需要把不同 $K V$ 块得出的 $O$ 加起来即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for each K/V block:</span><br><span class="line">    load K[j],V[j]</span><br><span class="line"></span><br><span class="line">    for each Q block:</span><br><span class="line">        load Q[i], O[i], l[i], m[i] // 这里读取 l 和 m, 将来 K^T 向右遍历的时候需要更新他们</span><br><span class="line">        compute</span><br><span class="line">        store O, l, m</span><br></pre></td></tr></table></figure>
+<p>$Q$ 和 $O$ 也太大, 需要分块, 所以内层是 $Q$ 和 $O$ 用同一个坐标和块数; 实际上将整个内层循环看成一个整体, 我们可以当他是一个完整的 $Q$ 和 $O$</p>
+<h4 id="V2">V2</h4>
+<p>我们发现 K V Tile 的每次迭代, 要读一遍 Q O l m, 写一遍 O l m, 内存内存太贵了, 考虑怎么优化</p>
+<p>K V 是只读的, 不需写入, 交换 K V 循环到里层的话, 访问 K V 的次数变多了, 但是写入 O l m 的次数少了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">for each Q block:</span><br><span class="line">    load Q</span><br><span class="line">    init O, l, m</span><br><span class="line"></span><br><span class="line">    for each KV block:</span><br><span class="line">        load K,V</span><br><span class="line">        update O, l, m</span><br><span class="line"></span><br><span class="line">    store O</span><br></pre></td></tr></table></figure>
+<h5 id="split-K-split-Q">split K -&gt; split Q</h5>
+<p>V1 对 K 的行做并行, 每个 warp 只能拿到一部分贡献, 还需要 shared mem 做最终计算</p>
+<p>Q 的行间是独立的, 改为对 Q 的行做并行, 每个 warp 都能拿到最终数据, 可以避免 shared mem 的消耗</p>
+<h4 id="V3">V3</h4>
+<p>Hopper 增加了 TMA 和 Tensor Core, 和 Cuda Core 可以并行运行</p>
+<p>因此改为 producer warp 加载到 Tensor Core 需要的地方, consumer warp 直接获取 Tensor 的矩阵计算结果</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/2068355332049522938">参考</a></p>
+<h3 id="radix-attention">radix attention</h3>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/LLM/" rel="tag"># LLM</a>
+              <a href="/tags/Transformer/" rel="tag"># Transformer</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/14038.html" rel="prev" title="动态 AC 自动机">
+                  <i class="fa fa-angle-left"></i> 动态 AC 自动机
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/3005.html" rel="next" title="回归">
+                  回归 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Cansult Chen</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

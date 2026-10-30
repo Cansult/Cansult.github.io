@@ -28,7 +28,7 @@
 <meta property="og:description" content="学下 cutlass, 写点总结">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-09-11T11:16:15.000Z">
-<meta property="article:modified_time" content="2026-10-26T07:51:53.929Z">
+<meta property="article:modified_time" content="2026-10-30T13:52:52.003Z">
 <meta property="article:author" content="Cansult Chen">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="cutlass">
@@ -70,7 +70,7 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","display_overflow":"scroll","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-mml-chtml.js","integrity":"sha256-ihPtDDm7pTmSF9ViEsItlvsrBTsNkz0MOXMchzOwCQw="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","display_overflow":"scroll","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-mml-chtml.js","integrity":"sha256-ihPtDDm7pTmSF9ViEsItlvsrBTsNkz0MOXMchzOwCQw="}}</script>
 <script src="/js/third-party/math/mathjax.js" defer></script>
 
 
@@ -180,7 +180,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -191,7 +191,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -259,7 +259,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-10-26 15:51:53" itemprop="dateModified" datetime="2026-10-26T15:51:53+08:00">2026-10-26</time>
+      <time title="Modified: 2026-10-30 21:52:52" itemprop="dateModified" datetime="2026-10-30T21:52:52+08:00">2026-10-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -282,20 +282,21 @@
     
     <div class="post-body" itemprop="articleBody"><p>学下 cutlass, 写点总结</p>
 <span id="more"></span>
-
-<h2 id="swizzle"><a href="#swizzle" class="headerlink" title="swizzle"></a>swizzle</h2><p>为减少 (主要是 mma ldmatrix 的) bank conflict, 需要对 shape stride offset 后得到的标量一维地址进行 swizzle, 记作 Swizzle o Offset o Layout</p>
+<h2 id="swizzle">swizzle</h2>
+<p>为减少 (主要是 mma ldmatrix 的) bank conflict, 需要对 shape stride offset 后得到的标量一维地址进行 swizzle, 记作 Swizzle o Offset o Layout</p>
 <p>(mma 只能小矩阵的乘法, 导致多个线程加载一个小部分的内存, 在行主序的情况下更容易导致 bank conflict, 可以参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/27381896431">文章</a>)</p>
-<h3 id="具体过程"><a href="#具体过程" class="headerlink" title="具体过程"></a>具体过程</h3><p><code>swizzle&lt;B, M, S&gt;</code></p>
+<h3 id="具体过程">具体过程</h3>
+<p><code>swizzle&lt;B, M, S&gt;</code></p>
 <ul>
-<li>B: Base / num_bits: 参与亦或的位的长度 (len(z) &#x3D;&#x3D; len(y))</li>
-<li>M: Mask / num_base: 保持不变的末尾长度, 可以看做变换中的单位长度</li>
-<li>S: Shift / num_shift: 参与亦或的两段 bit 的距离</li>
+<li>B: Base / <code>num_bits</code>: 参与亦或的位的长度 <code>(len(z) == len(y))</code></li>
+<li>M: Mask / <code>num_base</code>: 保持不变的末尾长度, 可以看做变换中的单位长度</li>
+<li>S: Shift / <code>num_shift</code>: 参与亦或的两段 bit 的距离</li>
 </ul>
 <p>贴下 cutlass 中的原注释</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> INPUT:</span><br><span class="line"> 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0</span><br><span class="line">|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |</span><br><span class="line">  x  w  v  u  t  s  r  q  p  o  n  m  l Y3 Y2 Y1 Y0  k  j  i  h  g  f  e Z3 Z2 Z1 Z0  d  c  b  a</span><br><span class="line">                                         ^        ^                       ^        ^</span><br><span class="line">                          Extract y bits |        |                       |        |</span><br><span class="line">                          by bitwise and |        |      num_shift        |        |</span><br><span class="line">                          with mask      |        |&lt;----------------------|-------&gt;|   num_base</span><br><span class="line">                                         |________|      (&gt;0 here)        |________|  &lt;--------&gt;</span><br><span class="line">                                             |                                |</span><br><span class="line">                                             ----------------------------------</span><br><span class="line">                                             shift Yi bits, xor w/input    ___|____</span><br><span class="line">                                                                          |        | Ai = Yi ^ Zi</span><br><span class="line"> OUTPUT:                                                                  v        v</span><br><span class="line"> 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0</span><br><span class="line">|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |</span><br><span class="line">  x  w  v  u  t  s  r  q  p  o  n  m  l Y3 Y2 Y1 Y0  k  j  i  h  g  f  e A3 A2 A1 A1  d  c  b  a</span><br></pre></td></tr></table></figure>
-
 <p>总的来说, swizzle 的输出就是把输入的一部分和另一部分做异或</p>
-<h3 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/671419093">参考</a></p>
+<h3 id="本质">本质</h3>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/671419093">参考</a></p>
 <p>swizzle 本质就是把二维坐标中的 <code>new_icol = icol xor irow</code></p>
 <p>从这个角度理解, 就可以:</p>
 <ul>
@@ -303,94 +304,98 @@
 <li>更高的 <code>S</code> 位看做是表示列号的范围</li>
 <li>再高的 <code>B</code> 位看做是表示行号的范围</li>
 </ul>
-<p>这样, 定义中的 </p>
+<p>这样, 定义中的</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">true_mask = ((1 &lt;&lt; B) - 1) &lt;&lt; (M + S)</span><br><span class="line">new_idx = (idx xor (idx &amp; true_mask))</span><br></pre></td></tr></table></figure>
-
 <p>就可以理解为列号异或行号了</p>
-<h2 id="swizzle-融入-layout-优化"><a href="#swizzle-融入-layout-优化" class="headerlink" title="swizzle 融入 layout 优化"></a>swizzle 融入 layout 优化</h2><p>在某些 <code>slice</code>(固定某些坐标) 的情况下, <code>swizzle(layout(irow, icol))</code> 可以被简化为一个 <code>new_layout(irow, icol)</code>, 而结果不变, 这样可以节约运算</p>
+<h2 id="swizzle-融入-layout-优化">swizzle 融入 layout 优化</h2>
+<p>在某些 <code>slice</code>(固定某些坐标) 的情况下, <code>swizzle(layout(irow, icol))</code> 可以被简化为一个 <code>new_layout(irow, icol)</code>, 而结果不变, 这样可以节约运算</p>
 <p>这种简化要求 <code>swizzle</code> 具有一些性质, 比较简单的要求就是在 <code>slice</code> 的要求下, <code>y</code> 和 <code>z</code> 的所有对应的位 <code>i</code> 中, <code>y_i</code> 和 <code>z_i</code> 有一个不变:</p>
 <ul>
 <li>都不变: 显然, swizzle 的结果不变</li>
-<li><code>y_i</code> 不变: </li>
+<li><code>y_i</code> 不变:</li>
 <li><code>z_i</code> 不变:</li>
 </ul>
-<p>有一个简单的判断方法可以快速判断: </p>
+<p>有一个简单的判断方法可以快速判断:</p>
 <p>设 <code>A = slice(max_index)</code>, <code>A</code> 中为 1 的位就是 swizzle 前活跃的位 (和数位 dp 之类的类似, 如果 slice 的这一位可以活动, 那能表示的最大值的这一位一定是 1)</p>
 <p><code>collision_bitwise = A and (~sw(A))</code></p>
-<p><strong>证明:</strong></p>
-<p>对一对 $Y_i&#x2F;Z_i$，设：$a_z&#x3D;A_{Z_i},\ a_y&#x3D;A_{Y_i}$</p>
-<p>则： $\operatorname{sw}(A)_{Z_i}&#x3D;a_z\oplus a_y$</p>
+<p>**证明:**</p>
+<p>对一对 $Y_i/Z_i$，设：$a_z=A_{Z_i},\ a_y=A_{Y_i}$</p>
+<p>则： $\operatorname{sw}(A)_{Z_i}=a_z\oplus a_y$</p>
 <p>四种情况是：</p>
 <table>
 <thead>
 <tr>
-<th align="right">$a_z$</th>
-<th align="right">$a_y$</th>
+<th style="text-align:right">$a_z$</th>
+<th style="text-align:right">$a_y$</th>
 <th>含义</th>
-<th align="right">$\operatorname{sw}(A)_{Z_i}$</th>
+<th style="text-align:right">$\operatorname{sw}(A)_{Z_i}$</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="right">0</td>
-<td align="right">0</td>
+<tbody>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
 <td>都不 active</td>
-<td align="right">0</td>
+<td style="text-align:right">0</td>
 </tr>
 <tr>
-<td align="right">0</td>
-<td align="right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
 <td>只有 $Y_i$ active</td>
-<td align="right">1</td>
+<td style="text-align:right">1</td>
 </tr>
 <tr>
-<td align="right">1</td>
-<td align="right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
 <td>只有 $Z_i$ active</td>
-<td align="right">1</td>
+<td style="text-align:right">1</td>
 </tr>
 <tr>
-<td align="right">1</td>
-<td align="right">1</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
 <td>$Y_i,Z_i$ 同时 active</td>
-<td align="right">0</td>
+<td style="text-align:right">0</td>
 </tr>
-</tbody></table>
-<p>再观察 $C$ 在 $Z_i$ 位置上的值：$C_{Z_i}&#x3D;A_{Z_i}\land \neg \operatorname{sw}(A)_{Z_i}$</p>
-<p>代入：$C_{Z_i}&#x3D;a_z\land\neg(a_z\oplus a_y)$</p>
+</tbody>
+</table>
+<p>再观察 $C$ 在 $Z_i$ 位置上的值：$C_{Z_i}=A_{Z_i}\land \neg \operatorname{sw}(A)_{Z_i}$</p>
+<p>代入：$C_{Z_i}=a_z\land\neg(a_z\oplus a_y)$</p>
 <table>
 <thead>
 <tr>
-<th align="right">$a_z$</th>
-<th align="right">$a_y$</th>
-<th align="right">$a_z\oplus a_y$</th>
-<th align="right">$a_z\land\neg(a_z\oplus a_y)$</th>
+<th style="text-align:right">$a_z$</th>
+<th style="text-align:right">$a_y$</th>
+<th style="text-align:right">$a_z\oplus a_y$</th>
+<th style="text-align:right">$a_z\land\neg(a_z\oplus a_y)$</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
+<tbody>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
 </tr>
 <tr>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
 </tr>
 <tr>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
 </tr>
 <tr>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">1</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>$C_i$ 为 1 当且仅当 $Z_i$ 和 $Y_i$ 都 active (对 <code>sw(A)</code> 取反消除了 $Y, Z$ 之外的位的影响)</p>
 
     </div>

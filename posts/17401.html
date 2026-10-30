@@ -28,7 +28,7 @@
 <meta property="og:description" content="学变形金刚, 写点总结">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-06-30T11:27:04.000Z">
-<meta property="article:modified_time" content="2026-10-30T13:50:43.972Z">
+<meta property="article:modified_time" content="2026-10-30T14:16:35.672Z">
 <meta property="article:author" content="Cansult Chen">
 <meta property="article:tag" content="LLM">
 <meta property="article:tag" content="Transformer">
@@ -165,7 +165,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#flash-attention"><span class="nav-number">1.</span> <span class="nav-text">flash attention</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#V1"><span class="nav-number">1.1.</span> <span class="nav-text">V1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#V2"><span class="nav-number">1.2.</span> <span class="nav-text">V2</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#split-K-split-Q"><span class="nav-number">1.2.1.</span> <span class="nav-text">split K -&gt; split Q</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#V3"><span class="nav-number">1.3.</span> <span class="nav-text">V3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#radix-attention"><span class="nav-number">2.</span> <span class="nav-text">radix attention</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#flash-attention"><span class="nav-number">1.</span> <span class="nav-text">flash attention</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#v1"><span class="nav-number">1.1.</span> <span class="nav-text">V1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v2"><span class="nav-number">1.2.</span> <span class="nav-text">V2</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#split-k---split-q"><span class="nav-number">1.2.1.</span> <span class="nav-text">split K -&gt; split Q</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v3"><span class="nav-number">1.3.</span> <span class="nav-text">V3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#radix-attention"><span class="nav-number">2.</span> <span class="nav-text">radix attention</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -259,7 +259,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-10-30 21:50:43" itemprop="dateModified" datetime="2026-10-30T21:50:43+08:00">2026-10-30</time>
+      <time title="Modified: 2026-10-30 22:16:35" itemprop="dateModified" datetime="2026-10-30T22:16:35+08:00">2026-10-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -284,46 +284,76 @@
 <span id="more"></span>
 <h3 id="flash-attention">flash attention</h3>
 <p>先定义下常用变量</p>
-<p>$$<br>
-\begin{flalign*}<br>
-Q_{N \times d} &amp;= X_{N \times d_{token}}W_{d_{token} \times d} &amp;&amp; \\<br>
-O_{N \times d} &amp;= \mathrm{attn} = \mathrm{softmax}(\frac{QK^T}{\sqrt{d}})V &amp;&amp; \\<br>
-S_{N \times N} &amp;= \frac{QK^T}{\sqrt{d}} &amp;&amp; \\<br>
-P_{N \times N} &amp;= \mathrm{softmax}(S) &amp;&amp; \\<br>
-m_{N \times 1} &amp;= \mathrm{rowmax}(S) &amp;&amp; \\<br>
-l_{N \times 1} &amp;= \mathrm{rowsum}(\exp(S - m)) &amp;&amp; \\<br>
-O_{N \times d} &amp;= PV &amp;&amp; \\<br>
-\end{flalign*}<br>
-$$</p>
+<p><span class="math display">\[
+\begin{flalign*}
+Q_{N \times d} &amp;= X_{N \times d_{token}}W_{d_{token} \times d}
+&amp;&amp; \\
+O_{N \times d} &amp;= \mathrm{attn} =
+\mathrm{softmax}(\frac{QK^T}{\sqrt{d}})V &amp;&amp; \\
+S_{N \times N} &amp;= \frac{QK^T}{\sqrt{d}} &amp;&amp; \\
+P_{N \times N} &amp;= \mathrm{softmax}(S) &amp;&amp; \\
+m_{N \times 1} &amp;= \mathrm{rowmax}(S) &amp;&amp; \\
+l_{N \times 1} &amp;= \mathrm{rowsum}(\exp(S - m)) &amp;&amp; \\
+O_{N \times d} &amp;= PV &amp;&amp; \\
+\end{flalign*}
+\]</span></p>
 <p><code>safe_softmax(X)[i] = expf(X[i] - max(X)) / sum( expf( X[i] - max(X) ) )</code></p>
-<p>$N$ 通常很大, 考虑分 Tile</p>
-<p>$Q, O$ 分 $T_r = \frac{N}{B_r}$ 片, $Q_i, O_i: B_r \times d$</p>
-<p>$K, V$ 分 $T_c = \frac{N}{B_c}$ 片, $K_i, V_i: B_c \times d$</p>
-<p>$m, l$ 分 $T_r$ 片, $m_i, l_i: B_r \times 1$</p>
-<h4 id="V1">V1</h4>
-<p>考虑要得到 $O_{i, j}$ 的话, 需要 $P_{i, :} \cdot V_{:, j}$</p>
-<p>而 $P_{i, :}$ 需要</p>
-<p>$$<br>
-\frac{\exp(\frac{1}{\sqrt{d}} \times Q_{i, :} \times K^T  - m_i)}{l_i}<br>
-$$</p>
-<p>$K_{N \times d}$ 按 $N$ 方向分片后, $K^T$ 被分成了横向的几块, 每一列是被完整保存的</p>
+<p><span class="math inline">\(N\)</span> 通常很大, 考虑分 Tile</p>
+<p><span class="math inline">\(Q, O\)</span> 分 <span
+class="math inline">\(T_r = \frac{N}{B_r}\)</span> 片, <span
+class="math inline">\(Q_i, O_i: B_r \times d\)</span></p>
+<p><span class="math inline">\(K, V\)</span> 分 <span
+class="math inline">\(T_c = \frac{N}{B_c}\)</span> 片, <span
+class="math inline">\(K_i, V_i: B_c \times d\)</span></p>
+<p><span class="math inline">\(m, l\)</span> 分 <span
+class="math inline">\(T_r\)</span> 片, <span class="math inline">\(m_i,
+l_i: B_r \times 1\)</span></p>
+<h4 id="v1">V1</h4>
+<p>考虑要得到 <span class="math inline">\(O_{i, j}\)</span> 的话, 需要
+<span class="math inline">\(P_{i, :} \cdot V_{:, j}\)</span></p>
+<p>而 <span class="math inline">\(P_{i, :}\)</span> 需要</p>
+<p><span class="math display">\[
+\frac{\exp(\frac{1}{\sqrt{d}} \times Q_{i, :} \times K^T  - m_i)}{l_i}
+\]</span></p>
+<p><span class="math inline">\(K_{N \times d}\)</span> 按 <span
+class="math inline">\(N\)</span> 方向分片后, <span
+class="math inline">\(K^T\)</span> 被分成了横向的几块,
+每一列是被完整保存的</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">     K^T</span><br><span class="line">┌────┬────┬────┬─────┐</span><br><span class="line">│    │    │    │     │</span><br><span class="line">│  1 │  2 │ .. │ T_c │</span><br><span class="line">│    │    │    │     │</span><br><span class="line">└────┴────┴────┴─────┘</span><br></pre></td></tr></table></figure>
-<p>$Q_{N\times d} \times K^T_i$ 是最终 $Q \times K^T$ 的一部分, 在经过**全局** softmax 处理后, 这部分 乘上 $V_i$ 就是 $O_{N\times d}$ 的一部分贡献</p>
-<p>(当然每次循环的时候我们是没有全局 softmax 的, 所以需要 online softmax 的技术去算贡献)</p>
-<p>要求最终值只需要把不同 $K V$ 块得出的 $O$ 加起来即可</p>
+<p><span class="math inline">\(Q_{N\times d} \times K^T_i\)</span>
+是最终 <span class="math inline">\(Q \times K^T\)</span> 的一部分,
+在经过<strong>全局</strong> softmax 处理后, 这部分 乘上 <span
+class="math inline">\(V_i\)</span> 就是 <span
+class="math inline">\(O_{N\times d}\)</span> 的一部分贡献</p>
+<p>(当然每次循环的时候我们是没有全局 softmax 的, 所以需要 online softmax
+的技术去算贡献)</p>
+<p>要求最终值只需要把不同 <span class="math inline">\(K V\)</span>
+块得出的 <span class="math inline">\(O\)</span> 加起来即可</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for each K/V block:</span><br><span class="line">    load K[j],V[j]</span><br><span class="line"></span><br><span class="line">    for each Q block:</span><br><span class="line">        load Q[i], O[i], l[i], m[i] // 这里读取 l 和 m, 将来 K^T 向右遍历的时候需要更新他们</span><br><span class="line">        compute</span><br><span class="line">        store O, l, m</span><br></pre></td></tr></table></figure>
-<p>$Q$ 和 $O$ 也太大, 需要分块, 所以内层是 $Q$ 和 $O$ 用同一个坐标和块数; 实际上将整个内层循环看成一个整体, 我们可以当他是一个完整的 $Q$ 和 $O$</p>
-<h4 id="V2">V2</h4>
-<p>我们发现 K V Tile 的每次迭代, 要读一遍 Q O l m, 写一遍 O l m, 内存内存太贵了, 考虑怎么优化</p>
-<p>K V 是只读的, 不需写入, 交换 K V 循环到里层的话, 访问 K V 的次数变多了, 但是写入 O l m 的次数少了</p>
+<p><span class="math inline">\(Q\)</span> 和 <span
+class="math inline">\(O\)</span> 也太大, 需要分块, 所以内层是 <span
+class="math inline">\(Q\)</span> 和 <span
+class="math inline">\(O\)</span> 用同一个坐标和块数;
+实际上将整个内层循环看成一个整体, 我们可以当他是一个完整的 <span
+class="math inline">\(Q\)</span> 和 <span
+class="math inline">\(O\)</span></p>
+<h4 id="v2">V2</h4>
+<p>我们发现 K V Tile 的每次迭代, 要读一遍 Q O l m, 写一遍 O l m,
+内存内存太贵了, 考虑怎么优化</p>
+<p>K V 是只读的, 不需写入, 交换 K V 循环到里层的话, 访问 K V
+的次数变多了, 但是写入 O l m 的次数少了</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">for each Q block:</span><br><span class="line">    load Q</span><br><span class="line">    init O, l, m</span><br><span class="line"></span><br><span class="line">    for each KV block:</span><br><span class="line">        load K,V</span><br><span class="line">        update O, l, m</span><br><span class="line"></span><br><span class="line">    store O</span><br></pre></td></tr></table></figure>
-<h5 id="split-K-split-Q">split K -&gt; split Q</h5>
-<p>V1 对 K 的行做并行, 每个 warp 只能拿到一部分贡献, 还需要 shared mem 做最终计算</p>
-<p>Q 的行间是独立的, 改为对 Q 的行做并行, 每个 warp 都能拿到最终数据, 可以避免 shared mem 的消耗</p>
-<h4 id="V3">V3</h4>
+<h5 id="split-k---split-q">split K -&gt; split Q</h5>
+<p>V1 对 K 的行做并行, 每个 warp 只能拿到一部分贡献, 还需要 shared mem
+做最终计算</p>
+<p>Q 的行间是独立的, 改为对 Q 的行做并行, 每个 warp 都能拿到最终数据,
+可以避免 shared mem 的消耗</p>
+<h4 id="v3">V3</h4>
 <p>Hopper 增加了 TMA 和 Tensor Core, 和 Cuda Core 可以并行运行</p>
-<p>因此改为 producer warp 加载到 Tensor Core 需要的地方, consumer warp 直接获取 Tensor 的矩阵计算结果</p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/2068355332049522938">参考</a></p>
+<p>因此改为 producer warp 加载到 Tensor Core 需要的地方, consumer warp
+直接获取 Tensor 的矩阵计算结果</p>
+<p><a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/2068355332049522938">参考</a></p>
 <h3 id="radix-attention">radix attention</h3>
 
     </div>

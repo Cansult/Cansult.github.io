@@ -285,30 +285,37 @@
 <p>哪怕实践过也不过是重新学的时候会快一点而已</p>
 <span id="more"></span>
 <h4 id="链接属性">链接属性</h4>
-<ol>
+<ol type="1">
 <li>外部链接意味着，一个名字所指代的实体可以通过其他翻译单元中的声明被引用。</li>
 </ol>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.cpp</span></span><br><span class="line"><span class="type">int</span> value = <span class="number">42</span>;</span><br></pre></td></tr></table></figure>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// b.cpp</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> value;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="2">
+<ol start="2" type="1">
 <li>内部链接意味着，同一个翻译单元内的不同声明可以指代同一个实体，但这种身份不会通过该名字延伸到其他翻译单元。</li>
 </ol>
 <p>匿名 namespace 用来平替 static 可能更好用</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> &#123;</span><br><span class="line"><span class="type">int</span> counter = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="3">
+<ol start="3" type="1">
 <li>无链接意味着，这个名字不具有跨声明建立同一实体身份的链接属性。</li>
 </ol>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">g</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="绑定">绑定</h4>
 <p>我们将物理链接的过程成为绑定, 与逻辑链接区分</p>
-<ol>
-<li>内部绑定: 编译翻译单元的使用时就已确定这个名字的定义, 不需要跨翻译单元工作</li>
+<ol type="1">
+<li>内部绑定: 编译翻译单元的使用时就已确定这个名字的定义,
+不需要跨翻译单元工作</li>
 <li>外部绑定: 需要跨翻译单元, 不能重复定义</li>
-<li>双重绑定: 需要跨翻译单元, 但可以重复定义, 例如 <code>inline</code> 修饰的函数和变量</li>
+<li>双重绑定: 需要跨翻译单元, 但可以重复定义, 例如 <code>inline</code>
+修饰的函数和变量</li>
 </ol>
-<p>不光是 <code>inline</code> 修饰的函数和变量, 类类型定义、函数模板定义、类模板定义 都可以多个翻译单元有相同定义而不违反 ODR</p>
-<p>这一设计主要都是为了能让多个要用到 这个类 (的成员)、模板实例化 的地方都能够得到足够的信息——模板实例化是在编译阶段进行的, 所以需要完整的实现, 因为链接器是比较独立于 C++ 语言之外的</p>
-<p>需要注意的是, 模板函数的显式特化并不是模板函数, 而是普通的函数, 所以也具有外部绑定</p>
+<p>不光是 <code>inline</code> 修饰的函数和变量,
+类类型定义、函数模板定义、类模板定义
+都可以多个翻译单元有相同定义而不违反 ODR</p>
+<p>这一设计主要都是为了能让多个要用到 这个类 (的成员)、模板实例化
+的地方都能够得到足够的信息——模板实例化是在编译阶段进行的,
+所以需要完整的实现, 因为链接器是比较独立于 C++ 语言之外的</p>
+<p>需要注意的是, 模板函数的显式特化并不是模板函数, 而是普通的函数,
+所以也具有外部绑定</p>
 
     </div>
 

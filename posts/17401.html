@@ -20,19 +20,22 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"cansult.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":10,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="学变形金刚, 写点总结">
+    <meta name="description" content="学变形金刚, 写点总结 哎 怎么突然好像就要被时代碾死了">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Transformer 入门">
 <meta property="og:url" content="https://cansult.github.io/posts/17401.html">
 <meta property="og:site_name" content="Cansult&#39;s blog">
-<meta property="og:description" content="学变形金刚, 写点总结">
+<meta property="og:description" content="学变形金刚, 写点总结 哎 怎么突然好像就要被时代碾死了">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-06-30T11:27:04.000Z">
-<meta property="article:modified_time" content="2026-10-30T14:23:24.973Z">
+<meta property="og:image" content="https://cansult.github.io/pictures/261105A.png">
+<meta property="og:image" content="https://cansult.github.io/pictures/261105B.gif">
+<meta property="article:published_time" content="2026-11-02T11:27:04.000Z">
+<meta property="article:modified_time" content="2026-11-06T13:49:06.350Z">
 <meta property="article:author" content="Cansult Chen">
 <meta property="article:tag" content="LLM">
 <meta property="article:tag" content="Transformer">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cansult.github.io/pictures/261105A.png">
 
 
 <link rel="canonical" href="https://cansult.github.io/posts/17401.html">
@@ -165,7 +168,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#flash-attention"><span class="nav-number">1.</span> <span class="nav-text">flash attention</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#v1"><span class="nav-number">1.1.</span> <span class="nav-text">V1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v2"><span class="nav-number">1.2.</span> <span class="nav-text">V2</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#split-k---split-q"><span class="nav-number">1.2.1.</span> <span class="nav-text">split K -&gt; split Q</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v3"><span class="nav-number">1.3.</span> <span class="nav-text">V3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#radix-attention"><span class="nav-number">2.</span> <span class="nav-text">radix attention</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#tokenizer"><span class="nav-number">1.</span> <span class="nav-text">Tokenizer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#character-based-tokenization"><span class="nav-number">1.1.</span> <span class="nav-text">Character-based tokenization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#byte-based-tokenization"><span class="nav-number">1.2.</span> <span class="nav-text">Byte-based tokenization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#word-based-tokenization"><span class="nav-number">1.3.</span> <span class="nav-text">Word-based tokenization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bpe-byte-pair-encoding"><span class="nav-number">1.4.</span> <span class="nav-text">BPE (Byte Pair Encoding)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0"><span class="nav-number">2.</span> <span class="nav-text">学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#init"><span class="nav-number">2.1.</span> <span class="nav-text">Init</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="nav-number">2.2.</span> <span class="nav-text">反向传播</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text">优化器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AE%8B%E5%B7%AE%E7%BD%91%E7%BB%9C"><span class="nav-number">3.</span> <span class="nav-text">残差网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#norm"><span class="nav-number">3.1.</span> <span class="nav-text">Norm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ffn-feed-forward-network"><span class="nav-number">3.2.</span> <span class="nav-text">FFN (Feed-Forward
+Network)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-number">3.2.1.</span> <span class="nav-text">激活函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#moe"><span class="nav-number">3.2.2.</span> <span class="nav-text">MoE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81"><span class="nav-number">3.3.</span> <span class="nav-text">位置编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#attention"><span class="nav-number">3.4.</span> <span class="nav-text">Attention</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#flash-attention"><span class="nav-number">3.4.1.</span> <span class="nav-text">flash attention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kv-cache"><span class="nav-number">3.4.2.</span> <span class="nav-text">KV Cache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mha"><span class="nav-number">3.4.3.</span> <span class="nav-text">MHA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linear-attention"><span class="nav-number">3.4.4.</span> <span class="nav-text">Linear attention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sparse-attention"><span class="nav-number">3.4.5.</span> <span class="nav-text">Sparse attention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sliding-window-attention"><span class="nav-number">3.4.6.</span> <span class="nav-text">Sliding window attention</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -180,7 +184,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -191,7 +195,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -252,14 +256,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2026-06-30 19:27:04" itemprop="dateCreated datePublished" datetime="2026-06-30T19:27:04+08:00">2026-06-30</time>
+      <time title="Created: 2026-11-02 19:27:04" itemprop="dateCreated datePublished" datetime="2026-11-02T19:27:04+08:00">2026-11-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-10-30 22:23:24" itemprop="dateModified" datetime="2026-10-30T22:23:24+08:00">2026-10-30</time>
+      <time title="Modified: 2026-11-06 21:49:06" itemprop="dateModified" datetime="2026-11-06T21:49:06+08:00">2026-11-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -281,7 +285,144 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>学变形金刚, 写点总结</p>
+<p>哎 怎么突然好像就要被时代碾死了</p>
 <span id="more"></span>
+<h1 id="tokenizer">Tokenizer</h1>
+<h2 id="character-based-tokenization">Character-based tokenization</h2>
+<p>没什么好说的, 就是 Unicode character 和 码点 的一一转换</p>
+<p>压缩率取决于 Unicode</p>
+<p>词表太大了, 不常用的 character 浪费空间</p>
+<h2 id="byte-based-tokenization">Byte-based tokenization</h2>
+<p>按字节分词原样存, 词表大小 256</p>
+<p>压缩率为 1, 太小了</p>
+<h2 id="word-based-tokenization">Word-based tokenization</h2>
+<p>按单词分词</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">segments = regex.findall(<span class="string">r&quot;\w+|.&quot;</span>, string)  <span class="comment"># @inspect segments</span></span><br></pre></td></tr></table></figure>
+<p>词表太大, 不常用的词浪费空间</p>
+<h2 id="bpe-byte-pair-encoding">BPE (<em>Byte Pair Encoding</em>)</h2>
+<p>先按字节原样存, 然后按已知的 word 中不同 token 连续出现的概率,
+从大到小合并 token</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">train_bpe</span>(<span class="params">string: <span class="built_in">str</span>, num_merges: <span class="built_in">int</span></span>) -&gt; BPETokenizerParams:  <span class="comment"># @inspect string, @inspect num_merges</span></span><br><span class="line">    <span class="comment"># Start with the list of bytes of string.</span></span><br><span class="line">    indices = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, string.encode(<span class="string">&quot;utf-8&quot;</span>)))  <span class="comment"># @inspect indices</span></span><br><span class="line">    merges: <span class="built_in">dict</span>[<span class="built_in">tuple</span>[<span class="built_in">int</span>, <span class="built_in">int</span>], <span class="built_in">int</span>] = &#123;&#125;  <span class="comment"># index1, index2 =&gt; merged index</span></span><br><span class="line">    vocab: <span class="built_in">dict</span>[<span class="built_in">int</span>, <span class="built_in">bytes</span>] = &#123;x: <span class="built_in">bytes</span>([x]) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>)&#125;  <span class="comment"># index -&gt; bytes</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num_merges):</span><br><span class="line">        <span class="comment"># Count the number of occurrences of each pair of tokens</span></span><br><span class="line">        counts = defaultdict(<span class="built_in">int</span>)</span><br><span class="line">        <span class="keyword">for</span> index1, index2 <span class="keyword">in</span> <span class="built_in">zip</span>(indices, indices[<span class="number">1</span>:]):  <span class="comment"># For each adjacent pair</span></span><br><span class="line">            counts[(index1, index2)] += <span class="number">1</span>  <span class="comment"># @inspect counts</span></span><br><span class="line">        <span class="comment"># Find the most common pair.</span></span><br><span class="line">        pair = <span class="built_in">max</span>(counts, key=counts.get)  <span class="comment"># @inspect pair</span></span><br><span class="line">        index1, index2 = pair</span><br><span class="line">        <span class="comment"># Merge that pair.</span></span><br><span class="line">        new_index = <span class="number">256</span> + i  <span class="comment"># @inspect new_index</span></span><br><span class="line">        merges[pair] = new_index  <span class="comment"># @inspect merges</span></span><br><span class="line">        vocab[new_index] = vocab[index1] + vocab[index2]  <span class="comment"># @inspect vocab</span></span><br><span class="line">        indices = merge(indices, pair, new_index)  <span class="comment"># @inspect indices</span></span><br><span class="line">    <span class="keyword">return</span> BPETokenizerParams(vocab=vocab, merges=merges)</span><br></pre></td></tr></table></figure>
+<h1 id="学习">学习</h1>
+<h2 id="init">Init</h2>
+<p>对于 <span class="math inline">\(y = x_{d}W_{d\times d}\)</span>,
+假设 <span class="math inline">\(x_i\sim \mathcal{N}(0,1), \, W_{ij}\sim
+\mathcal{N}(0,1)\)</span> 且相互独立</p>
+<p>由 <span
+class="math inline">\(\operatorname{Var}(aX+bY)=a^2\operatorname{Var}(X)+b^2\operatorname{Var}(Y)\)</span>
+和 <span class="math inline">\(\operatorname{Var}(XY)
+=E[X^2Y^2]-(E[XY])^2\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{Var}(y_j)
+&amp;=\operatorname{Var}\left(\sum_{i=1}^{d}x_iW_{ij}\right)\\
+&amp;=\sum_{i=1}^{d}\operatorname{Var}(x_iW_{ij})\\
+&amp;=d\\
+\operatorname{Std}(y_j)&amp;=\sqrt{d}
+\end{aligned}
+\]</span></p>
+<p>为了避免方差随维数增长而增长导致的梯度不稳定, 初始化的时候一般会使用
+<code>w = nn.Parameter(torch.randn(input_dim, output_dim) / np.sqrt(input_dim))</code></p>
+<p>Attn 中的分母原因也是类似的</p>
+<h2 id="反向传播">反向传播</h2>
+<ul>
+<li><p>总得来说就是保存计算图, 然后链式法则, 基础操作查表</p></li>
+<li><p>一般认为反向传播的计算量是前向的两倍:</p>
+<p>对于线性层 <span class="math inline">\(Y=XW\)</span>,
+前向传播需要一次矩阵乘法, 而反向传播需要两次矩阵乘法:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  \frac{\partial L}{\partial W}&amp;=X^T\frac{\partial L}{\partial Y}\\
+  \frac{\partial L}{\partial X}&amp;=\frac{\partial L}{\partial Y}W^T
+  \end{aligned}
+  \]</span></p>
+<p>其实主要就是前一层的梯度计算需要这一层的 <span
+class="math inline">\(\frac{\partial L}{\partial X}\)</span>,
+所以得多算一个</p></li>
+</ul>
+<h2 id="优化器">优化器</h2>
+<p>没什么好说的, 主要就是要避免震荡和学不了东西</p>
+<ul>
+<li>SGD (<em>Stochastic Gradient Descent</em>): <span
+class="math inline">\(\theta_{t+1}=\theta_t-\eta g_t\)</span>,
+随机指的是 Loss 是由随机抽取的样本得出的</li>
+<li>Momentum: 令 <span class="math inline">\(v_t=\beta
+v_{t-1}+g_t\)</span>, 更新: <span
+class="math inline">\(\theta_{t+1}=\theta_t-\eta v_t\)</span></li>
+<li>AdaGrad: 令 <span class="math inline">\(G_t=G_{t-1}+g_t^2\)</span>,
+更新: <span class="math inline">\(\theta_{t+1} = \theta_t-
+\frac{\eta}{\sqrt{G_t}+\epsilon}g_t\)</span></li>
+<li>RMSProp: 令 <span class="math inline">\(s_t=\beta
+s_{t-1}+(1-\beta)g_t^2\)</span>, 更新: <span
+class="math inline">\(\theta_{t+1} = \theta_t-
+\frac{\eta}{\sqrt{s_t}+\epsilon}g_t\)</span></li>
+<li>Adam: <span class="math display">\[
+\begin{aligned}
+m_t&amp;=\beta_1m_{t-1}+(1-\beta_1)g_t\\
+v_t&amp;=\beta_2v_{t-1}+(1-\beta_2)g_t^2\\
+\hat m_t&amp;=\frac{m_t}{1-\beta_1^t}\\
+\hat v_t&amp;=\frac{v_t}{1-\beta_2^t}\\
+\theta_{t+1} &amp;= \theta_t- \eta\frac{\hat m_t}{\sqrt{\hat
+v_t}+\epsilon}
+\end{aligned}
+\]</span></li>
+</ul>
+<h1 id="残差网络">残差网络</h1>
+<p>学差值 <span class="math inline">\(H(x) - x\)</span> 比直接学目标值
+<span class="math inline">\(H(x)\)</span> 效果好</p>
+<ul>
+<li>直接学 <span class="math inline">\(H(x)\)</span>
+很难学习到恒等映射</li>
+<li>梯度问题</li>
+</ul>
+<h2 id="norm">Norm</h2>
+<p>传统 postNorm 放在残差 <span class="math inline">\(H(x)\)</span> 和
+<span class="math inline">\(x\)</span> 相加之后, 现在基本都使用 preNorm:
+放在进入 <span class="math inline">\(H(x)\)</span> 之前</p>
+<figure>
+<img src="../pictures/261105A.png" alt="post or pre Norm" />
+<figcaption aria-hidden="true">post or pre Norm</figcaption>
+</figure>
+<p>好处是避免像 postNorm
+一样层数多的时候求梯度时会出现多个矩阵连乘可能导致的梯度问题 <span
+class="math inline">\(\frac{\partial x_L}{\partial x_0} =
+\prod_{l=0}^{L-1} J_{\operatorname{LN},l}(I+J_{F,l})\)</span>, 坏处是
+<span class="math inline">\(x\)</span> 本身不经过 Norm</p>
+<ul>
+<li>LayerNorm: <span
+class="math inline">\(y_i=\frac{x_i-\mu}{\sqrt{\sigma^2+\epsilon}}\)</span></li>
+<li>RMSNrom: <span
+class="math inline">\(y_i=\frac{x_i}{\sqrt{\frac{1}{d}\sum_{i=1}^{d}x_i^2+\epsilon}}\)</span>,
+其中 <span
+class="math inline">\(RMS(x)=\sqrt{\frac{1}{d}\sum_{i=1}^{d}x_i^2}=\sqrt{\mathbb{E}(X^2)}=\sqrt{\operatorname{Var}(X)
++ \mathbb{E}(X^2)}\)</span>, RMSNorm 一般用在 <span
+class="math inline">\(H(X)\)</span> 路径上, 保留偏差是有必要的,
+所以不用减均值, 也因此计算量更小</li>
+</ul>
+<p>不减偏置还有一个好处就是减小访存压力, 虽然 FLOPS 没多少,
+但是访存带来的时间消耗占比挺大的; 其实 FFN 也没什么人加偏置了, 效果有限
+<span class="math inline">\(\mathrm{FFN}(x) = \sigma(xW_1+b_1)W_2+b_2
+\to \mathrm{FFN}(x) = \sigma(xW_1)W_2\)</span></p>
+<h2 id="ffn-feed-forward-network">FFN (<em>Feed-Forward
+Network</em>)</h2>
+<p>升维 激活 降维</p>
+<h3 id="激活函数">激活函数</h3>
+<p>太多了, 是因为好水论文吗</p>
+<h3 id="moe">MoE</h3>
+<p>一个大 FFN 效率太低了, 拆成多个, 由 router 判断每个 token
+用哪(些)个专家, 然后合并结果</p>
+<p>好像还有对 attn 搞 MoE 的, 比较少</p>
+<p>共享专家: 每个 token 都经过的大 FFN; 实测似乎没什么效果</p>
+<h4 id="router">router</h4>
+<ul>
+<li>topK: 每个模型一个可训练的向量, 每个 token 和这个向量做运算得出权重,
+挑出 top K 个专家, softmax 权重; 然后每个专家的结果对权重加权求和</li>
+<li>hash: 战力计算单位</li>
+<li>RL to learn routes: 现在没什么人用了</li>
+<li>整体分派: 把一组 token 看做一个整体, 让整体的分数尽可能高</li>
+</ul>
+<h2 id="位置编码">位置编码</h2>
+<h2 id="attention">Attention</h2>
 <h3 id="flash-attention">flash attention</h3>
 <p>先定义下常用变量</p>
 <p><span class="math display">\[
@@ -354,7 +495,78 @@ class="math inline">\(O\)</span></p>
 直接获取 Tensor 的矩阵计算结果</p>
 <p><a
 target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/2068355332049522938">参考</a></p>
-<h3 id="radix-attention">radix attention</h3>
+<h3 id="kv-cache">KV Cache</h3>
+<figure>
+<img src="../pictures/261105B.gif" alt="decode" />
+<figcaption aria-hidden="true">decode</figcaption>
+</figure>
+<h3 id="mha">MHA</h3>
+<p>MHA 在 decode 时的算数强度太差了 (<span
+class="math inline">\(bnd^2\)</span> 次计算, 读之前的 KV 和计算当前 KV
+读取投影矩阵 <span class="math inline">\(W_K, W_V\)</span> 总共需要
+<span class="math inline">\(bn^2d + nd^2\)</span> 次访存),
+考虑怎么优化</p>
+<h4 id="mqa">MQA</h4>
+<p>把 KV 都只保留一个头, 访存就少了 (<span class="math inline">\(bnd +
+bn^2\frac{d}{h} + nd^2\)</span>)</p>
+<p>Q 依然保持 h 个头, 每个头分别和 KV 做 attn, 结果 concat 起来</p>
+<p>质量可能下降</p>
+<h4 id="gqa">GQA</h4>
+<p>多给 KV 留几个头, 每个头固定对应一个范围的 Q 的头</p>
+<p>然后和 MQA 差不多</p>
+<p>质量下降的少点 总之就是取舍</p>
+<h4 id="mla-multi-head-latent-attention">MLA (<em>Multi-Head Latent
+Attention</em>)</h4>
+<p>存储时降维, 压缩 KV 的维数, 计算时再升回来</p>
+<p>有点像 FFN; 或者说类似 Block Floating Point, 抽出来一个 <span
+class="math inline">\(c^{KV}\)</span></p>
+<p><span class="math display">\[
+q_i^\top k_i
+=q_i^\top W_i^{UK}c^{KV}
+=\left((W_i^{UK})^\top q_i\right)^\top c^{KV}
+\]</span></p>
+<p>(那为什么不直接把 QKV 的维数超参数降下来)</p>
+<p>这个过程中对位置编码有一些要求</p>
+<h3 id="linear-attention">Linear attention</h3>
+<p><span class="math inline">\(attn = \rho(QK^T)V\)</span></p>
+<p>attention 计算和空间大主要都是因为 <span
+class="math inline">\(Q_{n\times d}K^T\)</span> 得出来的那个 <span
+class="math inline">\(n\times n\)</span> 大矩阵</p>
+<p>如果 <span class="math inline">\(\rho\)</span> 是恒等变化, <span
+class="math inline">\((QK^T)V = Q(K^TV)\)</span>, 就简单多了 (<span
+class="math inline">\(2nd_kd_v\)</span>)</p>
+<p>还有更好的性质: 考虑 <span class="math inline">\(O\)</span> 每一行
+(也就是每个 token) <span class="math inline">\(o_t\)</span>
+的计算过程</p>
+<p>(学术上一般把 <span class="math inline">\(q_t\)</span> 看做 <span
+class="math inline">\(Q\)</span> 的第 <span
+class="math inline">\(t\)</span> 行的<strong>列</strong>表示, <span
+class="math inline">\(q_t^T\)</span> 才代表 <span
+class="math inline">\(Q\)</span> 的某一行, <span
+class="math inline">\(k_t, v_t\)</span> 同理; 我感觉有点扯淡,
+下文还是直接用 <span class="math inline">\(q_t\)</span> 代表第 <span
+class="math inline">\(t\)</span> 行)</p>
+<p><span class="math display">\[
+\begin{aligned}
+s_t &amp;= \frac{1}{\sqrt{d}}(QK^T)_t = \frac{1}{\sqrt{d}}(q_tK^T) \\
+o_t &amp;= \frac{1}{\sqrt{d}}s_tV \\
+&amp;= \frac{1}{\sqrt{d}}\begin{bmatrix} q_tk_1^T &amp; \cdots &amp;
+q_tk_N^T \end{bmatrix} \begin{bmatrix} v_1\\ \vdots\\ v_N \end{bmatrix}
+\\
+&amp;= \frac{1}{\sqrt{d}}\sum_{i=1}^{N}(q_tk_i^T)v_i \\
+&amp;= \frac{1}{\sqrt{d}}q_t\sum_{i=1}^{N}k_i^Tv_i
+\end{aligned}
+\]</span></p>
+<p>我们设 <span class="math inline">\(S_t =
+\sum_{i=1}^{t}k_i^Tv_i\)</span>, 则 <span class="math inline">\(o_t =
+\frac{1}{\sqrt{d}}q_tS_t\)</span>, 且 <span class="math inline">\(S_t =
+S_{t - 1} + k_t^Tv_t\)</span></p>
+<p>有点像 RNN</p>
+<p>可以加一点遗忘: <span class="math inline">\(S_t = \gamma S_{t - 1} +
+k_t^Tv_t\)</span></p>
+<p>一般把线性注意力和全注意力掺和着用, 效果差的不会太大</p>
+<h3 id="sparse-attention">Sparse attention</h3>
+<h3 id="sliding-window-attention">Sliding window attention</h3>
 
     </div>
 
@@ -372,14 +584,11 @@ target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/20683553320495
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/posts/14038.html" rel="prev" title="动态 AC 自动机">
-                  <i class="fa fa-angle-left"></i> 动态 AC 自动机
+                <a href="/posts/33230.html" rel="prev" title="后训练入门">
+                  <i class="fa fa-angle-left"></i> 后训练入门
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/3005.html" rel="next" title="回归">
-                  回归 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>

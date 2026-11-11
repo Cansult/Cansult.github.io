@@ -13,7 +13,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Trebuchet+MS:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Courier+New:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="https://fonts.font.im/css2?family=Trebuchet+MS:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=PT+Mono:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
@@ -27,19 +27,20 @@
 <meta property="og:site_name" content="Cansult&#39;s blog">
 <meta property="og:description" content="学 cuda, 写点总结">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cansult.github.io/pictures/261109A.png">
 <meta property="og:image" content="https://cansult.github.io/pictures/2610084.png">
 <meta property="og:image" content="https://cansult.github.io/pictures/2610085.png">
 <meta property="og:image" content="https://cansult.github.io/pictures/2610081.png">
 <meta property="og:image" content="https://cansult.github.io/pictures/2610082.png">
 <meta property="og:image" content="https://cansult.github.io/pictures/2610083.png">
 <meta property="article:published_time" content="2026-09-30T11:16:15.000Z">
-<meta property="article:modified_time" content="2026-10-30T14:23:24.973Z">
+<meta property="article:modified_time" content="2026-11-11T14:36:07.501Z">
 <meta property="article:author" content="Cansult Chen">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="cuda">
 <meta property="article:tag" content="gpu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cansult.github.io/pictures/2610084.png">
+<meta name="twitter:image" content="https://cansult.github.io/pictures/261109A.png">
 
 
 <link rel="canonical" href="https://cansult.github.io/posts/51160.html">
@@ -172,8 +173,11 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AC%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">硬件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1"><span class="nav-number">1.1.</span> <span class="nav-text">抽象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E5%86%85%E5%AD%98%E8%AE%BF%E9%97%AE"><span class="nav-number">2.1.</span> <span class="nav-text">合并内存访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E9%93%BA"><span class="nav-number">2.2.</span> <span class="nav-text">平铺</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%B2%97%E5%8C%96"><span class="nav-number">2.3.</span> <span class="nav-text">线程粗化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E7%BA%A6"><span class="nav-number">3.1.</span> <span class="nav-text">规约</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%92%E5%B9%B6"><span class="nav-number">3.2.</span> <span class="nav-text">归并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%BC%80%E5%92%8C"><span class="nav-number">3.3.</span> <span class="nav-text">前缀和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spmv-sparse-matrix-vector-multiplication"><span class="nav-number">3.4.</span> <span class="nav-text">SpMV (Sparse
-Matrix-Vector Multiplication)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bfs"><span class="nav-number">3.5.</span> <span class="nav-text">BFS</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A1%AC%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">硬件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1"><span class="nav-number">1.1.</span> <span class="nav-text">抽象</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E5%86%85%E5%AD%98%E8%AE%BF%E9%97%AE"><span class="nav-number">2.1.</span> <span class="nav-text">合并内存访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B3%E9%93%BA"><span class="nav-number">2.2.</span> <span class="nav-text">平铺</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%B2%97%E5%8C%96"><span class="nav-number">2.3.</span> <span class="nav-text">线程粗化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E5%8D%A1%E5%B9%B6%E8%A1%8C"><span class="nav-number">2.4.</span> <span class="nav-text">多卡并行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%AD%E7%BB%83"><span class="nav-number">2.4.1.</span> <span class="nav-text">分布式训练</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%94%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%84%E7%BA%A6"><span class="nav-number">3.1.</span> <span class="nav-text">规约</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%92%E5%B9%B6"><span class="nav-number">3.2.</span> <span class="nav-text">归并</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BC%80%E5%92%8C"><span class="nav-number">3.3.</span> <span class="nav-text">前缀和</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#kogge-stone"><span class="nav-number">3.3.1.</span> <span class="nav-text">Kogge-Stone</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#brent-kung"><span class="nav-number">3.3.2.</span> <span class="nav-text">Brent-Kung</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spmv-sparse-matrix-vector-multiplication"><span class="nav-number">3.4.</span> <span class="nav-text">SpMV (Sparse
+Matrix-Vector Multiplication)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#coo-coordinate"><span class="nav-number">3.4.1.</span> <span class="nav-text">COO (COOrdinate)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#csr-compressed-sparse-row"><span class="nav-number">3.4.2.</span> <span class="nav-text">CSR (Compressed Sparse
+Row)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ell-ellpack-%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9A%84-spmv-%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">3.4.3.</span> <span class="nav-text">ELL (ELLPACK 中使用的
+SpMV 实现方式)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ell-coo"><span class="nav-number">3.4.4.</span> <span class="nav-text">ELL-COO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jds-jagged-diagonal-storage"><span class="nav-number">3.4.5.</span> <span class="nav-text">JDS (Jagged Diagonal
+Storage)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bfs"><span class="nav-number">3.5.</span> <span class="nav-text">BFS</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -188,18 +192,18 @@ Matrix-Vector Multiplication)</span></a></li><li class="nav-item nav-level-3"><a
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -267,7 +271,7 @@ Matrix-Vector Multiplication)</span></a></li><li class="nav-item nav-level-3"><a
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-10-30 22:23:24" itemprop="dateModified" datetime="2026-10-30T22:23:24+08:00">2026-10-30</time>
+      <time title="Modified: 2026-11-11 22:36:07" itemprop="dateModified" datetime="2026-11-11T22:36:07+08:00">2026-11-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -290,17 +294,38 @@ Matrix-Vector Multiplication)</span></a></li><li class="nav-item nav-level-3"><a
     
     <div class="post-body" itemprop="articleBody"><p>学 cuda, 写点总结</p>
 <span id="more"></span>
-<h2 id="硬件">硬件</h2>
-<h3 id="抽象">抽象</h3>
-<h2 id="优化">优化</h2>
-<h3 id="合并内存访问">合并内存访问</h3>
-<h3 id="平铺">平铺</h3>
-<h3 id="线程粗化">线程粗化</h3>
-<h2 id="应用">应用</h2>
-<h3 id="规约">规约</h3>
-<h3 id="归并">归并</h3>
-<h3 id="前缀和">前缀和</h3>
-<h4 id="kogge-stone">Kogge-Stone</h4>
+<h1 id="硬件">硬件</h1>
+<h2 id="抽象">抽象</h2>
+<h1 id="优化">优化</h1>
+<h2 id="合并内存访问">合并内存访问</h2>
+<h2 id="平铺">平铺</h2>
+<h2 id="线程粗化">线程粗化</h2>
+<h2 id="多卡并行">多卡并行</h2>
+<figure>
+<img src="../pictures/261109A.png" alt="nv" />
+<figcaption aria-hidden="true">nv</figcaption>
+</figure>
+<h3 id="分布式训练">分布式训练</h3>
+<h4 id="数据并行">数据并行</h4>
+<p>每张卡都有完整的模型, 对要处理的输入进行切分</p>
+<p>比如并行处理不同 batch</p>
+<p>相对简单点, 处理不了参数太大的情况</p>
+<p>在训练的时候通常只需要最后算梯度的时候 all reduce 一次</p>
+<h4 id="张量并行">张量并行</h4>
+<p>每张卡的存模型的一部分, 对参数矩阵本身切分</p>
+<p>比如矩阵乘法 <span class="math inline">\(XW\)</span> 就可以把 <span
+class="math inline">\(W\)</span> 按列切分, 结果为 <span
+class="math inline">\(\mathrm{Concat}(XW_0, XW_1, \dots
+XW_{\mathrm{size}(world) - 1})\)</span></p>
+<p>模型每层依赖上一层的结果, 所以每层结束都要 all gather 一次</p>
+<h4 id="流水线并行">流水线并行</h4>
+<p>每张卡存模型的一部分层, 按层切分</p>
+<p>可以通过重叠通信和计算来消除流水线气泡</p>
+<h1 id="应用">应用</h1>
+<h2 id="规约">规约</h2>
+<h2 id="归并">归并</h2>
+<h2 id="前缀和">前缀和</h2>
+<h3 id="kogge-stone">Kogge-Stone</h3>
 <p>没什么好说的, 和树形规约看上去挺像的,
 区别在于每次迭代参与的线程是哪些:
 规约在每一轮都把一半的数据计算贡献后抛弃,
@@ -318,7 +343,7 @@ class="math inline">\(2^{offset}\)</span> 的前缀和, 但是不抛弃这些数
 O(n\log n)\)</span>, 对前缀和来说偏大</p>
 <p>而且受制于显示中资源的限制, <code>SECTION_SIZE</code> 不可能太大,
 效率还会进一步下降</p>
-<h4 id="brent-kung">Brent-Kung</h4>
+<h3 id="brent-kung">Brent-Kung</h3>
 <p>我们实际上无用计算了很多部分, 尤其是 <code>stride</code> 小而
 <code>i</code> 大的部分</p>
 <p>考虑怎么减少这部分</p>
@@ -353,10 +378,10 @@ class="math inline">\(\mathrm{lowbit}(p - x) = 2nx \ge x\)</span></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__global__ <span class="type">void</span> <span class="title">Brent_Kung_scan_kernel</span><span class="params">(<span class="type">float</span> *X, <span class="type">float</span> *Y, <span class="type">unsigned</span> <span class="type">int</span> N)</span> </span>&#123;</span><br><span class="line">    __shared__ <span class="type">float</span> XY[SECTION_SIZE];</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> i = <span class="number">2</span>*blockIdx.x*blockDim.x + threadIdx.x;</span><br><span class="line">    <span class="keyword">if</span>(i &lt; N) XY[threadIdx.x] = X[i];</span><br><span class="line">    <span class="keyword">if</span>(i + blockDim.x &lt; N) XY[threadIdx.x + blockDim.x] = X[i + blockDim.x];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">unsigned</span> <span class="type">int</span> stride = <span class="number">1</span>; stride &lt;= blockDim.x; stride *= <span class="number">2</span>) &#123;</span><br><span class="line">        __syncthreads();</span><br><span class="line">        <span class="type">unsigned</span> <span class="type">int</span> index = (threadIdx.x + <span class="number">1</span>)*<span class="number">2</span>*stride - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(index &lt; SECTION_SIZE) &#123;</span><br><span class="line">            XY[index] += XY[index - stride];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> stride = SECTION_SIZE/<span class="number">4</span>; stride &gt; <span class="number">0</span>; stride /= <span class="number">2</span>) &#123;</span><br><span class="line">        __syncthreads();</span><br><span class="line">        <span class="type">unsigned</span> <span class="type">int</span> index = (threadIdx.x + <span class="number">1</span>)*stride*<span class="number">2</span> - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(index + stride &lt; SECTION_SIZE) &#123;</span><br><span class="line">            XY[index + stride] += XY[index];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">__syncthreads();</span><br><span class="line">    <span class="keyword">if</span> (i &lt; N) Y[i] = XY[threadIdx.x];</span><br><span class="line">    <span class="keyword">if</span> (i + blockDim.x &lt; N) Y[i + blockDim.x] = XY[threadIdx.x + blockDim.x];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Brent-Kung 主要减少的是计算次数, 可能使用于限制能耗的场景;
 单纯的计算时间可能不如 Kogge-Stone, 毕竟要做两遍计算</p>
-<h3 id="spmv-sparse-matrix-vector-multiplication">SpMV (<em>Sparse
-Matrix-Vector Multiplication</em>)</h3>
+<h2 id="spmv-sparse-matrix-vector-multiplication">SpMV (<em>Sparse
+Matrix-Vector Multiplication</em>)</h2>
 <p>一个稀疏矩阵乘一个向量, 一般认为这个向量是稠密的</p>
-<h4 id="coo-coordinate">COO (<em>COOrdinate</em>)</h4>
+<h3 id="coo-coordinate">COO (<em>COOrdinate</em>)</h3>
 <p>最简单的形式, 坐标表 <code>row[n], col[n], val[n]</code>
 记录稀疏矩阵中非 0 位置的坐标和值. 并行处理非 0 值</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__global__ <span class="type">void</span> <span class="title">SpMV_COO</span><span class="params">(<span class="type">const</span> coo* matrix, <span class="type">const</span> <span class="type">float</span>* x, <span class="type">float</span>* y)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> ind = blockIdx.x * blockDim.x + threadIdx.x;</span><br><span class="line">    <span class="keyword">if</span> (ind &lt; matrix-&gt;size) &#123;</span><br><span class="line">        <span class="type">int</span> row = matrix-&gt;row[ind];</span><br><span class="line">        <span class="type">int</span> col = matrix-&gt;col[ind];</span><br><span class="line">        <span class="type">float</span> val = matrix-&gt;val[ind];</span><br><span class="line">        <span class="built_in">atomic_add</span>(&amp;y[row], x[col] * val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -369,8 +394,8 @@ Matrix-Vector Multiplication</em>)</h3>
 <li>由于相同行的值会在不同线程累加到同一个位置,
 需要额外的原子操作开销</li>
 </ul>
-<h4 id="csr-compressed-sparse-row">CSR (<em>Compressed Sparse
-Row</em>)</h4>
+<h3 id="csr-compressed-sparse-row">CSR (<em>Compressed Sparse
+Row</em>)</h3>
 <p>将坐标按所属的行分类. 并行处理所有行, 一行的内容在一个线程内处理,
 避免原子操作的开销</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__global__ <span class="type">void</span> <span class="title">SpMV_CSR</span><span class="params">(<span class="type">const</span> csr* matrix, <span class="type">const</span> <span class="type">float</span>* x, <span class="type">float</span>* y)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> row = blockIdx.x * blockDim.x + threadIdx.x;</span><br><span class="line">    <span class="keyword">if</span> (row &lt; matrix-&gt;row_size) &#123;</span><br><span class="line">        <span class="type">float</span> sum = <span class="number">0.0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = matrix-&gt;row_ptr[row]; i &lt; matrix-&gt;row_ptr[row + <span class="number">1</span>]; i ++) &#123;</span><br><span class="line">            <span class="type">int</span> col = matrix-&gt;col[i];</span><br><span class="line">            <span class="type">float</span> val = matrix-&gt;val[i];</span><br><span class="line">            sum += x[col] * val;</span><br><span class="line">        &#125;</span><br><span class="line">        y[row] += sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -381,8 +406,8 @@ Row</em>)</h4>
 <li>控制发散: 取决于一个 warp 内不同行间非 0 列的长度差异</li>
 <li>内存访问: 非合并</li>
 </ul>
-<h4 id="ell-ellpack-中使用的-spmv-实现方式">ELL (<em>ELLPACK 中使用的
-SpMV 实现方式</em>)</h4>
+<h3 id="ell-ellpack-中使用的-spmv-实现方式">ELL (<em>ELLPACK 中使用的
+SpMV 实现方式</em>)</h3>
 <p>将坐标按所属行分组后, 将所有行填充 0 至最长的那一行;
 而后存储为列主序的数组; 并行处理所有行</p>
 <figure>
@@ -398,7 +423,7 @@ SpMV 实现方式</em>)</h4>
 <li>控制发散: 取决于一个 warp 内不同行间非 0 列的长度差异</li>
 <li>内存访问: 合并</li>
 </ul>
-<h4 id="ell-coo">ELL-COO</h4>
+<h3 id="ell-coo">ELL-COO</h3>
 <p>注意到在有几列相当长的情况下, 填充会带来相当大的内存浪费,
 我们可以把超过阈值的几行多出来的部分使用 COO 来存储; 其他部分依旧使用
 ELL</p>
@@ -406,8 +431,8 @@ ELL</p>
 <img src="../pictures/2610082.png" alt="ELL-COO" />
 <figcaption aria-hidden="true">ELL-COO</figcaption>
 </figure>
-<h4 id="jds-jagged-diagonal-storage">JDS (<em>Jagged Diagonal
-Storage</em>)</h4>
+<h3 id="jds-jagged-diagonal-storage">JDS (<em>Jagged Diagonal
+Storage</em>)</h3>
 <p>JDS 将不同行按照包含的非 0 列的多少进行排序, 并行处理所有行;
 通过排序, 一个 warp 内不同行间的非 0 列长度基本是相近的,
 可以减少控制发散; 改为列主序也是为了合并内存访问</p>
@@ -417,7 +442,7 @@ Storage</em>)</h4>
 </figure>
 <p>代码和 ELL 差不多</p>
 <p>排序的消耗可能比较大, 更适合多次使用这一矩阵的情景</p>
-<h3 id="bfs">BFS</h3>
+<h2 id="bfs">BFS</h2>
 <p>有并行处理顶点 / 边 / bfs 队列的</p>
 <p>但是我感觉都不如直接用邻接矩阵做矩阵快速幂</p>
 <p>可能中间结果矩阵会变稠密, 导致空间上涨</p>

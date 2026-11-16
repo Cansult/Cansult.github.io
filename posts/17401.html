@@ -27,15 +27,16 @@
 <meta property="og:site_name" content="Cansult&#39;s blog">
 <meta property="og:description" content="学变形金刚, 写点总结 哎 怎么突然好像就要被时代碾死了">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cansult.github.io/pictures/261105A.png">
 <meta property="og:image" content="https://cansult.github.io/pictures/261105B.gif">
 <meta property="og:image" content="https://cansult.github.io/pictures/261109B.png">
 <meta property="article:published_time" content="2026-11-02T11:27:04.000Z">
-<meta property="article:modified_time" content="2026-11-11T15:03:08.535Z">
+<meta property="article:modified_time" content="2026-11-16T14:11:29.299Z">
 <meta property="article:author" content="Cansult Chen">
 <meta property="article:tag" content="LLM">
 <meta property="article:tag" content="Transformer">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cansult.github.io/pictures/261105B.gif">
+<meta name="twitter:image" content="https://cansult.github.io/pictures/261105A.png">
 
 
 <link rel="canonical" href="https://cansult.github.io/posts/17401.html">
@@ -184,18 +185,18 @@ Network)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a cla
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -263,7 +264,7 @@ Network)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a cla
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-11-11 23:03:08" itemprop="dateModified" datetime="2026-11-11T23:03:08+08:00">2026-11-11</time>
+      <time title="Modified: 2026-11-16 22:11:29" itemprop="dateModified" datetime="2026-11-16T22:11:29+08:00">2026-11-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -315,7 +316,10 @@ Network)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a cla
 <p>传统 postNorm 放在残差 <span class="math inline">\(H(x)\)</span> 和
 <span class="math inline">\(x\)</span> 相加之后, 现在基本都使用 preNorm:
 放在进入 <span class="math inline">\(H(x)\)</span> 之前</p>
-<p><a href="../pictures/261105A.png">post or pre Norm</a></p>
+<figure>
+<img src="../pictures/261105A.png" alt="post or pre Norm" />
+<figcaption aria-hidden="true">post or pre Norm</figcaption>
+</figure>
 <p>好处是避免像 postNorm
 一样层数多的时候求梯度时会出现多个矩阵连乘可能导致的梯度问题 <span
 class="math inline">\(\frac{\partial x_L}{\partial x_0} =
@@ -634,6 +638,9 @@ output tokens)</li>
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/posts/3471.html" rel="next" title="Agent 入门">
+                  Agent 入门 <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -645,7 +652,6 @@ output tokens)</li>
 
 
 
-    <div class="comments gitalk-container"></div>
 </div>
   </main>
 
@@ -681,10 +687,6 @@ output tokens)</li>
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
-
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"cansult","repo":"blogComments","client_id":"Ov23ctu4b5pkeUQLQGck","client_secret":"208734fde56ad26df29486e455a5905554c7e00b","admin_user":"cansult","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"body":"Comments for post ${title}, see ${url}","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"fb1996a0e75b8ca989d32d184f733103"}</script>
-<script src="/js/third-party/comments/gitalk.js" defer></script>
 
 </body>
 </html>

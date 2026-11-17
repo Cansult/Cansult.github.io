@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/favicon.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.font.im/css2?family=Trebuchet+MS:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=PT+Mono:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cansult.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":10,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="写点高级并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="现代 C++ 并发">
+<meta property="og:url" content="https://cansult.github.io/posts/41633.html">
+<meta property="og:site_name" content="Cansult&#39;s blog">
+<meta property="og:description" content="写点高级并发">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-11-17T11:16:15.000Z">
+<meta property="article:modified_time" content="2026-11-17T13:40:54.378Z">
+<meta property="article:author" content="Cansult Chen">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="并发">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cansult.github.io/posts/41633.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cansult.github.io/posts/41633.html","path":"posts/41633.html","title":"现代 C++ 并发"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>现代 C++ 并发 | Cansult's blog</title>
+  
+
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","display_overflow":"scroll","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-mml-chtml.js","integrity":"sha256-ihPtDDm7pTmSF9ViEsItlvsrBTsNkz0MOXMchzOwCQw="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cansult's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">即使愿望永远无法实现<br>我也不愿就这样放手</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E6%89%8B%E6%AE%B5"><span class="nav-number">1.</span> <span class="nav-text">同步手段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F"><span class="nav-number">1.1.</span> <span class="nav-text">条件变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#atomicwait"><span class="nav-number">1.2.</span> <span class="nav-text">atomic::wait</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#promise-future"><span class="nav-number">1.3.</span> <span class="nav-text">promise &amp;
+future</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#latch-barrier"><span class="nav-number">1.4.</span> <span class="nav-text">latch &amp;
+barrier</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%8F%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">协程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E6%A0%88%E5%8D%8F%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">有栈协程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E6%A0%88%E5%8D%8F%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">无栈协程</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Cansult Chen"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Cansult Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cansult" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cansult" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cansult.github.io/posts/41633.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Cansult Chen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cansult's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="现代 C++ 并发 | Cansult's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          现代 C++ 并发
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2026-11-17 19:16:15 / Modified: 21:40:54" itemprop="dateCreated datePublished" datetime="2026-11-17T19:16:15+08:00">2026-11-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>写点高级并发</p>
+<span id="more"></span>
+<h2 id="同步手段">同步手段</h2>
+<h3 id="条件变量">条件变量</h3>
+<p>其实机制和 mutex 差不多, 这个的想法是很自然的</p>
+<p>考虑一个朴素的生产消费:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">std::mutex m;</span><br><span class="line">std::queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Producer</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">producer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function">std::lock_guard <span class="title">lk</span><span class="params">(m)</span></span>;</span><br><span class="line">        q.<span class="built_in">push</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Consumer</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">consumer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="function">std::unique_lock <span class="title">lk</span><span class="params">(m)</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            <span class="type">int</span> x = q.<span class="built_in">front</span>();</span><br><span class="line">            q.<span class="built_in">pop</span>();</span><br><span class="line">            lk.<span class="built_in">unlock</span>();</span><br><span class="line"></span><br><span class="line">            <span class="built_in">consume</span>(x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当没在生产的时候, 获取 mutex 不会被阻塞,
+所以即使不满足条件也会不断获取 mutex 然后判断 pred, 造成浪费</p>
+<p>引入唤醒机制</p>
+<ul>
+<li><code>wait( std::unique_lock&lt;std::mutex&gt;&amp; lock, Predicate pred )</code>:
+线程进入阻塞态; 直到 <code>notify</code> 唤醒, 从阻塞变为就绪, 检查
+<code>pred</code>, 不满足就再进入阻塞态
+<ul>
+<li><code>lock</code>: 保护共享数据; 避免错过 <code>notify</code></li>
+<li><code>pred</code>: 避免虚假唤醒</li>
+</ul></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::unique_lock <span class="title">lock</span><span class="params">(m)</span></span>;</span><br><span class="line">cv.<span class="built_in">wait</span>(lock, []&#123; <span class="keyword">return</span> ready; &#125;);</span><br></pre></td></tr></table></figure>
+<p>约等于</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (!<span class="built_in">pred</span>()) &#123;</span><br><span class="line">    <span class="comment">// pred = true; notify();</span></span><br><span class="line">    lock.<span class="built_in">unlock</span>(); <span class="comment">// 如果没有 lock, notify 可能发生在 pred 不满足之后, 进入阻塞之前, 导致错过通知</span></span><br><span class="line">    <span class="comment">// 阻塞, 这里保证进入阻塞和 unlock 是原子的</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 就绪</span></span><br><span class="line">    lock.<span class="built_in">lock</span>(); <span class="comment">// 被唤醒后重新获取 mutex</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>notify</code>: 对共享数据处理的过程中要加锁:
+<ul>
+<li>为了消费者对共享数据的可见性, 这里可以参考<a
+href="https://cansult.github.io/posts/20346.html">内存序</a></li>
+<li>避免错过 <code>notify</code></li>
+</ul></li>
+</ul>
+<p>所以哪怕共享数据是原子的, 也需要加锁</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="function">std::lock_guard <span class="title">lock</span><span class="params">(m)</span></span>;</span><br><span class="line">    ready = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line">cv.notify_one();</span><br></pre></td></tr></table></figure>
+<h4 id="futex">futex</h4>
+<p>Fast Userspace Mutex, 尽量 (没有竞争时) 不进入内核态</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">lock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">CAS</span>(&amp;state, <span class="number">0</span>, <span class="number">1</span>)) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 慢速路径：发生竞争，进入 futex 等待</span></span><br><span class="line">    <span class="built_in">futex_wait</span>(...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="atomicwait">atomic::wait</h3>
+<p><code>-std=c++20</code></p>
+<p>C++20 提供了可以把原子变量的类似条件变量的操作, 挺有意思的</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">std::atomic&lt;<span class="type">bool</span>&gt; ready&#123;<span class="literal">false</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">consumer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ready.<span class="built_in">wait</span>(<span class="literal">false</span>);</span><br><span class="line">    <span class="comment">// ready 已经变成 true</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">producer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ready.<span class="built_in">store</span>(<span class="literal">true</span>);</span><br><span class="line">    ready.notify_one();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>复杂场景可能还是得用条件变量</p>
+<h3 id="promise-future"><code>promise</code> &amp;
+<code>future</code></h3>
+<p>可以看做某种一次性条件变量 + 内容传递</p>
+<p><code>promise</code> 和 <code>future</code> 共同指向要传递的值的地址,
+类似引用计数;</p>
+<p><code>get</code> 转移所有权并减少引用计数 (所以 get 后 future
+就无效了), promise 析构时减少引用计数</p>
+<p><code>wait_for/wait_until</code> 在 <code>ready</code> 之前会返回
+<code>deferred</code> (任务还未开始执行, 比如
+<code>std::launch::deferred</code> 参数的 <code>std::async</code>) 或
+<code>timeout</code> (超时)</p>
+<p><code>shared_future</code> 可以让多个线程等待同一个 promise, 他的 get
+不会转移所有权, 返回的是 <code>const &amp;</code></p>
+<h4 id="packaged_task"><code>packaged_task</code></h4>
+<p>用来包装一个 callable, 使其可以纳入 <code>future</code>
+的体系中去</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;future&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 来自 packaged_task 的 future</span></span><br><span class="line">    <span class="function">std::packaged_task&lt;<span class="title">int</span><span class="params">()</span>&gt; <span class="title">task</span><span class="params">([]()&#123; <span class="keyword">return</span> <span class="number">7</span>; &#125;)</span></span>; <span class="comment">// 包装函数</span></span><br><span class="line">    std::future&lt;<span class="type">int</span>&gt; f1 = task.<span class="built_in">get_future</span>();  <span class="comment">// 获取 future</span></span><br><span class="line">    <span class="function">std::thread <span class="title">t</span><span class="params">(std::move(task))</span></span>; <span class="comment">// 在线程上运行</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 来自 async() 的 future</span></span><br><span class="line">    std::future&lt;<span class="type">int</span>&gt; f2 = std::<span class="built_in">async</span>(std::launch::async, []()&#123; <span class="keyword">return</span> <span class="number">8</span>; &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 来自 promise 的 future</span></span><br><span class="line">    std::promise&lt;<span class="type">int</span>&gt; p;</span><br><span class="line">    std::future&lt;<span class="type">int</span>&gt; f3 = p.<span class="built_in">get_future</span>();</span><br><span class="line">    std::<span class="built_in">thread</span>([&amp;p]&#123; p.<span class="built_in">set_value_at_thread_exit</span>(<span class="number">9</span>); &#125;).<span class="built_in">detach</span>();</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;等待...&quot;</span> &lt;&lt; std::flush;</span><br><span class="line">    f1.<span class="built_in">wait</span>();</span><br><span class="line">    f2.<span class="built_in">wait</span>();</span><br><span class="line">    f3.<span class="built_in">wait</span>();</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;完成!\n结果为: &quot;</span></span><br><span class="line">              &lt;&lt; f1.<span class="built_in">get</span>() &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; f2.<span class="built_in">get</span>() &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; f3.<span class="built_in">get</span>() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    t.<span class="built_in">join</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;future&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::promise&lt;<span class="type">int</span>&gt; p;</span><br><span class="line">    std::future&lt;<span class="type">int</span>&gt; f = p.<span class="built_in">get_future</span>();</span><br><span class="line"></span><br><span class="line">    <span class="function">std::thread <span class="title">t</span><span class="params">([&amp;p]</span></span></span><br><span class="line"><span class="params"><span class="function">    &#123;</span></span></span><br><span class="line"><span class="params"><span class="function">        <span class="keyword">try</span></span></span></span><br><span class="line"><span class="params"><span class="function">        &#123;</span></span></span><br><span class="line"><span class="params"><span class="function">            <span class="comment">// 可能抛出异常的代码</span></span></span></span><br><span class="line"><span class="params"><span class="function">            <span class="keyword">throw</span> std::runtime_error(<span class="string">&quot;Example&quot;</span>);</span></span></span><br><span class="line"><span class="params"><span class="function">        &#125;</span></span></span><br><span class="line"><span class="params"><span class="function">        <span class="keyword">catch</span> (...)</span></span></span><br><span class="line"><span class="params"><span class="function">        &#123;</span></span></span><br><span class="line"><span class="params"><span class="function">            <span class="keyword">try</span></span></span></span><br><span class="line"><span class="params"><span class="function">            &#123;</span></span></span><br><span class="line"><span class="params"><span class="function">                <span class="comment">// 存储 promise 中抛出的任何异常</span></span></span></span><br><span class="line"><span class="params"><span class="function">                p.set_exception(std::current_exception());</span></span></span><br><span class="line"><span class="params"><span class="function">            &#125;</span></span></span><br><span class="line"><span class="params"><span class="function">            <span class="keyword">catch</span> (...) &#123;&#125; <span class="comment">// set_exception() 也可能抛出异常</span></span></span></span><br><span class="line"><span class="params"><span class="function">        &#125;</span></span></span><br><span class="line"><span class="params"><span class="function">    &#125;)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; f.<span class="built_in">get</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (<span class="type">const</span> std::exception&amp; e)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;来自线程的异常: &quot;</span> &lt;&lt; e.<span class="built_in">what</span>() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    t.<span class="built_in">join</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="latch-barrier"><code>latch</code> &amp;
+<code>barrier</code></h3>
+<p><code>-std=c++20</code></p>
+<ul>
+<li><code>latch</code>: 感觉就像一个加了限制的原子变量, 初始是任务数,
+每个任务完成后减一, <code>wait</code> 直到 0; 有点像 go 的
+<code>sync.WaitGroup</code></li>
+<li><code>barrier</code>: 功能更强大, 划分了阶段,
+阶段结束后还能执行回调; 当前是哪个 phase 保存在 <code>barrier</code>
+实例中
+<ul>
+<li><code>arrive</code>: 调用者报告完成了当前 phase, 返回一个
+<code>arrival_token</code>; 当前 phase 的待完成数 <code>-= 1</code></li>
+<li><code>wait(arrival_token&amp;&amp;)</code>: 让调用者阻塞, 直到当前
+phase 的所有预期 worker 都 arrive</li>
+<li><code>arrive_and_wait</code>: 等价于
+<code>wait(arrive())</code></li>
+<li><code>arrive_and_drop</code>: 调用者报告完成了当前 phase,
+且以后的所有 phase 减少一个需要同步的 worker (有趣的是,
+<code>arrive</code> 可以报告多次完成当前 phase, 而
+<code>arrive_and_xxx</code> 只能报告一次)</li>
+<li>阶段结束的回调函数在 phase 未完成计数为 0 时, 下一次
+<code>arrive/wait</code> 调用时执行; 最后一次回调是否执行取决于实现 (…
+男人什么罐头我说)</li>
+</ul></li>
+</ul>
+<h2 id="协程">协程</h2>
+<h3 id="有栈协程">有栈协程</h3>
+<h3 id="无栈协程">无栈协程</h3>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/%E5%B9%B6%E5%8F%91/" rel="tag"># 并发</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/49936.html" rel="prev" title="dsh context manager 插件开发笔记">
+                  <i class="fa fa-angle-left"></i> dsh context manager 插件开发笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Cansult Chen</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"cansult/blogComments","issue_term":"pathname","theme":"preferred-color-scheme"}</script>
+<script src="/js/third-party/comments/utterances.js" defer></script>
+
+</body>
+</html>

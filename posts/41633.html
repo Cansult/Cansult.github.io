@@ -28,7 +28,7 @@
 <meta property="og:description" content="写点高级并发">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-11-17T11:16:15.000Z">
-<meta property="article:modified_time" content="2026-11-17T13:40:54.378Z">
+<meta property="article:modified_time" content="2026-11-18T14:44:31.547Z">
 <meta property="article:author" content="Cansult Chen">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="并发">
@@ -165,9 +165,9 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E6%89%8B%E6%AE%B5"><span class="nav-number">1.</span> <span class="nav-text">同步手段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F"><span class="nav-number">1.1.</span> <span class="nav-text">条件变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#atomicwait"><span class="nav-number">1.2.</span> <span class="nav-text">atomic::wait</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#promise-future"><span class="nav-number">1.3.</span> <span class="nav-text">promise &amp;
-future</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#latch-barrier"><span class="nav-number">1.4.</span> <span class="nav-text">latch &amp;
-barrier</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%8F%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">协程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E6%A0%88%E5%8D%8F%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">有栈协程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E6%A0%88%E5%8D%8F%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">无栈协程</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%8F%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">协程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E6%A0%88%E5%8D%8F%E7%A8%8B-%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="nav-number">1.1.</span> <span class="nav-text">无栈协程 (状态机)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E6%A0%88%E5%8D%8F%E7%A8%8B"><span class="nav-number">1.2.</span> <span class="nav-text">有栈协程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E7%A7%B0%E5%8D%8F%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">对称协程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8D%8F%E7%A8%8B"><span class="nav-number">1.4.</span> <span class="nav-text">非对称协程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.5.</span> <span class="nav-text">常见实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#goroutine"><span class="nav-number">1.5.1.</span> <span class="nav-text">goroutine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bthread"><span class="nav-number">1.5.2.</span> <span class="nav-text">bthread</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python"><span class="nav-number">1.5.3.</span> <span class="nav-text">python</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cpp20"><span class="nav-number">1.5.4.</span> <span class="nav-text">cpp20:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E6%89%8B%E6%AE%B5"><span class="nav-number">2.</span> <span class="nav-text">同步手段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F"><span class="nav-number">2.1.</span> <span class="nav-text">条件变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#futex"><span class="nav-number">2.2.</span> <span class="nav-text">futex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#atomicwait"><span class="nav-number">2.3.</span> <span class="nav-text">atomic::wait</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#promise-future"><span class="nav-number">2.4.</span> <span class="nav-text">promise &amp;
+future</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#packaged_task"><span class="nav-number">2.4.1.</span> <span class="nav-text">packaged_task</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#latch-barrier"><span class="nav-number">2.5.</span> <span class="nav-text">latch &amp;
+barrier</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -182,7 +182,7 @@ barrier</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -193,7 +193,7 @@ barrier</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -253,9 +253,15 @@ barrier</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2026-11-17 19:16:15 / Modified: 21:40:54" itemprop="dateCreated datePublished" datetime="2026-11-17T19:16:15+08:00">2026-11-17</time>
+      <time title="Created: 2026-11-17 19:16:15" itemprop="dateCreated datePublished" datetime="2026-11-17T19:16:15+08:00">2026-11-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-11-18 22:44:31" itemprop="dateModified" datetime="2026-11-18T22:44:31+08:00">2026-11-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -278,8 +284,127 @@ barrier</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-
     
     <div class="post-body" itemprop="articleBody"><p>写点高级并发</p>
 <span id="more"></span>
-<h2 id="同步手段">同步手段</h2>
-<h3 id="条件变量">条件变量</h3>
+<h1 id="协程">协程</h1>
+<p>协程本身不是并发的, worker 对协程的执行是并发的</p>
+<p>(当然按这个说法 <code>std::thread</code> 本身也不是并发的, 是 CPU
+核对线程的执行是并发的)</p>
+<blockquote>
+<p>协程是一种能够暂停执行的函数：通过 <code>suspend</code>
+操作暂停后，可以在稍后的某个时刻通过 <code>resume</code>
+操作继续执行</p>
+</blockquote>
+<ul>
+<li>按 <strong>控制转移机制</strong> 区分, 分为对称协程和非对称协程</li>
+<li>按 是否能够在<strong>嵌套调用内部</strong>暂停执行 区分,
+分为有栈协程和无栈协程</li>
+</ul>
+<h2 id="无栈协程-状态机">无栈协程 (状态机)</h2>
+<p>提供三个操作:</p>
+<ul>
+<li><code>create</code>: 创建, 但不执行</li>
+<li><code>resume</code>: 开始执行(转移)</li>
+<li><code>yield</code>: 到达下一个状态, 暂停执行</li>
+</ul>
+<p>需要把所有跨越状态使用的变量额外保存在堆上, 实现类似于:</p>
+<p>(注意无栈协程的暂停点是编译期确定的)</p>
+<p>(如果编译器能确定协程生存期严格嵌入 caller 生存期中, 也可以放在
+caller 的栈帧或者协程 frame 中)</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Task <span class="title">foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="function"><span class="keyword">co_await</span> <span class="title">something</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="type">int</span> b = a + <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">FooFrame</span> &#123;</span><br><span class="line">    <span class="type">int</span> state;</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">resume</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (state) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">            a = <span class="number">10</span>;</span><br><span class="line">            state = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            <span class="type">int</span> b = a + <span class="number">1</span>;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><a
+target="_blank" rel="noopener" href="https://lewissbaker.github.io/2017/09/25/coroutine-theory#an-illustration">一个示例</a></p>
+<h2 id="有栈协程">有栈协程</h2>
+<p>和线程类似, 保存着当前的调用栈 (不管是协程的,
+还是协程调用的非协程函数的, 更可能需要编译器开洞),
+协程暂停时还需要保存寄存器之类的; 一般是放在堆上</p>
+<h2 id="对称协程">对称协程</h2>
+<p>可以将控制权交给任意协程</p>
+<h2 id="非对称协程">非对称协程</h2>
+<p>只能将控制权交给调用者</p>
+<h2 id="常见实现">常见实现</h2>
+<h3 id="goroutine">goroutine</h3>
+<h3 id="bthread">bthread</h3>
+<h3 id="python">python</h3>
+<h3 id="cpp20">cpp20:</h3>
+<p>哎我靠 cpp 怎么这么自由</p>
+<p>除了内部的状态, 协程还需要:</p>
+<ul>
+<li>promise 类 (不是 <code>std::promise</code>)</li>
+<li>handle 类 (继承 <code>coroutine_handle&lt;yourPromise&gt;</code>):
+可以让我们操作协程</li>
+</ul>
+<p>大概会长这样:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> std</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Promise&gt;</span><br><span class="line">  <span class="keyword">struct</span> <span class="title class_">coroutine_handle</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">template</span>&lt;&gt;</span><br><span class="line">  <span class="keyword">struct</span> <span class="title class_">coroutine_handle</span>&lt;<span class="type">void</span>&gt;</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">done</span><span class="params">()</span> <span class="type">const</span></span>; <span class="comment">// 判断是否完成</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">resume</span><span class="params">()</span></span>; <span class="comment">// 恢复 </span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">destroy</span><span class="params">()</span></span>; <span class="comment">// 销毁, 一般是 RAII 自动管理的</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span>* <span class="title">address</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">    <span class="function"><span class="type">static</span> coroutine_handle <span class="title">from_address</span><span class="params">(<span class="type">void</span>* address)</span></span>; <span class="comment">// 中 promise 中找回 handle: 同一个协程的 promise 和 handle 在同一个协程帧中, 地址偏移是确定的</span></span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Promise&gt;</span><br><span class="line">  <span class="keyword">struct</span> <span class="title class_">coroutine_handle</span> : coroutine_handle&lt;<span class="type">void</span>&gt;</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="function">Promise&amp; <span class="title">promise</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">    <span class="function"><span class="type">static</span> coroutine_handle <span class="title">from_promise</span><span class="params">(Promise&amp; promise)</span></span>; <span class="comment">// 注意必须确保 promise 类型与协程帧所使用的具体 promise 类型完全一致；如果具体 promise 类型是 Derived，尝试构造 coroutine_handle&lt;Base&gt; 可能导致未定义行为。</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">static</span> coroutine_handle <span class="title">from_address</span><span class="params">(<span class="type">void</span>* address)</span></span>;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>操作:</p>
+<ul>
+<li><code>co_await</code>: 一个一元运算符, 可以作用在一个
+<code>Awaitable</code> 上, 代表挂起直到异步操作 <code>Awaitable</code>
+完成
+<ul>
+<li><code>Awaitable</code>: 能被 <code>co_await</code> 调用的类型
+(可能通过 <code>operator co_await()</code> 返回另一个
+<code>Awaiter</code>, 所以不一定是一个 <code>Awaiter</code>)</li>
+<li><code>Awaiter</code>: 实现下列接口的类型 (<code>Awaiter</code>
+一定是一个 <code>Awaitable</code>): 这些接口允许程序员做一些自定义操作
+<ul>
+<li><code>await_ready()</code>: 判断是否需要挂起时调用的回调函数,
+避免下面 <code>&lt;suspend-coroutine&gt;</code> 操作的开销</li>
+<li><code>await_suspend(std::coroutine_handle&lt;&gt;)</code>:
+挂起时调用的回调函数, 可以返回 <code>bool</code> 或 <code>void</code>;
+一般用来启动异步操作, 且负责在异步操作结束后恢复协程,
+比如注册回调函数调用 handle 的 resume, 或者把 handle 扔给调度器
+<ul>
+<li>返回 <code>bool</code>: <code>true</code> 代表真的挂起, 否则继续执行
+<code>co_await</code> 后面的代码; 避免 <code>await_ready</code> 到
+<code>await_suspend</code> 之间的部分状态发生了变化</li>
+<li>返回 <code>void</code>: 一定挂起</li>
+</ul></li>
+<li><code>await_resume()</code>: 恢复时调用的回调函数, 其返回值就是整个
+<code>co_await</code> 的返回值; 如果抛出异常就从 <code>co_await</code>
+传播出去, 这种情况下协程会被自动恢复, 且这个恢复不会再调用
+<code>await_resume()</code></li>
+</ul></li>
+<li><code>co_await &lt;expr&gt;</code> 流程如下:
+<ol type="1">
+<li>获取 Awaitable: 如果协程的 promise 有 <code>await_transform</code>
+方法, 就通过 <code>promise.await_transform(&lt;expr&gt;)</code> 获取;
+否则把 <code>&lt;expr&gt;</code> 本身作为 Awaitable</li>
+<li>获取 Awaiter: 如果 Awaitable 有 <code>operator co_await()</code>
+方法, 就用这个获取 Awaiter; 否则把 Awaitable 作为 Awaiter</li>
+<li>挂起</li>
+</ol></li>
+</ul></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="keyword">auto</span>&amp;&amp; value = <span class="comment">/*&lt;expr&gt;*/</span>;</span><br><span class="line">  <span class="keyword">auto</span>&amp;&amp; awaitable = <span class="built_in">get_awaitable</span>(promise, <span class="keyword">static_cast</span>&lt;<span class="keyword">decltype</span>(value)&gt;(value));</span><br><span class="line">  <span class="keyword">auto</span>&amp;&amp; awaiter = <span class="built_in">get_awaiter</span>(<span class="keyword">static_cast</span>&lt;<span class="keyword">decltype</span>(awaitable)&gt;(awaitable));</span><br><span class="line">  <span class="keyword">if</span> (!awaiter.<span class="built_in">await_ready</span>()) <span class="comment">// 异步操作是否已完成, 是否不需要挂起</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">using</span> <span class="type">handle_t</span> = std::experimental::coroutine_handle&lt;P&gt;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">using</span> <span class="type">await_suspend_result_t</span> =</span><br><span class="line">      <span class="keyword">decltype</span>(awaiter.<span class="built_in">await_suspend</span>(<span class="type">handle_t</span>::<span class="built_in">from_promise</span>(promise)));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// &lt;suspend-coroutine&gt;</span></span><br><span class="line">    <span class="comment">// 挂起, 这里编译器会生成代码来保存协程当前状态并为其恢复做好准备，包括存储 &lt;resume-point&gt; 的位置，以及把当前寄存器中持有的值溢出写入协程帧内存。</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(std::is_void_v&lt;<span class="type">await_suspend_result_t</span>&gt;)</span> <span class="comment">// 是 void, 一定挂起</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      awaiter.<span class="built_in">await_suspend</span>(<span class="type">handle_t</span>::<span class="built_in">from_promise</span>(promise));</span><br><span class="line">      <span class="comment">// &lt;return-to-caller-or-resumer&gt;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">static_assert</span>(</span><br><span class="line">         std::is_same_v&lt;<span class="type">await_suspend_result_t</span>, <span class="type">bool</span>&gt;,</span><br><span class="line">         <span class="string">&quot;await_suspend() must return &#x27;void&#x27; or &#x27;bool&#x27;.&quot;</span>);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (awaiter.<span class="built_in">await_suspend</span>(<span class="type">handle_t</span>::<span class="built_in">from_promise</span>(promise))) <span class="comment">// true 就挂起, 否则继续执行</span></span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">// &lt;return-to-caller-or-resumer&gt;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// &lt;resume-point&gt;</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> awaiter.<span class="built_in">await_resume</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note info"><p>可以注意到 <code>await_suspend</code> 是在 协程挂起之后,
+转移控制权之前 调用的</p>
+<p>有一种 trick 用法是 <code>Awaiter</code>
+对象在协程已经挂起之后启动异步操作, 并把已挂起协程的
+<code>coroutine_handle</code> 传给该操作; 操作完成时
+(可能在另一个线程上), 它可以直接安全地恢复协程, 不需要任何额外的同步</p>
+<p>这种用法需要注意: 在传递完 handle 后, <code>await_suspend</code>
+就要避免访问 <code>this</code> 和 promise; 因为在 交出 handle 之后,
+<code>await_suspend</code> 结束之前, 协程就可能已经恢复了, 这时整个
+<code>Awaiter</code> 对象都已经被析构了 还是太 trick 了, 尽量少用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Time     Thread 1                           Thread 2</span><br><span class="line">  |      --------                           --------</span><br><span class="line">  |      ....                               Call OS - Wait for I/O event</span><br><span class="line">  |      Call await_ready()                    |</span><br><span class="line">  |      &lt;await-ready&gt;                         |</span><br><span class="line">  |      Call await_suspend(handle)            |</span><br><span class="line">  |        Store handle in operation           |</span><br><span class="line">  V        Start AsyncFileRead ---+            V</span><br><span class="line">                                  +-----&gt;</span><br><span class="line">                                            Load coroutine_handle from operation</span><br><span class="line">                                            Call handle.resume()</span><br><span class="line"></span><br><span class="line">                                              Call to await_resume()</span><br><span class="line">                                              execution continues....</span><br><span class="line">           Call to AsyncFileRead returns</span><br><span class="line">         Call to await_suspend() returns</span><br></pre></td></tr></table></figure>
+<p>有栈协程就很难做到这一点: 大部分有栈协程框架中,
+一个协程的挂起与另一个协程的恢复被合并成一次 “上下文切换”; 在这种
+“上下文切换” 中一般没有机会在
+挂起当前协程之后、把执行权转移给另一个协程之前 执行逻辑</p>
+<p>如果我们想在有栈协程上实现类似的异步文件读操作,
+就必须在挂起协程<em>之前</em>启动操作; 而操作有可能在
+协程挂起、具备恢复资格 之前 就在另一个线程上完成,
+这时调用恢复就会存在竞争, 需要线程同步</p>
+<p><a
+target="_blank" rel="noopener" href="https://lewissbaker.github.io/2017/11/17/understanding-operator-co-await#synchronisation-free-async-code">参考</a></p>
+</div>
+<ul>
+<li><code>co_yield</code>:</li>
+<li><code>co_return</code>:</li>
+</ul>
+<h4 id="boost-coroutine">boost coroutine</h4>
+<h1 id="同步手段">同步手段</h1>
+<h2 id="条件变量">条件变量</h2>
 <p>其实机制和 mutex 差不多, 这个的想法是很自然的</p>
 <p>考虑一个朴素的生产消费:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">std::mutex m;</span><br><span class="line">std::queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Producer</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">producer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function">std::lock_guard <span class="title">lk</span><span class="params">(m)</span></span>;</span><br><span class="line">        q.<span class="built_in">push</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Consumer</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">consumer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="function">std::unique_lock <span class="title">lk</span><span class="params">(m)</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            <span class="type">int</span> x = q.<span class="built_in">front</span>();</span><br><span class="line">            q.<span class="built_in">pop</span>();</span><br><span class="line">            lk.<span class="built_in">unlock</span>();</span><br><span class="line"></span><br><span class="line">            <span class="built_in">consume</span>(x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -308,16 +433,16 @@ href="https://cansult.github.io/posts/20346.html">内存序</a></li>
 </ul>
 <p>所以哪怕共享数据是原子的, 也需要加锁</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="function">std::lock_guard <span class="title">lock</span><span class="params">(m)</span></span>;</span><br><span class="line">    ready = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line">cv.notify_one();</span><br></pre></td></tr></table></figure>
-<h4 id="futex">futex</h4>
+<h2 id="futex">futex</h2>
 <p>Fast Userspace Mutex, 尽量 (没有竞争时) 不进入内核态</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">lock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">CAS</span>(&amp;state, <span class="number">0</span>, <span class="number">1</span>)) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 慢速路径：发生竞争，进入 futex 等待</span></span><br><span class="line">    <span class="built_in">futex_wait</span>(...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="atomicwait">atomic::wait</h3>
+<h2 id="atomicwait">atomic::wait</h2>
 <p><code>-std=c++20</code></p>
 <p>C++20 提供了可以把原子变量的类似条件变量的操作, 挺有意思的</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">std::atomic&lt;<span class="type">bool</span>&gt; ready&#123;<span class="literal">false</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">consumer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ready.<span class="built_in">wait</span>(<span class="literal">false</span>);</span><br><span class="line">    <span class="comment">// ready 已经变成 true</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">producer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ready.<span class="built_in">store</span>(<span class="literal">true</span>);</span><br><span class="line">    ready.notify_one();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>复杂场景可能还是得用条件变量</p>
-<h3 id="promise-future"><code>promise</code> &amp;
-<code>future</code></h3>
+<h2 id="promise-future"><code>promise</code> &amp;
+<code>future</code></h2>
 <p>可以看做某种一次性条件变量 + 内容传递</p>
 <p><code>promise</code> 和 <code>future</code> 共同指向要传递的值的地址,
 类似引用计数;</p>
@@ -329,13 +454,13 @@ href="https://cansult.github.io/posts/20346.html">内存序</a></li>
 <code>timeout</code> (超时)</p>
 <p><code>shared_future</code> 可以让多个线程等待同一个 promise, 他的 get
 不会转移所有权, 返回的是 <code>const &amp;</code></p>
-<h4 id="packaged_task"><code>packaged_task</code></h4>
+<h3 id="packaged_task"><code>packaged_task</code></h3>
 <p>用来包装一个 callable, 使其可以纳入 <code>future</code>
 的体系中去</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;future&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 来自 packaged_task 的 future</span></span><br><span class="line">    <span class="function">std::packaged_task&lt;<span class="title">int</span><span class="params">()</span>&gt; <span class="title">task</span><span class="params">([]()&#123; <span class="keyword">return</span> <span class="number">7</span>; &#125;)</span></span>; <span class="comment">// 包装函数</span></span><br><span class="line">    std::future&lt;<span class="type">int</span>&gt; f1 = task.<span class="built_in">get_future</span>();  <span class="comment">// 获取 future</span></span><br><span class="line">    <span class="function">std::thread <span class="title">t</span><span class="params">(std::move(task))</span></span>; <span class="comment">// 在线程上运行</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 来自 async() 的 future</span></span><br><span class="line">    std::future&lt;<span class="type">int</span>&gt; f2 = std::<span class="built_in">async</span>(std::launch::async, []()&#123; <span class="keyword">return</span> <span class="number">8</span>; &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 来自 promise 的 future</span></span><br><span class="line">    std::promise&lt;<span class="type">int</span>&gt; p;</span><br><span class="line">    std::future&lt;<span class="type">int</span>&gt; f3 = p.<span class="built_in">get_future</span>();</span><br><span class="line">    std::<span class="built_in">thread</span>([&amp;p]&#123; p.<span class="built_in">set_value_at_thread_exit</span>(<span class="number">9</span>); &#125;).<span class="built_in">detach</span>();</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;等待...&quot;</span> &lt;&lt; std::flush;</span><br><span class="line">    f1.<span class="built_in">wait</span>();</span><br><span class="line">    f2.<span class="built_in">wait</span>();</span><br><span class="line">    f3.<span class="built_in">wait</span>();</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;完成!\n结果为: &quot;</span></span><br><span class="line">              &lt;&lt; f1.<span class="built_in">get</span>() &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; f2.<span class="built_in">get</span>() &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; f3.<span class="built_in">get</span>() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    t.<span class="built_in">join</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;future&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::promise&lt;<span class="type">int</span>&gt; p;</span><br><span class="line">    std::future&lt;<span class="type">int</span>&gt; f = p.<span class="built_in">get_future</span>();</span><br><span class="line"></span><br><span class="line">    <span class="function">std::thread <span class="title">t</span><span class="params">([&amp;p]</span></span></span><br><span class="line"><span class="params"><span class="function">    &#123;</span></span></span><br><span class="line"><span class="params"><span class="function">        <span class="keyword">try</span></span></span></span><br><span class="line"><span class="params"><span class="function">        &#123;</span></span></span><br><span class="line"><span class="params"><span class="function">            <span class="comment">// 可能抛出异常的代码</span></span></span></span><br><span class="line"><span class="params"><span class="function">            <span class="keyword">throw</span> std::runtime_error(<span class="string">&quot;Example&quot;</span>);</span></span></span><br><span class="line"><span class="params"><span class="function">        &#125;</span></span></span><br><span class="line"><span class="params"><span class="function">        <span class="keyword">catch</span> (...)</span></span></span><br><span class="line"><span class="params"><span class="function">        &#123;</span></span></span><br><span class="line"><span class="params"><span class="function">            <span class="keyword">try</span></span></span></span><br><span class="line"><span class="params"><span class="function">            &#123;</span></span></span><br><span class="line"><span class="params"><span class="function">                <span class="comment">// 存储 promise 中抛出的任何异常</span></span></span></span><br><span class="line"><span class="params"><span class="function">                p.set_exception(std::current_exception());</span></span></span><br><span class="line"><span class="params"><span class="function">            &#125;</span></span></span><br><span class="line"><span class="params"><span class="function">            <span class="keyword">catch</span> (...) &#123;&#125; <span class="comment">// set_exception() 也可能抛出异常</span></span></span></span><br><span class="line"><span class="params"><span class="function">        &#125;</span></span></span><br><span class="line"><span class="params"><span class="function">    &#125;)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; f.<span class="built_in">get</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (<span class="type">const</span> std::exception&amp; e)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;来自线程的异常: &quot;</span> &lt;&lt; e.<span class="built_in">what</span>() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    t.<span class="built_in">join</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="latch-barrier"><code>latch</code> &amp;
-<code>barrier</code></h3>
+<h2 id="latch-barrier"><code>latch</code> &amp;
+<code>barrier</code></h2>
 <p><code>-std=c++20</code></p>
 <ul>
 <li><code>latch</code>: 感觉就像一个加了限制的原子变量, 初始是任务数,
@@ -360,9 +485,6 @@ phase 的所有预期 worker 都 arrive</li>
 男人什么罐头我说)</li>
 </ul></li>
 </ul>
-<h2 id="协程">协程</h2>
-<h3 id="有栈协程">有栈协程</h3>
-<h3 id="无栈协程">无栈协程</h3>
 
     </div>
 

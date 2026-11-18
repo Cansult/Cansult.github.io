@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"cansult.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":10,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="我一开始以为是自己下的盗版电子书翻译太差 买了实体书发现也不咋样">
+    <meta name="description" content="我一开始以为是自己下的盗版电子书翻译太差, 买了实体书发现也不咋样 而且书的结构很随心所欲, 或许因为 more is difficult">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《大规模 C++ 软件开发》读书笔记">
 <meta property="og:url" content="https://cansult.github.io/posts/37705.html">
 <meta property="og:site_name" content="Cansult&#39;s blog">
-<meta property="og:description" content="我一开始以为是自己下的盗版电子书翻译太差 买了实体书发现也不咋样">
+<meta property="og:description" content="我一开始以为是自己下的盗版电子书翻译太差, 买了实体书发现也不咋样 而且书的结构很随心所欲, 或许因为 more is difficult">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-10-08T11:27:04.000Z">
-<meta property="article:modified_time" content="2026-11-17T13:41:54.619Z">
+<meta property="article:modified_time" content="2026-11-18T14:27:54.615Z">
 <meta property="article:author" content="Cansult Chen">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="架构">
@@ -166,7 +166,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.</span> <span class="nav-text">物理设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5"><span class="nav-number">1.1.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.2.</span> <span class="nav-text">面向对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB"><span class="nav-number">1.2.1.</span> <span class="nav-text">依赖关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B1%82"><span class="nav-number">1.3.</span> <span class="nav-text">分层:</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.</span> <span class="nav-text">物理设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5"><span class="nav-number">1.1.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.2.</span> <span class="nav-text">面向对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB"><span class="nav-number">1.2.1.</span> <span class="nav-text">依赖关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B1%82"><span class="nav-number">1.3.</span> <span class="nav-text">分层:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#section"><span class="nav-number">1.4.</span> <span class="nav-text">???</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6"><span class="nav-number">1.4.1.</span> <span class="nav-text">组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%85"><span class="nav-number">1.4.2.</span> <span class="nav-text">包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%85%E7%BB%84"><span class="nav-number">1.4.3.</span> <span class="nav-text">包组</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -181,7 +181,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -192,7 +192,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -260,7 +260,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-11-17 21:41:54" itemprop="dateModified" datetime="2026-11-17T21:41:54+08:00">2026-11-17</time>
+      <time title="Modified: 2026-11-18 22:27:54" itemprop="dateModified" datetime="2026-11-18T22:27:54+08:00">2026-11-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -281,8 +281,8 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>我一开始以为是自己下的盗版电子书翻译太差</p>
-<p>买了实体书发现也不咋样</p>
+    <div class="post-body" itemprop="articleBody"><p>我一开始以为是自己下的盗版电子书翻译太差, 买了实体书发现也不咋样</p>
+<p>而且书的结构很随心所欲, 或许因为 more is difficult</p>
 <span id="more"></span>
 <p>重用来自于分解和稳定: 上层的应用可以经常变化, 底层的库应该保持稳定;
 分解应该是分层的, 层次越低粒度越细, 影响面越广, 越应该稳定</p>
@@ -342,6 +342,20 @@
 </ul>
 <h2 id="分层">分层:</h2>
 <p>DAG 的拓扑层级</p>
+<h2 id="section">???</h2>
+<h3 id="组件">组件</h3>
+<ul>
+<li>头文件应该自己能通过编译 且只需要 include
+能编译所需的其他头文件</li>
+<li>需要了解实现细节的类/函数应该放在一个模块里</li>
+<li>一个组件应该只有一个公共类; 私有类可以通过嵌套(次优)或者放在匿名
+namespace 里</li>
+<li></li>
+</ul>
+<h4 id="组件的依赖">组件的依赖</h4>
+<h3 id="包">包</h3>
+<h4 id="包的依赖">包的依赖</h4>
+<h3 id="包组">包组</h3>
 
     </div>
 

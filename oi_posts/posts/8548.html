@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/oi_posts/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/oi_posts/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/oi_posts/images/favicon.jpg">
+  <link rel="mask-icon" href="/oi_posts/images/favicon.jpg" color="#222">
+
+<link rel="stylesheet" href="/oi_posts/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.font.im/css2?family=Trebuchet+MS:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=PT+Mono:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cansult.github.io","root":"/oi_posts/","images":"/oi_posts/images","scheme":"Gemini","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/oi_posts/search.json","localsearch":{"enable":true,"top_n_per_article":10,"unescape":false,"preload":true}}</script><script src="/oi_posts/js/config.js" defer></script>
+
+    <meta name="description" content="神建模…我真是太菜了…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="翻车笔记 [SCOI2007]修车 + [Noi2012]美食节 [网络流, 清奇脑回路, 翻车]">
+<meta property="og:url" content="https://cansult.github.io/oi_posts/posts/8548.html">
+<meta property="og:site_name" content="Cansult&#39;s blog">
+<meta property="og:description" content="神建模…我真是太菜了…">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-04-18T10:52:00.000Z">
+<meta property="article:modified_time" content="2019-04-08T10:13:40.000Z">
+<meta property="article:author" content="Cansult Chen">
+<meta property="article:tag" content="动态加边">
+<meta property="article:tag" content="清奇脑回路">
+<meta property="article:tag" content="网络流">
+<meta property="article:tag" content="翻车">
+<meta property="article:tag" content="费用流">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cansult.github.io/oi_posts/posts/8548.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://cansult.github.io/oi_posts/posts/8548.html","path":"posts/8548.html","title":"翻车笔记 [SCOI2007]修车 + [Noi2012]美食节 [网络流, 清奇脑回路, 翻车]"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>翻车笔记 [SCOI2007]修车 + [Noi2012]美食节 [网络流, 清奇脑回路, 翻车] | Cansult's blog</title>
+  
+
+
+
+
+
+
+
+
+  
+<script src="/oi_posts/js/utils.js" defer></script><script src="/oi_posts/js/motion.js" defer></script><script src="/oi_posts/js/sidebar.js" defer></script><script src="/oi_posts/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/oi_posts/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","display_overflow":"scroll","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-mml-chtml.js","integrity":"sha256-ihPtDDm7pTmSF9ViEsItlvsrBTsNkz0MOXMchzOwCQw="}}</script>
+<script src="/oi_posts/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/oi_posts/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/oi_posts/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Cansult's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">即使愿望永远无法实现<br>我也不愿就这样放手</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/oi_posts/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/oi_posts/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/oi_posts/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/oi_posts/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/oi_posts/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-links"><a href="/oi_posts/links/" rel="section"><i class="fa fa-sitemap fa-fw"></i>Links</a></li><li class="menu-item menu-item-ret-to-new-posts"><a href="https://cansult.github.io/" rel="section"><i class="fa fa-reply fa-fw"></i>Ret to new posts</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%87%B5%E9%80%BC%E7%9A%84-%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">懵逼的 题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%AF%E6%B7%A1%E7%9A%84-%E9%A2%98%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">扯淡的 题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B2%99%E8%8C%B6%E7%9A%84-%E4%BB%A3%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">沙茶的 代码</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Cansult Chen"
+      src="/oi_posts/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Cansult Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/oi_posts/archives/">
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/oi_posts/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/oi_posts/tags/">
+        <span class="site-state-item-count">66</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cansult" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cansult" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cansult.github.io/oi_posts/posts/8548.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/oi_posts/images/avatar.jpeg">
+      <meta itemprop="name" content="Cansult Chen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cansult's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="翻车笔记 [SCOI2007]修车 + [Noi2012]美食节 [网络流, 清奇脑回路, 翻车] | Cansult's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          翻车笔记 [SCOI2007]修车 + [Noi2012]美食节 [网络流, 清奇脑回路, 翻车]
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-04-18 18:52:00" itemprop="dateCreated datePublished" datetime="2018-04-18T18:52:00+08:00">2018-04-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2019-04-08 18:13:40" itemprop="dateModified" datetime="2019-04-08T18:13:40+08:00">2019-04-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/oi_posts/categories/%E7%BF%BB%E8%BD%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">翻车笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>神建模…我真是太菜了…</p>
+<span id="more"></span>
+<h3 id="懵逼的-题目">懵逼的 题目</h3>
+<p><a target="_blank" rel="noopener" href="https://www.lydsy.com/JudgeOnline/problem.php?id=1070">1070:
+[SCOI2007]修车</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.lydsy.com/JudgeOnline/problem.php?id=2879">2879:
+[Noi2012]美食节</a></p>
+<h3 id="扯淡的-题解">扯淡的 题解</h3>
+<p>我内心: 这玩意咋做啊qwqwqwqwqwq,
+之前的东西会对后面的边权造成影响啊qwqwqwqwqwq</p>
+<p>然后翻题解…王gay梁A了… AHmhr A了…xMinh A了…REfun A了…</p>
+<p>…你们都太强了 Orzzzzzz</p>
+<p>艹</p>
+<p>前面会对后面造成影响那我倒过来连边不就行了…</p>
+<p>设 第<span class="math inline">\(j\)</span>盘菜是第<span
+class="math inline">\(i\)</span>个人做的倒数第<span
+class="math inline">\(k\)</span>盘菜,
+那么这盘菜对答案的影响就是后面的<span
+class="math inline">\(k\)</span>个人, 影响的总时间是<span
+class="math inline">\(k \cdot time_{i, j}\)</span></p>
+<p>然后好啦</p>
+<ul>
+<li><p>拆点: 把每一个厨师拆成<span class="math inline">\(\sum_j^n
+p_j\)</span>个点<span class="math inline">\(b_{i, k}\)</span>,
+代表第<span class="math inline">\(i\)</span>个厨师做倒数第<span
+class="math inline">\(k\)</span>盘菜</p></li>
+<li><p>连边:</p>
+<ul>
+<li><span class="math inline">\(S\)</span>向所有的菜<span
+class="math inline">\(c_i\)</span>连边<span class="math inline">\(cost =
+0, cap = (c_i\)</span>的需求量<span
+class="math inline">\()\)</span></li>
+<li><span class="math inline">\(c_j\)</span>向<span
+class="math inline">\(b_{i, k}\)</span>连边, <span
+class="math inline">\(cost = k \cdot time_{i, j}, cap = 1\)</span></li>
+<li><span class="math inline">\(b_{i, k}\)</span>向<span
+class="math inline">\(T\)</span>连边, <span class="math inline">\(cost =
+0, cap = 1\)</span></li>
+</ul></li>
+</ul>
+<p>没了?</p>
+<p><del>没了</del></p>
+<p>你用这种方法做美食节的时候…你会发现你T的很惨啊…Emmmmmmmm…我们有一种奇妙的优化方法…</p>
+<p>我们发现这个边数太多了…然而每一次曾广只会用到<span
+class="math inline">\(3\)</span>条边…<span
+class="math inline">\(spfa\)</span>的复杂度就爆炸了…</p>
+<p>考虑怎么缩减边数…</p>
+<p>你跑<span
+class="math inline">\(spfa\)</span>肯定是先跑费用最小的边…而如果边<span
+class="math inline">\(c_j \to b_{i, k + 1}\)</span>符合要求, 而且<span
+class="math inline">\((c_j \to b_{i, k}).cap &gt; (c_j \to b_{i,
+k}).flow\)</span>时, 肯定是要跑<span class="math inline">\(c_j \to b_{i,
+k}\)</span>的…</p>
+<p>也就是说, 如果<span class="math inline">\(c_j\to b_{i,
+k}\)</span>没有满流, 我们是没有必要加<span class="math inline">\(c_j \to
+b_{i, k + 1}\)</span>这条边的…我们就可以在每一次增广后才加入对应的边,
+这样就保证了整个图的边数都在一个可以接受的范围内</p>
+<p>复杂度? <span class="math inline">\(\mathrm O(\)</span>跑的过<span
+class="math inline">\()\)</span>…</p>
+<h3 id="沙茶的-代码">沙茶的 代码</h3>
+<h4 id="修车">修车</h4>
+<p>他bzoj这个题时限<span
+class="math inline">\(1s\)</span>感觉很不资瓷啊…没<del>(懒得)</del>卡</p>
+<p><del>你以为你bzoj的测评姬速度能和别的oj比还是咋的,
+还™搞<strong>总时限</strong><span
+class="math inline">\(1s\)</span></del></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**************************************************************</span></span><br><span class="line"><span class="comment">    Problem: 1070</span></span><br><span class="line"><span class="comment">    User: Cansult</span></span><br><span class="line"><span class="comment">    Language: C++</span></span><br><span class="line"><span class="comment">    Result: Time_Limit_Exceed</span></span><br><span class="line"><span class="comment">****************************************************************/</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXN (100000 + 5)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXM (500000 + 5)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INF (0X7FFFFFFF)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXC (100)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> rev(a) ((a) ^ 1)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> bh(i, j) ((((i) - 1) * MAXC) + j)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ca(i) (i + 90000)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DD double</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> s = <span class="number">0</span>, t = MAXN - <span class="number">1</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">edg</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> from, to, next, cap, flow, cost;</span><br><span class="line">    <span class="built_in">edg</span>() &#123;&#125;</span><br><span class="line">    <span class="built_in">edg</span>(<span class="type">int</span> fr, <span class="type">int</span> dqt, <span class="type">int</span> ne, <span class="type">int</span> ca, <span class="type">int</span> co): <span class="built_in">from</span>(fr), <span class="built_in">to</span>(dqt), <span class="built_in">next</span>(ne), <span class="built_in">cap</span>(ca), <span class="built_in">flow</span>(<span class="number">0</span>), <span class="built_in">cost</span>(co) &#123;&#125;</span><br><span class="line">&#125;b[MAXM &lt;&lt; <span class="number">1</span>];</span><br><span class="line"><span class="type">int</span> g[MAXN], cntb = <span class="number">-1</span>, n, m, gg[MAXC][MAXC], pre[MAXN], ans;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">adn</span><span class="params">(<span class="type">int</span> from, <span class="type">int</span> to, <span class="type">int</span> cap, <span class="type">int</span> cost)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    b[++cntb] = <span class="built_in">edg</span>(from, to, g[from], cap, cost);</span><br><span class="line">    g[from] = cntb;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">spfa</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> dis[MAXN], a[MAXN];</span><br><span class="line">    <span class="type">bool</span> inq[MAXN];</span><br><span class="line">    <span class="built_in">memset</span>(inq, <span class="literal">false</span>, <span class="keyword">sizeof</span>(inq));</span><br><span class="line">    <span class="built_in">memset</span>(dis, <span class="number">0x7f</span>, <span class="keyword">sizeof</span>(dis));</span><br><span class="line">    <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a));</span><br><span class="line">    queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">    q.<span class="built_in">push</span>(s);</span><br><span class="line">    dis[s] = <span class="number">0</span>;</span><br><span class="line">    a[s] = INF;</span><br><span class="line">    <span class="keyword">while</span> (!q.<span class="built_in">empty</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> dq = q.<span class="built_in">front</span>();</span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line">        inq[dq] = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = g[dq]; ~i; i = b[i].next)</span><br><span class="line">            <span class="keyword">if</span> (dis[b[i].to] &gt; dis[dq] + b[i].cost &amp;&amp; b[i].cap &gt; b[i].flow)</span><br><span class="line">            &#123;</span><br><span class="line">                a[b[i].to] = <span class="built_in">min</span>(a[dq], b[i].cap - b[i].flow);</span><br><span class="line">                pre[b[i].to] = i;</span><br><span class="line">                dis[b[i].to] = dis[dq] + b[i].cost;</span><br><span class="line">                <span class="keyword">if</span> (!inq[b[i].to])</span><br><span class="line">                    inq[b[i].to] = <span class="literal">true</span>, q.<span class="built_in">push</span>(b[i].to);</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a[t];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> zl = <span class="built_in">spfa</span>();</span><br><span class="line">        <span class="keyword">if</span> (!zl)    <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = t; i != s; i = b[pre[i]].from)</span><br><span class="line">            <span class="comment">/*printf(&quot;from: %d, to: %d, cost: %d, flow: %d\n&quot;, b[pre[i]].from, b[pre[i]].to, b[pre[i]].cost, b[pre[i]].flow), */</span>b[pre[i]].flow += zl, b[<span class="built_in">rev</span>(pre[i])].flow -= zl, ans += zl * b[pre[i]].cost; <span class="comment">// Emmmm怎么加成流量了...</span></span><br><span class="line"><span class="comment">//      puts(&quot;-----------&quot;);</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">        <span class="built_in">adn</span>(s, <span class="built_in">ca</span>(i), <span class="number">1</span>, <span class="number">0</span>), <span class="built_in">adn</span>(<span class="built_in">ca</span>(i), s, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">            <span class="built_in">adn</span>(<span class="built_in">bh</span>(i, j), t, <span class="number">1</span>, <span class="number">0</span>), <span class="built_in">adn</span>(t, <span class="built_in">bh</span>(i, j), <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">1</span>; k &lt;= m; k++)</span><br><span class="line">        <span class="built_in">adn</span>(<span class="built_in">ca</span>(i), <span class="built_in">bh</span>(j, k), <span class="number">1</span>, gg[j][i] * k), <span class="built_in">adn</span>(<span class="built_in">bh</span>(j, k), <span class="built_in">ca</span>(i), <span class="number">0</span>, -gg[j][i] * k);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="comment">//    cout &lt;&lt; &quot;Hello world!&quot; &lt;&lt; endl;</span></span><br><span class="line"><span class="comment">//  freopen(&quot;in.in&quot;, &quot;r&quot;, stdin);</span></span><br><span class="line">    <span class="built_in">memset</span>(g, <span class="number">-1</span>, <span class="keyword">sizeof</span>(g));</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;gg[j][i]);</span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line">    <span class="built_in">solve</span>();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.2lf&quot;</span>, (DD)ans / m);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">3 9</span></span><br><span class="line"><span class="comment">42 2 53</span></span><br><span class="line"><span class="comment">16 66 94</span></span><br><span class="line"><span class="comment">37 55 99</span></span><br><span class="line"><span class="comment">77 79 11</span></span><br><span class="line"><span class="comment">9 2 95</span></span><br><span class="line"><span class="comment">19 49 10</span></span><br><span class="line"><span class="comment">5 19 91</span></span><br><span class="line"><span class="comment">36 14 95</span></span><br><span class="line"><span class="comment">100 61 54</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment">23.78</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h4 id="美食节">美食节</h4>
+<p>其实这个实现还是有一些细节</p>
+<p>如果你一开始就把所有的<span class="math inline">\(b_{i,
+k}\)</span>与<span class="math inline">\(T\)</span>连上边了,
+你的常数就炸了…稳定<span class="math inline">\(1.4s\)</span>…</p>
+<p>所以要把<span class="math inline">\(b_{i, k}\to
+T\)</span>的连边和<span class="math inline">\(c_j \to b_{i,
+k}\)</span>的连边放在一起…</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**************************************************************</span></span><br><span class="line"><span class="comment">    Problem: 2879</span></span><br><span class="line"><span class="comment">    User: Cansult</span></span><br><span class="line"><span class="comment">    Language: C++</span></span><br><span class="line"><span class="comment">    Result: Accepted</span></span><br><span class="line"><span class="comment">    Time:7108 ms</span></span><br><span class="line"><span class="comment">    Memory:14932 kb</span></span><br><span class="line"><span class="comment">****************************************************************/</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">费用流</span></span><br><span class="line"><span class="comment">我猜...对于每一个厨师来说, 应该先放用时小的..</span></span><br><span class="line"><span class="comment">每一道菜我是不是可以多连几条边然后赋边权啥的...</span></span><br><span class="line"><span class="comment">我是不是可以...按照边权, 一层一层的加...</span></span><br><span class="line"><span class="comment">写一写?</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment">Naive!</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXN (100000 + 5)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXM (500000 + 5)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INF (0x7fffffff)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXC (800 + 5)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXH (100 + 5)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> rev(a) ((a) ^ 1)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ca(i) (90000 + i)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> bh(i, j) ((i) * MAXC + (j))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> cint const int</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> rint register int</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> s = <span class="number">0</span>, t = MAXN - <span class="number">1</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">edg</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> from, to, next, cap, flow, cost;</span><br><span class="line">    <span class="built_in">edg</span>() &#123;&#125;</span><br><span class="line">    <span class="built_in">edg</span>(cint fr, cint dqt, cint ne, cint ca, cint co): <span class="built_in">from</span>(fr), <span class="built_in">to</span>(dqt), <span class="built_in">next</span>(ne), <span class="built_in">cap</span>(ca), <span class="built_in">flow</span>(<span class="number">0</span>), <span class="built_in">cost</span>(co) &#123;&#125;</span><br><span class="line">&#125;b[MAXM];</span><br><span class="line"><span class="type">int</span> g[MAXN], cntb = <span class="number">-1</span>, n, m, cnt[MAXC], dqch, ans, fans, gg[MAXH][MAXC], totp, pre[MAXN];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">adn</span><span class="params">(cint from, cint to, cint cap, cint cost)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    b[++cntb] = <span class="built_in">edg</span>(from, to, g[from], cap, cost);</span><br><span class="line">    g[from] = cntb;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">min</span><span class="params">(<span class="type">const</span> <span class="type">int</span> x, <span class="type">const</span> <span class="type">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x &gt; y)</span><br><span class="line">        <span class="keyword">return</span> y;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">spfa</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> dis[MAXN], a[MAXN];</span><br><span class="line">    <span class="type">bool</span> inq[MAXN];</span><br><span class="line">    queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">    <span class="built_in">memset</span>(dis, <span class="number">0x7f</span>, <span class="keyword">sizeof</span>(dis));</span><br><span class="line">    <span class="built_in">memset</span>(inq, <span class="literal">false</span>, <span class="keyword">sizeof</span>(inq));</span><br><span class="line">    a[t] = <span class="number">0</span>;</span><br><span class="line">    a[s] = INF;</span><br><span class="line">    dis[s] = <span class="number">0</span>;</span><br><span class="line">    q.<span class="built_in">push</span>(s);</span><br><span class="line">    <span class="keyword">while</span> (!q.<span class="built_in">empty</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> dq = q.<span class="built_in">front</span>();</span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line">        inq[dq] = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (rint i = g[dq]; ~i; i = b[i].next)</span><br><span class="line">            <span class="keyword">if</span> (dis[b[i].to] &gt; dis[dq] + b[i].cost &amp;&amp; b[i].cap &gt; b[i].flow)</span><br><span class="line">            &#123;</span><br><span class="line">                dis[b[i].to] = dis[dq] + b[i].cost;</span><br><span class="line">                a[b[i].to] = <span class="built_in">min</span>(a[dq], b[i].cap - b[i].flow);</span><br><span class="line">                pre[b[i].to] = i;</span><br><span class="line">                <span class="keyword">if</span>(!inq[b[i].to])</span><br><span class="line">                    q.<span class="built_in">push</span>(b[i].to), inq[b[i].to] = <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a[t];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cint zl = <span class="built_in">spfa</span>();</span><br><span class="line">    fans += zl;</span><br><span class="line">    <span class="keyword">for</span> (rint i = t; i != s; i = b[pre[i]].from)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (b[pre[i]].from &lt; <span class="number">90000</span> &amp;&amp; b[pre[i]].to == t)</span><br><span class="line">            dqch = b[pre[i]].from / MAXC;</span><br><span class="line">        b[pre[i]].flow += zl, b[<span class="built_in">rev</span>(pre[i])].flow -= zl;</span><br><span class="line">        ans += zl * b[pre[i]].cost;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dqch;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">qwq</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (rint i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">    <span class="keyword">for</span> (rint j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">        <span class="built_in">adn</span>(<span class="built_in">ca</span>(j), <span class="built_in">bh</span>(i, cnt[i] + <span class="number">1</span>), <span class="number">1</span>, gg[i][j] * (cnt[i] + <span class="number">1</span>)), <span class="built_in">adn</span>(<span class="built_in">bh</span>(i, cnt[i] + <span class="number">1</span>), <span class="built_in">ca</span>(j), <span class="number">0</span>, -gg[i][j] * (cnt[i] + <span class="number">1</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">        <span class="built_in">adn</span>(<span class="built_in">bh</span>(i, cnt[i] + <span class="number">1</span>), t, <span class="number">1</span>, <span class="number">0</span>), <span class="built_in">adn</span>(t, <span class="built_in">bh</span>(i, cnt[i] + <span class="number">1</span>), <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">/*for (rint i = 1; i &lt;= m; i++)</span></span><br><span class="line"><span class="comment">    for (rint j = 1; j &lt;= totp; j++)</span></span><br><span class="line"><span class="comment">        adn(bh(i, j), t, 1, 0), adn(t, bh(i, j), 0, 0);*/</span></span><br><span class="line">    <span class="keyword">while</span> (fans &lt; totp)</span><br><span class="line">    &#123;</span><br><span class="line">        cint i = <span class="built_in">solve</span>();</span><br><span class="line">        ++cnt[i];</span><br><span class="line">        <span class="keyword">for</span> (rint j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">            <span class="built_in">adn</span>(<span class="built_in">ca</span>(j), <span class="built_in">bh</span>(i, cnt[i] + <span class="number">1</span>), <span class="number">1</span>, gg[i][j] * (cnt[i] + <span class="number">1</span>)), <span class="built_in">adn</span>(<span class="built_in">bh</span>(i, cnt[i] + <span class="number">1</span>), <span class="built_in">ca</span>(j), <span class="number">0</span>, -gg[i][j] * (cnt[i] + <span class="number">1</span>));</span><br><span class="line">        <span class="built_in">adn</span>(<span class="built_in">bh</span>(i, cnt[i] + <span class="number">1</span>), t, <span class="number">1</span>, <span class="number">0</span>), <span class="built_in">adn</span>(t, <span class="built_in">bh</span>(i, cnt[i] + <span class="number">1</span>), <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    rint re = <span class="number">0</span>, f = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">register</span> <span class="type">char</span> x = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (x &lt; <span class="string">&#x27;0&#x27;</span> || x &gt; <span class="string">&#x27;9&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (x == <span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">            f = <span class="number">-1</span>;</span><br><span class="line">        x = <span class="built_in">getchar</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (x &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; x &lt;= <span class="string">&#x27;9&#x27;</span>)</span><br><span class="line">        re = (re &lt;&lt; <span class="number">1</span>) + (re &lt;&lt; <span class="number">3</span>) + x - <span class="string">&#x27;0&#x27;</span>, x = <span class="built_in">getchar</span>();</span><br><span class="line">    <span class="keyword">return</span> re * f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(g, <span class="number">-1</span>, <span class="keyword">sizeof</span>(g));</span><br><span class="line"><span class="comment">//  scanf(&quot;%d%d&quot;, &amp;n, &amp;m);</span></span><br><span class="line">    n = <span class="built_in">read</span>(), m = <span class="built_in">read</span>();</span><br><span class="line">    <span class="keyword">for</span> (rint i = <span class="number">1</span>, srx; i &lt;= n; i++)</span><br><span class="line">        <span class="comment">/*scanf(&quot;%d&quot;, &amp;srx), */</span>srx = <span class="built_in">read</span>(), <span class="built_in">adn</span>(s, <span class="built_in">ca</span>(i), srx, <span class="number">0</span>), <span class="built_in">adn</span>(<span class="built_in">ca</span>(i), s, <span class="number">0</span>, <span class="number">0</span>), totp += srx;</span><br><span class="line">    <span class="keyword">for</span> (rint i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    <span class="keyword">for</span> (rint j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">        gg[j][i] = <span class="built_in">read</span>();</span><br><span class="line">    <span class="comment">//      scanf(&quot;%d&quot;, &amp;gg[j][i]);</span></span><br><span class="line">    <span class="built_in">qwq</span>();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">3 2</span></span><br><span class="line"><span class="comment">3 1 1</span></span><br><span class="line"><span class="comment">5 7</span></span><br><span class="line"><span class="comment">3 6</span></span><br><span class="line"><span class="comment">8 9</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>By 沙茶 Cansult</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/oi_posts/tags/%E6%B8%85%E5%A5%87%E8%84%91%E5%9B%9E%E8%B7%AF/" rel="tag"># 清奇脑回路</a>
+              <a href="/oi_posts/tags/%E7%BF%BB%E8%BD%A6/" rel="tag"># 翻车</a>
+              <a href="/oi_posts/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/" rel="tag"># 网络流</a>
+              <a href="/oi_posts/tags/%E8%B4%B9%E7%94%A8%E6%B5%81/" rel="tag"># 费用流</a>
+              <a href="/oi_posts/tags/%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BE%B9/" rel="tag"># 动态加边</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/oi_posts/posts/16668.html" rel="prev" title="学习笔记 点分治 [点分治, 树, 分治]">
+                  <i class="fa fa-angle-left"></i> 学习笔记 点分治 [点分治, 树, 分治]
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/oi_posts/posts/64976.html" rel="next" title="翻车笔记 ABC096D &quot;Five, Five Everywhere&quot; [欧拉筛, 数学, 清奇脑回路]">
+                  翻车笔记 ABC096D "Five, Five Everywhere" [欧拉筛, 数学, 清奇脑回路] <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Cansult Chen</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"Cansult/blogComments","issue_term":"pathname","theme":"preferred-color-scheme"}</script>
+<script src="/oi_posts/js/third-party/comments/utterances.js" defer></script>
+
+</body>
+</html>

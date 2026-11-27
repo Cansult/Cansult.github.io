@@ -20,18 +20,18 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"cansult.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-light","dark":"atom-one-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":10,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="学变形金刚, 写点总结 哎 怎么突然好像就要被时代碾死了">
+    <meta name="description" content="学变形金刚, 写点总结 哎 怎么突然好像就要被时代碾死了 看看能不能死个明白">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Transformer 入门">
 <meta property="og:url" content="https://cansult.github.io/posts/17401.html">
 <meta property="og:site_name" content="Cansult&#39;s blog">
-<meta property="og:description" content="学变形金刚, 写点总结 哎 怎么突然好像就要被时代碾死了">
+<meta property="og:description" content="学变形金刚, 写点总结 哎 怎么突然好像就要被时代碾死了 看看能不能死个明白">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cansult.github.io/pictures/261105A.png">
-<meta property="og:image" content="https://cansult.github.io/pictures/261105B.gif">
 <meta property="og:image" content="https://cansult.github.io/pictures/261109B.png">
+<meta property="og:image" content="https://cansult.github.io/pictures/261105B.gif">
 <meta property="article:published_time" content="2026-11-02T11:27:04.000Z">
-<meta property="article:modified_time" content="2026-11-16T14:11:29.299Z">
+<meta property="article:modified_time" content="2026-11-27T12:40:18.849Z">
 <meta property="article:author" content="Cansult Chen">
 <meta property="article:tag" content="LLM">
 <meta property="article:tag" content="Transformer">
@@ -170,8 +170,8 @@
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#tokenizer"><span class="nav-number">1.</span> <span class="nav-text">Tokenizer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#character-based-tokenization"><span class="nav-number">1.1.</span> <span class="nav-text">Character-based tokenization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#byte-based-tokenization"><span class="nav-number">1.2.</span> <span class="nav-text">Byte-based tokenization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#word-based-tokenization"><span class="nav-number">1.3.</span> <span class="nav-text">Word-based tokenization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bpe-byte-pair-encoding"><span class="nav-number">1.4.</span> <span class="nav-text">BPE (Byte Pair Encoding)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AE%8B%E5%B7%AE%E7%BD%91%E7%BB%9C"><span class="nav-number">2.</span> <span class="nav-text">残差网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#norm"><span class="nav-number">2.1.</span> <span class="nav-text">Norm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ffn-feed-forward-network"><span class="nav-number">2.2.</span> <span class="nav-text">FFN (Feed-Forward
-Network)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.1.</span> <span class="nav-text">激活函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#moe"><span class="nav-number">2.2.2.</span> <span class="nav-text">MoE</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#router"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">router</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81"><span class="nav-number">2.3.</span> <span class="nav-text">位置编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#attention"><span class="nav-number">2.4.</span> <span class="nav-text">Attention</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#flash-attention"><span class="nav-number">2.4.1.</span> <span class="nav-text">flash attention</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#v1"><span class="nav-number">2.4.1.1.</span> <span class="nav-text">V1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v2"><span class="nav-number">2.4.1.2.</span> <span class="nav-text">V2</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#split-k---split-q"><span class="nav-number">2.4.1.2.1.</span> <span class="nav-text">split K -&gt; split Q</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v3"><span class="nav-number">2.4.1.3.</span> <span class="nav-text">V3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kv-cache"><span class="nav-number">2.4.2.</span> <span class="nav-text">KV Cache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mha"><span class="nav-number">2.4.3.</span> <span class="nav-text">MHA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mqa"><span class="nav-number">2.4.3.1.</span> <span class="nav-text">MQA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gqa"><span class="nav-number">2.4.3.2.</span> <span class="nav-text">GQA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mla-multi-head-latent-attention"><span class="nav-number">2.4.3.3.</span> <span class="nav-text">MLA (Multi-Head Latent
-Attention)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linear-attention"><span class="nav-number">2.4.4.</span> <span class="nav-text">Linear attention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sparse-attention"><span class="nav-number">2.4.5.</span> <span class="nav-text">Sparse attention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sliding-window-attention"><span class="nav-number">2.4.6.</span> <span class="nav-text">Sliding window attention</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83"><span class="nav-number">3.</span> <span class="nav-text">训练</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#init"><span class="nav-number">3.1.</span> <span class="nav-text">Init</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="nav-number">3.2.</span> <span class="nav-text">反向传播</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8"><span class="nav-number">3.3.</span> <span class="nav-text">优化器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scaling-law"><span class="nav-number">3.4.</span> <span class="nav-text">Scaling law</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%83%BD%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="nav-number">3.4.1.</span> <span class="nav-text">可能的解释</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A8%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">推理</span></a></li></ol></div>
+Network)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.1.</span> <span class="nav-text">激活函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#moe"><span class="nav-number">2.2.2.</span> <span class="nav-text">MoE</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#router"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">router</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81"><span class="nav-number">2.3.</span> <span class="nav-text">位置编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#attention"><span class="nav-number">2.4.</span> <span class="nav-text">Attention</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#flash-attention"><span class="nav-number">2.4.1.</span> <span class="nav-text">flash attention</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#v1"><span class="nav-number">2.4.1.1.</span> <span class="nav-text">V1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v2"><span class="nav-number">2.4.1.2.</span> <span class="nav-text">V2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v3"><span class="nav-number">2.4.1.3.</span> <span class="nav-text">V3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mha"><span class="nav-number">2.4.2.</span> <span class="nav-text">MHA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mqa"><span class="nav-number">2.4.2.1.</span> <span class="nav-text">MQA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gqa"><span class="nav-number">2.4.2.2.</span> <span class="nav-text">GQA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mla-multi-head-latent-attention"><span class="nav-number">2.4.2.3.</span> <span class="nav-text">MLA (Multi-Head Latent
+Attention)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linear-attention"><span class="nav-number">2.4.3.</span> <span class="nav-text">Linear attention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sparse-attention"><span class="nav-number">2.4.4.</span> <span class="nav-text">Sparse attention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sliding-window-attention"><span class="nav-number">2.4.5.</span> <span class="nav-text">Sliding window attention</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83"><span class="nav-number">3.</span> <span class="nav-text">训练</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#init"><span class="nav-number">3.1.</span> <span class="nav-text">Init</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="nav-number">3.2.</span> <span class="nav-text">反向传播</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8"><span class="nav-number">3.3.</span> <span class="nav-text">优化器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scaling-law"><span class="nav-number">3.4.</span> <span class="nav-text">Scaling law</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%83%BD%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="nav-number">3.4.1.</span> <span class="nav-text">可能的解释</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A8%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">推理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.1.</span> <span class="nav-text">常见实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#kv-cache"><span class="nav-number">4.1.1.</span> <span class="nav-text">KV Cache</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#paged-attn"><span class="nav-number">4.1.1.1.</span> <span class="nav-text">Paged Attn</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#radix-attn"><span class="nav-number">4.1.1.2.</span> <span class="nav-text">Radix Attn</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E5%BA%A6"><span class="nav-number">4.1.2.</span> <span class="nav-text">调度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#batch"><span class="nav-number">4.1.2.1.</span> <span class="nav-text">batch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pd-%E5%88%86%E7%A6%BB"><span class="nav-number">4.1.2.2.</span> <span class="nav-text">PD 分离</span></a></li></ol></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -186,7 +186,7 @@ Attention)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="n
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -197,7 +197,7 @@ Attention)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="n
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -265,7 +265,7 @@ Attention)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="n
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-11-16 22:11:29" itemprop="dateModified" datetime="2026-11-16T22:11:29+08:00">2026-11-16</time>
+      <time title="Modified: 2026-11-27 20:40:18" itemprop="dateModified" datetime="2026-11-27T20:40:18+08:00">2026-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -288,6 +288,7 @@ Attention)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="n
     
     <div class="post-body" itemprop="articleBody"><p>学变形金刚, 写点总结</p>
 <p>哎 怎么突然好像就要被时代碾死了</p>
+<p>看看能不能死个明白</p>
 <span id="more"></span>
 <h1 id="tokenizer">Tokenizer</h1>
 <h2 id="character-based-tokenization">Character-based tokenization</h2>
@@ -432,11 +433,6 @@ class="math inline">\(O\)</span></p>
 直接获取 Tensor 的矩阵计算结果</p>
 <p><a
 target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/2068355332049522938">参考</a></p>
-<h3 id="kv-cache">KV Cache</h3>
-<figure>
-<img src="../pictures/261105B.gif" alt="decode" />
-<figcaption aria-hidden="true">decode</figcaption>
-</figure>
 <h3 id="mha">MHA</h3>
 <p>MHA 在 decode 时的算数强度太差了 (<span
 class="math inline">\(bnd^2\)</span> 次计算, 读之前的 KV 和计算当前 KV
@@ -617,6 +613,56 @@ both operands and stay in result</li>
 <li>S = T (during training, condition on S input tokens to predict T
 output tokens)</li>
 </ul>
+<h2 id="常见实现">常见实现</h2>
+<h3 id="kv-cache">KV Cache</h3>
+<figure>
+<img src="../pictures/261105B.gif" alt="decode" />
+<figcaption aria-hidden="true">decode</figcaption>
+</figure>
+<h4 id="paged-attn">Paged Attn</h4>
+<ul>
+<li>vllm</li>
+<li>deepInfer</li>
+</ul>
+<p>其实类似一个 trie 边是固定长度 token , 用 hash 实现的 radix attn</p>
+<p>理论上贡献在于把显存当内存一样分页管理: 可能是出于性能考虑,
+<code>cudaMalloc</code> 并不会像内存一样只 (?) 分配虚拟内存, 等缺页时再
+commit; 所以对于不知道多长的 token 序列, 分页可以避免碎片</p>
+<p>token 序列按固定长度分块; 每块做类似前缀哈希</p>
+<p><span class="math display">\[
+h_i=\operatorname{Hash}(h_{i-1},\ \text{tokens}_i,\ \text{extra keys})
+\]</span></p>
+<ul>
+<li>extra keys: 用来区分一些 token 相同而实际内容不同的东西,
+比如图片的占位符</li>
+</ul>
+<p>然后判断 <span class="math inline">\(h_i\)</span>
+是否已经存在就能找公共前缀了</p>
+<h4 id="radix-attn">Radix Attn</h4>
+<ul>
+<li>sglang</li>
+<li>TensorRT</li>
+</ul>
+<p>cache 的所有 token 序列的压缩 (一个节点只有一个子节点就压缩) trie
+树;</p>
+<p>其实 radix attn 也分 page 了, radix 只是为了快速找 page 号</p>
+<p>或许名字应该叫 radix-paged attn 和 hash-paged attn</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">TreeNode</span>:</span><br><span class="line">    counter = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, <span class="built_in">id</span>: <span class="type">Optional</span>[<span class="built_in">int</span>] = <span class="literal">None</span>, priority: <span class="built_in">int</span> = <span class="number">0</span></span>):</span><br><span class="line">        <span class="variable language_">self</span>.children = defaultdict(TreeNode) <span class="comment"># 子节点集合</span></span><br><span class="line">        <span class="variable language_">self</span>.parent: TreeNode = <span class="literal">None</span> <span class="comment"># 父节点</span></span><br><span class="line">        <span class="variable language_">self</span>.key: RadixKey = <span class="literal">None</span> <span class="comment"># 节点代表的 token 序列</span></span><br><span class="line">        <span class="variable language_">self</span>.value: <span class="type">Optional</span>[torch.Tensor] = <span class="literal">None</span> <span class="comment"># 节点代表的 kv cache page 编号</span></span><br><span class="line">        <span class="variable language_">self</span>.lock_ref = <span class="number">0</span></span><br><span class="line">        <span class="variable language_">self</span>.last_access_time = time.monotonic()</span><br><span class="line">        <span class="variable language_">self</span>.creation_time = time.monotonic()</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.hit_count = <span class="number">0</span></span><br><span class="line">        <span class="comment"># store hash values of each pages</span></span><br><span class="line">        <span class="variable language_">self</span>.hash_value: <span class="type">Optional</span>[<span class="type">List</span>[<span class="built_in">str</span>]] = <span class="literal">None</span></span><br><span class="line">        <span class="comment"># Namespace-aware hashes used only for external KV events.</span></span><br><span class="line">        <span class="variable language_">self</span>.event_hash_value: <span class="type">Optional</span>[<span class="type">List</span>[<span class="built_in">str</span>]] = <span class="literal">None</span></span><br><span class="line">        <span class="comment"># priority for priority-aware eviction</span></span><br><span class="line">        <span class="variable language_">self</span>.priority = priority</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.<span class="built_in">id</span> = TreeNode.counter <span class="keyword">if</span> <span class="built_in">id</span> <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">else</span> <span class="built_in">id</span></span><br><span class="line">        TreeNode.counter += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="调度">调度</h3>
+<h4 id="batch">batch</h4>
+<ul>
+<li>FFN: decode 时挨个计算 <span class="math inline">\(x_iW\)</span>
+效率太低了 (重复加载大矩阵); 一个 batch 内的 ffn 可以改为 <span
+class="math inline">\(\begin{bmatrix}x_1\\ x_2\\ x_3\\ x_4
+\end{bmatrix}W\)</span></li>
+<li>并行度: 单个 decode 计算可能喂不满全部 SM</li>
+<li>kernel launch: 减少 cpu 和 gpu 交互开销</li>
+</ul>
+<h4 id="pd-分离">PD 分离</h4>
+<ul>
+<li>vllm</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># NOTE(woosuk) on the scheduling algorithm:</span></span><br><span class="line"><span class="comment"># There&#x27;s no &quot;decoding phase&quot; nor &quot;prefill phase&quot; in the scheduler.</span></span><br><span class="line"><span class="comment"># Each request just has the num_computed_tokens and</span></span><br><span class="line"><span class="comment"># num_tokens_with_spec. num_tokens_with_spec =</span></span><br><span class="line"><span class="comment"># len(prompt_token_ids) + len(output_token_ids) + len(spec_token_ids).</span></span><br><span class="line"><span class="comment"># At each step, the scheduler tries to assign tokens to the requests</span></span><br><span class="line"><span class="comment"># so that each request&#x27;s num_computed_tokens can catch up its</span></span><br><span class="line"><span class="comment"># num_tokens_with_spec. This is general enough to cover</span></span><br><span class="line"><span class="comment"># chunked prefills, prefix caching, speculative decoding,</span></span><br><span class="line"><span class="comment"># and the &quot;jump decoding&quot; optimization in the future.1</span></span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -639,8 +685,8 @@ output tokens)</li>
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/3471.html" rel="next" title="Agent 入门">
-                  Agent 入门 <i class="fa fa-angle-right"></i>
+                <a href="/posts/3471.html" rel="next" title="Agent 入门 [WIP]">
+                  Agent 入门 [WIP] <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
